@@ -1,16 +1,23 @@
 # Homepage Design Showcase: ACME AI
 
+### ▶ [See it running live](https://rohitabrahamgeorge.github.io/acme-ai-web-showcase/) &nbsp;·&nbsp; [Download the code](https://github.com/rohitabrahamgeorge/acme-ai-web-showcase/archive/refs/heads/main.zip) &nbsp;·&nbsp; [More website projects](https://rohitabrahamgeorge.github.io/websites/)
+
+[![ACME AI Editorial Dark homepage, click to open the live site](assets/previews/editorial-hero.gif)](https://rohitabrahamgeorge.github.io/acme-ai-web-showcase/)
+
+*GitHub can only show recordings here. Click the image or the link above to use the real pages with every animation running.*
+
 Two animated SaaS homepage concepts for **ACME AI**, a fictional company with one message: *AI for your teams' most busy work*. The same story is told in two very different visual languages, each with its own motion system, layout rhythm and interaction details.
 
-**Live showcase:** enable GitHub Pages (see below) and open `https://rohitabrahamgeorge.github.io/acme-ai-web-showcase/`
+| Design | Live page |
+| --- | --- |
+| 01 · Editorial Dark | [rohitabrahamgeorge.github.io/acme-ai-web-showcase/designs/editorial-dark/](https://rohitabrahamgeorge.github.io/acme-ai-web-showcase/designs/editorial-dark/) |
+| 02 · Cinematic Light | [rohitabrahamgeorge.github.io/acme-ai-web-showcase/designs/cinematic-light/](https://rohitabrahamgeorge.github.io/acme-ai-web-showcase/designs/cinematic-light/) |
 
 > ACME AI is not a real company. Every brand, product, customer, person and number on these pages is invented for this portfolio.
 
 ---
 
 ## 01 · Editorial Dark
-
-![Editorial Dark hero with the Three.js work loop](assets/previews/editorial-hero.gif)
 
 A dark, magazine-like layout with oversized serif headlines, lime highlights and dense product panels.
 
@@ -24,7 +31,7 @@ A dark, magazine-like layout with oversized serif headlines, lime highlights and
 | Chapter tabs | Eight tabs auto-advance with a progress bar, pause on hover and only run while visible; each panel has a hand-coded animated SVG illustration |
 | Stories, security, FAQ | Snap-scrolling story carousel with a progress rail, metallic SVG security icons, sticky FAQ intro with a single-open accordion |
 
-[Open the page](designs/editorial-dark/) · [Watch the section tour (MP4)](assets/previews/editorial-sections.mp4)
+[Open the live page](https://rohitabrahamgeorge.github.io/acme-ai-web-showcase/designs/editorial-dark/) · [Watch the section tour (MP4)](assets/previews/editorial-sections.mp4)
 
 ---
 
@@ -43,7 +50,7 @@ A bright, spacious layout that leans on full-bleed photography, soft neutrals an
 | Industries | Centre-mode carousel where the active card grows, with autoplay, hover pause, swipe on touch and animated dots |
 | Stats, story, security | Count-up stats, parallax story images, a dark compliance grid and a demo card with a glowing module diagram |
 
-[Open the page](designs/cinematic-light/) · [Watch the tour (MP4)](assets/previews/cinematic-tour.mp4)
+[Open the live page](https://rohitabrahamgeorge.github.io/acme-ai-web-showcase/designs/cinematic-light/) · [Watch the tour (MP4)](assets/previews/cinematic-tour.mp4)
 
 ---
 

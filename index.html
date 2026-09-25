@@ -50,6 +50,23 @@
   .btn-ghost { border: 1px solid rgba(255,255,255,.2); color: var(--ink); }
   .btn-ghost:hover { background: rgba(255,255,255,.06); }
 
+  .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .crumb { font-size: 13px; color: var(--dim); text-decoration: none; }
+  .crumb:hover { color: var(--lime); }
+  .live { padding-bottom: 72px; }
+  .viewer { border: 1px solid rgba(255,255,255,.12); border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 40px 120px -40px rgba(172,215,25,.18); }
+  .chrome { display: flex; align-items: center; gap: 16px; padding: 10px 14px; background: #14170F; border-bottom: 1px solid var(--line); }
+  .dots { display: flex; gap: 6px; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.14); }
+  .tabs { display: flex; gap: 4px; flex: 1; min-width: 0; overflow-x: auto; }
+  .tabs button { font: 500 13px/1 'Inter', system-ui, sans-serif; color: var(--muted); background: none; border: 1px solid transparent; border-radius: 6px; padding: 8px 12px; cursor: pointer; white-space: nowrap; }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button[aria-selected="true"] { color: var(--ink); background: rgba(255,255,255,.06); border-color: var(--line); }
+  .full { font-size: 13px; color: var(--lime); text-decoration: none; white-space: nowrap; }
+  .viewer iframe { display: block; width: 100%; height: min(82vh, 880px); border: 0; background: #070806; }
+  .hint { color: var(--dim); font-size: 13px; margin: 14px 0 0; text-align: center; }
+  button:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+
   .how { border-top: 1px solid var(--line); margin-top: 40px; padding: 64px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .how h3 { font-size: 15px; font-weight: 600; margin: 0 0 8px; }
   .how p { margin: 0; color: var(--muted); font-size: 14px; }
@@ -60,7 +77,9 @@
     .card { grid-template-columns: 1fr; }
     .media { min-height: 0; aspect-ratio: 16 / 10; }
     .how { grid-template-columns: 1fr; }
-    .top nav { display: none; }
+    .top nav a:not(:first-child) { display: none; }
+    .viewer iframe { height: 78vh; }
+    .full { display: none; }
     .hero { padding: 64px 0 44px; }
     .body { padding: 26px 20px 24px; }
     h2 { font-size: 34px; }
@@ -72,7 +91,7 @@
 <header class="wrap">
   <div class="top">
     <a class="brand" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6.5 26.5 L16 6 L25.5 26.5" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 19 H21.4" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round"/><circle cx="16" cy="6" r="3.1" fill="#ACD719"/><circle cx="6.5" cy="26.5" r="2.2" fill="#ACD719"/><circle cx="25.5" cy="26.5" r="2.2" fill="#ACD719"/></svg>Homepage Design Showcase</a>
-    <nav><a href="#editorial">Editorial Dark</a><a href="#cinematic">Cinematic Light</a><a href="#how">How it is built</a></nav>
+    <nav><a href="/websites/">&#8592; All website projects</a><a href="#live">Live preview</a><a href="#editorial">Editorial Dark</a><a href="#cinematic">Cinematic Light</a><a href="#how">How it is built</a></nav>
   </div>
 </header>
 
@@ -82,6 +101,26 @@
     <h1>Two homepages for one AI brand, built to <em>move</em>.</h1>
     <p class="lede">ACME AI is a fictional company with one message: AI for your teams&#8217; most busy work. The same story is told twice, in two very different visual languages, each with its own motion system, layout rhythm and interaction details.</p>
     <p class="note"><b aria-hidden="true"></b>Every brand, product, customer and number on these pages is invented.</p>
+    <div class="cta-row">
+      <a class="btn btn-lime" href="#live">Try it live below &#8595;</a>
+      <a class="btn btn-ghost" href="https://github.com/rohitabrahamgeorge/acme-ai-web-showcase">View code on GitHub</a>
+      <a class="btn btn-ghost" href="https://github.com/rohitabrahamgeorge/acme-ai-web-showcase/archive/refs/heads/main.zip">Download ZIP</a>
+    </div>
+  </section>
+
+  <section class="live" id="live" aria-label="Live, interactive preview">
+    <div class="viewer">
+      <div class="chrome">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" data-src="designs/editorial-dark/">01 &#183; Editorial Dark</button>
+          <button role="tab" aria-selected="false" data-src="designs/cinematic-light/">02 &#183; Cinematic Light</button>
+        </div>
+        <a class="full" id="liveFull" href="designs/editorial-dark/">Open full screen &#8599;</a>
+      </div>
+      <iframe id="liveFrame" src="designs/editorial-dark/" title="Live ACME AI homepage" loading="eager"></iframe>
+    </div>
+    <p class="hint">This is the real page running, not a recording. Scroll inside the window, hover and click around.</p>
   </section>
 
   <section class="designs">
@@ -143,5 +182,18 @@
   <span>Designed and built by Rohit A George</span>
   <span>ACME AI is a fictional brand created for this portfolio.</span>
 </footer>
+<script>
+  /* Live viewer: switch which design runs in the frame */
+  (function () {
+    var frame = document.getElementById("liveFrame"), full = document.getElementById("liveFull");
+    document.querySelectorAll(".tabs button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll(".tabs button").forEach(function (b) { b.setAttribute("aria-selected", b === btn); });
+        frame.src = btn.dataset.src;
+        full.href = btn.dataset.src;
+      });
+    });
+  })();
+</script>
 </body>
 </html>
