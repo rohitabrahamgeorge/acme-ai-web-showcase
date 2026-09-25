@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homepage Design Showcase</title>
+<meta name="description" content="Two animated SaaS homepage concepts for a fictional AI company, ACME AI: an editorial dark build with a Three.js hero and a cinematic light build with a scroll-pinned 3D layer stack.">
+<link rel="icon" type="image/svg+xml" href="assets/img/acme-mark.svg">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root { --bg: #070806; --panel: #0F110D; --line: rgba(255,255,255,.08); --ink: #F2F3EE; --muted: #A2A698; --dim: #6F7469; --lime: #ACD719; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.6 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 28px 0 0; }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; letter-spacing: .02em; text-decoration: none; }
+  .brand svg { width: 22px; height: 22px; }
+  .top nav { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+  .top nav a { text-decoration: none; transition: color .2s; }
+  .top nav a:hover { color: var(--lime); }
+  .hero { padding: 96px 0 64px; }
+  .eyebrow { color: var(--lime); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 18px; }
+  h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(44px, 7vw, 86px); line-height: .98; letter-spacing: -.01em; margin: 0 0 24px; max-width: 900px; }
+  h1 em { color: var(--lime); }
+  .lede { color: var(--muted); font-size: 18px; max-width: 640px; margin: 0; }
+  .note { display: inline-flex; gap: 10px; align-items: center; margin-top: 28px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 40px; color: var(--muted); font-size: 13px; }
+  .note b { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px rgba(172,215,25,.18); }
+
+  .designs { display: grid; gap: 28px; padding-bottom: 40px; }
+  .card { display: grid; grid-template-columns: 1.35fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--panel); }
+  .media { position: relative; min-height: 380px; background: #000; overflow: hidden; }
+  .media video, .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .media .tag { position: absolute; left: 14px; bottom: 14px; z-index: 2; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 6px 10px; border-radius: 30px; background: rgba(7,8,6,.72); border: 1px solid rgba(255,255,255,.14); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .body { padding: 34px 32px 32px; display: flex; flex-direction: column; gap: 18px; }
+  .num { color: var(--dim); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+  h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 40px; line-height: 1.02; margin: 0; }
+  .body p { margin: 0; color: var(--muted); font-size: 15px; }
+  ul.feat { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  ul.feat li { display: flex; gap: 10px; font-size: 14px; color: #D3D6CC; line-height: 1.45; }
+  ul.feat li::before { content: ""; flex: 0 0 6px; height: 6px; margin-top: 8px; border-radius: 50%; background: var(--lime); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips span { font-size: 12px; padding: 4px 10px; border-radius: 30px; border: 1px solid var(--line); color: var(--muted); }
+  .actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: 10px; padding-top: 6px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border-radius: 6px; font-weight: 600; font-size: 14px; text-decoration: none; transition: background-color .2s, transform .2s; }
+  .btn-lime { background: var(--lime); color: #0A0B08; }
+  .btn-lime:hover { background: #C3EA3A; transform: translateY(-1px); }
+  .btn-ghost { border: 1px solid rgba(255,255,255,.2); color: var(--ink); }
+  .btn-ghost:hover { background: rgba(255,255,255,.06); }
+
+  .how { border-top: 1px solid var(--line); margin-top: 40px; padding: 64px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .how h3 { font-size: 15px; font-weight: 600; margin: 0 0 8px; }
+  .how p { margin: 0; color: var(--muted); font-size: 14px; }
+  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--dim); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  a:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+
+  @media (max-width: 900px) {
+    .card { grid-template-columns: 1fr; }
+    .media { min-height: 0; aspect-ratio: 16 / 10; }
+    .how { grid-template-columns: 1fr; }
+    .top nav { display: none; }
+    .hero { padding: 64px 0 44px; }
+    .body { padding: 26px 20px 24px; }
+    h2 { font-size: 34px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .media video { display: none; } }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="top">
+    <a class="brand" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6.5 26.5 L16 6 L25.5 26.5" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 19 H21.4" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round"/><circle cx="16" cy="6" r="3.1" fill="#ACD719"/><circle cx="6.5" cy="26.5" r="2.2" fill="#ACD719"/><circle cx="25.5" cy="26.5" r="2.2" fill="#ACD719"/></svg>Homepage Design Showcase</a>
+    <nav><a href="#editorial">Editorial Dark</a><a href="#cinematic">Cinematic Light</a><a href="#how">How it is built</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="eyebrow">Web design &#183; Motion &#183; Front-end build</p>
+    <h1>Two homepages for one AI brand, built to <em>move</em>.</h1>
+    <p class="lede">ACME AI is a fictional company with one message: AI for your teams&#8217; most busy work. The same story is told twice, in two very different visual languages, each with its own motion system, layout rhythm and interaction details.</p>
+    <p class="note"><b aria-hidden="true"></b>Every brand, product, customer and number on these pages is invented.</p>
+  </section>
+
+  <section class="designs">
+    <article class="card" id="editorial">
+      <div class="media">
+        <span class="tag">Design 01</span>
+        <video src="assets/previews/editorial-hero.mp4" poster="assets/previews/editorial-dark.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Screen recording of the Editorial Dark homepage hero"></video>
+      </div>
+      <div class="body">
+        <span class="num">01 &#183; Editorial Dark</span>
+        <h2>Serif editorial, a 3D work loop and a bento grid</h2>
+        <p>A dark, magazine-like layout: oversized serif headlines, lime highlights and dense product panels that feel alive without shouting.</p>
+        <ul class="feat">
+          <li>Real-time Three.js hero: a twisting loop of metallic slats with labels pinned to moving 3D nodes and a pulse that travels the loop</li>
+          <li>Bento grid with a scrolling approval feed, a floating request card, six-row connector marquees and a work log with a row sweep</li>
+          <li>Count-up stats with a 650-dot activity grid, a live log ticker and an animated equaliser</li>
+          <li>Auto-advancing chapter tabs with progress bars and coded SVG illustrations</li>
+        </ul>
+        <div class="chips"><span>Three.js</span><span>InstancedMesh</span><span>IntersectionObserver</span><span>CSS keyframes</span><span>Responsive</span></div>
+        <div class="actions">
+          <a class="btn btn-lime" href="designs/editorial-dark/">Open live page &#8594;</a>
+          <a class="btn btn-ghost" href="assets/previews/editorial-sections.mp4">Watch section tour</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" id="cinematic">
+      <div class="media">
+        <span class="tag">Design 02</span>
+        <video src="assets/previews/cinematic-tour.mp4" poster="assets/previews/cinematic-light.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Screen recording of the Cinematic Light homepage"></video>
+      </div>
+      <div class="body">
+        <span class="num">02 &#183; Cinematic Light</span>
+        <h2>Full-bleed photography, glass layers and quiet motion</h2>
+        <p>A bright, spacious layout that leans on photography, soft neutrals and scroll-driven storytelling.</p>
+        <ul class="feat">
+          <li>Full-bleed hero with a slow Ken Burns zoom, a scanning line and a word-by-word blur reveal on the headline</li>
+          <li>Scroll-pinned 3D glass-plate stack: seven isometric layers lift in sync with expanding pills and a progress bar</li>
+          <li>Eight product cards with hand-coded animated visuals: masking, checklists, orbits, flows and floating chips</li>
+          <li>Centre-mode industry carousel with autoplay, swipe and dots, count-up stats, parallax story images and an accordion FAQ</li>
+        </ul>
+        <div class="chips"><span>CSS 3D transforms</span><span>position: sticky</span><span>Scroll-linked JS</span><span>Vanilla JS</span><span>Responsive</span></div>
+        <div class="actions">
+          <a class="btn btn-lime" href="designs/cinematic-light/">Open live page &#8594;</a>
+          <a class="btn btn-ghost" href="assets/previews/cinematic-tour.mp4">Watch tour</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="how" id="how">
+    <div><h3>No framework, no build step</h3><p>Plain HTML, CSS and JavaScript. Each page is a single file you can open, read and reuse. Three.js is the only library, and only on the first design.</p></div>
+    <div><h3>Built for a visual page builder</h3><p>Both pages were first built inside a drag-and-drop page builder, with inline styles so every text, colour and button stays editable. A small shim lets them run standalone here.</p></div>
+    <div><h3>Motion with manners</h3><p>The 3D scene and auto-play pause when off screen, every animation respects reduced-motion settings, and never hide content if JavaScript fails. Layouts hold up from phones to wide desktops.</p></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>Designed and built by Rohit A George</span>
+  <span>ACME AI is a fictional brand created for this portfolio.</span>
+</footer>
+</body>
+</html>

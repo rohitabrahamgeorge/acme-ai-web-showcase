@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACME AI · Cinematic Light homepage</title>
+<meta name="description" content="ACME AI homepage concept: cinematic full-bleed hero, word-by-word headline reveal, a scroll-pinned 3D glass layer stack, coded product visuals and a centre-mode industry carousel. A fictional brand built as a web design showcase.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="../../assets/img/acme-mark.svg">
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../../assets/css/builder-shim.css">
+<script>function opImgFail(img){var box=img.parentNode;while(box&&!box.classList.contains("op-img-fallback")&&box.parentNode&&box.parentNode.nodeType===1)box=box.parentNode;if(box&&box.classList)box.classList.add("op-img-fallback");img.style.visibility="hidden";}</script>
+</head>
+<body>
+
+<style>
+    body { background-color: #FEFEFC; }
+    /* ============ ACME AI HOME (Cinematic Light) | prefix: op- ============ */
+    .is-container.v2 { max-width: 1200px !important; }
+    .op-font, .op-font h1, .op-font h2, .op-font h3, .op-font h4, .op-font p, .op-font a, .op-font span, .op-font div, .op-font button { font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif !important; }
+    .op-font h1, .op-font h2, .op-font h3 { font-weight: 400; margin: 0; }
+    .op-font p { margin: 0; }
+    .op-font .op-mono, .op-font .op-mono span { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important; }
+
+    /* full-bleed containers */
+    .is-section .is-container.v2.op-full { max-width: 100% !important; width: 100% !important; padding: 0 !important; }
+    .op-full > .row { margin: 0 !important; }
+    .op-full > .row > .column { padding: 0 !important; }
+    .op-wrap { max-width: 1320px; margin: 0 auto; padding-left: 32px; padding-right: 32px; box-sizing: border-box; }
+
+    /* scroll reveal (only hidden when JS is running) */
+    .op-js .op-rv { opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+    .op-js .op-rv.op-in { opacity: 1; transform: none; }
+    .op-d1 { transition-delay: .12s !important; } .op-d2 { transition-delay: .24s !important; } .op-d3 { transition-delay: .36s !important; }
+
+    /* ---------- NAV ---------- */
+    .is-section.op-nav-host { position: relative !important; z-index: 1000 !important; height: 0 !important; min-height: 0 !important; padding: 0 !important; margin: 0 !important; overflow: visible !important; }
+    .op-nav-host .is-container, .op-nav-host .row, .op-nav-host .column { height: 0 !important; min-height: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; overflow: visible !important; }
+    .op-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 999; transition: background-color .4s ease, box-shadow .4s ease; }
+    .op-nav-in { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .op-nav-links, .op-nav-right { display: flex; align-items: center; gap: 26px; flex: 1 1 0; }
+    .op-nav-right { justify-content: flex-end; }
+    .op-nav-right a { white-space: nowrap; }
+    .op-nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .op-nav a.op-nl { color: #ffffff; font-size: 13px; text-decoration: none; transition: color .3s ease, opacity .3s ease; }
+    .op-nav a.op-nl:hover { opacity: .7; }
+    .op-nav .acme-logo-t { transition: color .3s ease; }
+    .op-nav.op-solid { background-color: rgba(250,250,249,.97) !important; box-shadow: 0 1px 0 rgba(13,16,22,.08); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .op-nav.op-solid a.op-nl, .op-nav.op-solid .acme-logo-t { color: #0D1016 !important; }
+
+    /* ---------- BUTTONS / LINKS ---------- */
+    .op-pillbtn { display: inline-flex; align-items: center; gap: 12px; color: #0D1016 !important; background-color: #ACD719; font-size: 14px; font-weight: 500; padding: 9px 9px 9px 18px; border-radius: 48px; text-decoration: none; transition: background-color .25s ease; }
+    .op-pillbtn:hover { background-color: #C2EC2E; }
+    .op-pillbtn i { font-style: normal; background-color: #0D1016; color: #ACD719; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; transition: transform .25s ease; }
+    .op-pillbtn:hover i { transform: translateX(2px) rotate(-45deg); }
+    .op-ghostbtn { display: inline-block; color: #ffffff !important; background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.28); font-size: 14px; font-weight: 500; padding: 9px 18px; border-radius: 48px; text-decoration: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: background-color .25s ease; }
+    .op-ghostbtn:hover { background-color: rgba(255,255,255,0.2); }
+    .op-link { color: #0D1016 !important; font-size: 14px; text-decoration: none; transition: color .25s ease; }
+    .op-link:hover { color: #6B8A00 !important; }
+    .op-link-ul { display: inline-block; color: #0D1016 !important; font-size: 15px; text-decoration: none; border-bottom: 1px solid #0D1016; padding-bottom: 2px; transition: color .25s ease, border-color .25s ease; }
+    .op-link-ul:hover { color: #6B8A00 !important; border-color: #6B8A00; }
+
+    /* ---------- HERO ---------- */
+    .op-hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; width: 100%; }
+    .op-hero-media { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 0; }
+    .op-hero-media img.op-hero-img { position: absolute !important; top: 0; left: 0; width: 100% !important; height: 100% !important; max-width: none !important; object-fit: cover; display: block; }
+    .op-hero-shade { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; pointer-events: none; }
+    .op-kb { animation: op-kb 40s ease-in-out infinite alternate; transform-origin: 50% 50%; will-change: transform; backface-visibility: hidden; }
+    @keyframes op-kb { 0% { transform: scale(1.0) translateZ(0); } 100% { transform: scale(1.06) translateZ(0); } }
+    .op-hero-in { position: relative; z-index: 3; width: 100%; padding-bottom: 72px; text-align: center; }
+    .op-hero h1 .op-w { display: inline-block; opacity: 0; transform: translateY(40%); filter: blur(10px); animation: op-word 1.1s cubic-bezier(.2,.7,.2,1) forwards; }
+    @keyframes op-word { to { opacity: 1; transform: none; filter: none; } }
+    .op-hero-row { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; margin-top: 26px; }
+    .op-scan { position: absolute; left: 0; right: 0; height: 1px; top: 0; z-index: 2; pointer-events: none; background: linear-gradient(90deg, transparent, rgba(172,215,25,.55), transparent); animation: op-scan 7s linear infinite; }
+    @keyframes op-scan { 0% { top: 8%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 92%; opacity: 0; } }
+
+    /* ---------- PROOF STRIP + MARQUEE ---------- */
+    .op-proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .op-proof > div { padding: 26px 28px 26px 0; }
+    .op-mq { overflow: hidden; width: 100%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+    .op-mq-track { display: flex; width: max-content; animation: op-mq 38s linear infinite; }
+    .op-mq-set { display: flex; align-items: center; gap: 72px; padding: 0 36px; }
+    .op-mq-set span { color: #8A877F; font-size: 26px; font-weight: 500; letter-spacing: -0.03em; white-space: nowrap; display: inline-flex; align-items: center; gap: 12px; }
+    .op-mq-set span b { display: inline-block; width: 22px; height: 22px; border-radius: 7px; background: #D6D4CE; }
+    @keyframes op-mq { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ---------- LAYER STACK (pinned) ---------- */
+    .is-section.op-pin-host, .op-pin-host .is-container, .op-pin-host .row, .op-pin-host .column { overflow: visible !important; }
+    .op-pin { position: relative; height: 480vh; }
+    .op-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; }
+    .op-stage-grid { display: flex; align-items: center; gap: 24px; width: 100%; }
+    .op-pills { flex: 0 0 420px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; position: relative; z-index: 5; }
+    .op-pill { display: inline-block; max-width: 420px; border-radius: 22px; padding: 10px 16px; cursor: pointer; background-color: rgba(13,16,22,0.56); color: #ffffff; transition: border-radius .5s ease, padding .5s ease, max-width .5s ease, background-color .4s ease; }
+    .op-pill:hover { background-color: rgba(13,16,22,0.7); }
+    .op-pill-h { display: flex; align-items: center; gap: 10px; }
+    .op-pill-t { color: #ffffff; font-size: 13px; transition: font-size .4s ease, opacity .4s ease; }
+    .op-pill-plus { width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; line-height: 1; background-color: rgba(255,255,255,0.22); color: #ffffff; transition: transform .4s ease, opacity .3s ease; flex: 0 0 18px; }
+    .op-pill-b { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .6s cubic-bezier(.2,.7,.2,1), opacity .5s ease, margin .5s ease; }
+    .op-pill-b p { color: #ffffff; font-size: 16px; line-height: 1.4; }
+    .op-pill.op-on { border-radius: 24px; padding: 18px 24px 22px; }
+    .op-pill.op-on .op-pill-b { max-height: 200px; opacity: 1; margin-top: 10px; }
+    .op-pill.op-on .op-pill-plus { opacity: 0; transform: rotate(45deg); width: 0; flex-basis: 0; }
+    .op-pill.op-on .op-pill-t { font-size: 12px !important; opacity: .8; }
+    .op-stack-wrap { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; height: 100vh; position: relative; }
+    .op-stack { position: relative; width: 640px; height: 640px; margin-top: 90px; }
+    .op-plate { position: absolute; left: 50%; top: 50%; width: 380px; height: 380px; margin: -190px 0 0 -190px; border-radius: 26px; box-sizing: border-box;
+        background: linear-gradient(135deg, rgba(255,255,255,.92) 0%, rgba(236,236,234,.78) 45%, rgba(206,206,204,.66) 100%);
+        border: 1px solid rgba(255,255,255,.95);
+        box-shadow: inset 0 0 0 1px rgba(13,16,22,.05), 0 1px 0 #d9d9d7, 0 2px 0 #cfcfcd, 0 3px 0 #c4c4c2, 0 4px 0 #b9b9b7, 0 5px 0 #a8a8a6, 0 6px 0 #8d8d8b, 0 34px 40px -18px rgba(13,16,22,.35);
+        transform: translateY(var(--op-y, 0px)) rotateX(58deg) rotateZ(-45deg);
+        transition: transform 1s cubic-bezier(.2,.7,.2,1), opacity .7s ease, filter .7s ease; display: flex; align-items: center; justify-content: center; }
+    .op-plate-l { font-size: 26px; letter-spacing: -0.02em; color: #2E2E2C; opacity: .06; transition: opacity .6s ease; white-space: nowrap; }
+    .op-plate.op-on .op-plate-l { opacity: 1; }
+    .op-plate.op-on { box-shadow: inset 0 0 0 1px rgba(172,215,25,.55), 0 1px 0 #d9d9d7, 0 2px 0 #cfcfcd, 0 3px 0 #c4c4c2, 0 4px 0 #b9b9b7, 0 5px 0 #a8a8a6, 0 6px 0 #8d8d8b, 0 60px 60px -24px rgba(13,16,22,.45), 0 0 80px -10px rgba(172,215,25,.35); }
+    .op-plate .op-glint { position: absolute; inset: 0; border-radius: 26px; background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.75) 48%, transparent 62%); background-size: 250% 100%; background-position: 120% 0; opacity: 0; }
+    .op-plate.op-on .op-glint { opacity: 1; animation: op-glint 2.4s ease forwards; }
+    @keyframes op-glint { to { background-position: -40% 0; } }
+    .op-prog { position: relative; margin-top: 18px; width: 180px; height: 2px; background-color: rgba(13,16,22,0.12); }
+    .op-prog i { display: block; height: 100%; width: 0; background-color: #0D1016; transition: width .2s linear; }
+
+    /* ---------- WHY CARDS: coded visuals ---------- */
+    .op-viz { position: relative; height: 400px; border-radius: 4px; overflow: hidden; background: linear-gradient(180deg, #F3F3F1 0%, #E4E4E0 60%, #D9D9D4 100%); }
+    .op-viz-in { position: absolute; inset: 0; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+    .op-card:hover .op-viz-in { transform: scale(1.035); }
+    .op-glass { background: rgba(255,255,255,0.78); border: 1px solid rgba(255,255,255,0.95); box-shadow: 0 14px 34px -14px rgba(13,16,22,0.28); border-radius: 12px; }
+    .op-chipx { position: absolute; border-radius: 30px; padding: 7px 12px; font-size: 11px; color: #0D1016; white-space: nowrap; }
+    @keyframes op-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    .op-fl { animation: op-float 5.5s ease-in-out infinite; }
+    .op-dash path { stroke-dashoffset: 0; animation: op-dashmove 3s linear infinite; }
+    @keyframes op-dashmove { to { stroke-dashoffset: -32; } }
+    @keyframes op-seqk { 0% { opacity: .22; } 10% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: .22; } }
+    .op-seq { animation: op-seqk 5s ease infinite both; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid #ECEBE7; }
+    @keyframes op-pulsek { 0% { box-shadow: 0 0 0 0 rgba(229,72,77,.55); } 70% { box-shadow: 0 0 0 9px rgba(229,72,77,0); } 100% { box-shadow: 0 0 0 0 rgba(229,72,77,0); } }
+    .op-pulse { animation: op-pulsek 1.8s ease-out infinite; }
+    .op-scanx { position: absolute; top: 0; bottom: 0; width: 30%; left: -30%; background: linear-gradient(90deg, transparent, rgba(172,215,25,.35), transparent); animation: op-scanxk 3.2s ease-in-out infinite; }
+    @keyframes op-scanxk { 0% { left: -30%; } 100% { left: 110%; } }
+    .op-orbit { animation: op-spin 9s linear infinite; }
+    @keyframes op-spin { to { transform: rotate(360deg); } }
+    .op-mplate { position: absolute; left: 50%; width: 170px; height: 170px; margin-left: -85px; border-radius: 16px; display: flex; align-items: center; justify-content: center;
+        background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(226,226,223,.8)); border: 1px solid #fff;
+        box-shadow: 0 1px 0 #d5d5d2, 0 2px 0 #c9c9c6, 0 3px 0 #bcbcb9, 0 4px 0 #a3a3a0, 0 22px 26px -14px rgba(13,16,22,.35);
+        transform: rotateX(58deg) rotateZ(-45deg); }
+    .op-mplate.op-fl { animation-name: op-mfloat; }
+    @keyframes op-mfloat { 0%, 100% { transform: translateY(0) rotateX(58deg) rotateZ(-45deg); } 50% { transform: translateY(-8px) rotateX(58deg) rotateZ(-45deg); } }
+    .op-mplate:last-child { box-shadow: inset 0 0 0 1px rgba(172,215,25,.6), 0 1px 0 #d5d5d2, 0 2px 0 #c9c9c6, 0 3px 0 #bcbcb9, 0 4px 0 #a3a3a0, 0 30px 34px -14px rgba(13,16,22,.4), 0 0 50px -10px rgba(172,215,25,.45); }
+    .op-tick { font-size: 11px; color: #6B8A00; background: rgba(172,215,25,0.18); width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 20px; }
+
+    /* ---------- CTA coded diagram ---------- */
+    .op-dg { width: 100%; max-width: 520px; display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 10px; align-items: stretch; }
+    .op-dg-col { display: flex; flex-direction: column; gap: 8px; }
+    .op-dg-p { border-radius: 8px; padding: 9px 10px; font-size: 11.5px; line-height: 1.2; }
+    .op-dg-g { background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.95); box-shadow: 0 10px 26px -14px rgba(13,16,22,0.3); color: #0D1016; }
+    .op-dg-core { border-radius: 16px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; text-align: center; animation: op-glowk 4s ease-in-out infinite; }
+    @keyframes op-glowk { 0%, 100% { box-shadow: 0 0 0 1px rgba(172,215,25,.35), 0 18px 40px -18px rgba(13,16,22,.35); } 50% { box-shadow: 0 0 0 1px rgba(172,215,25,.7), 0 18px 40px -18px rgba(13,16,22,.35), 0 0 44px -6px rgba(172,215,25,.45); } }
+
+    /* ---------- WHY CARDS ---------- */
+    .op-cards { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 6px; scroll-behavior: smooth; }
+    .op-cards::-webkit-scrollbar { display: none; }
+    .op-card { flex: 0 0 360px; width: 360px; scroll-snap-align: start; }
+    .op-bar { height: 2px; margin: 18px 0 14px; position: relative; overflow: hidden; background-color: #E6E5E0; }
+    .op-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 18%; background: linear-gradient(90deg, #ACD719, #42ACE9); transition: width .8s cubic-bezier(.2,.7,.2,1); }
+    .op-card:hover .op-bar i { width: 100%; }
+    .op-arrows { display: flex; gap: 8px; }
+    .op-arrow { width: 38px; height: 38px; border-radius: 50%; border: 0; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; background-color: #E6E6E4; color: #0D1016; transition: background-color .3s ease; }
+    .op-arrow:hover { background-color: #D6D6D3; }
+
+    /* ---------- INDUSTRY CAROUSEL ---------- */
+    .op-ind-view { overflow: hidden; width: 100%; }
+    .op-ind-track { display: flex; align-items: flex-start; gap: 24px; transition: transform .9s cubic-bezier(.2,.7,.2,1); will-change: transform; }
+    .op-ind { flex: 0 0 auto; width: 210px; cursor: pointer; transition: width .9s cubic-bezier(.2,.7,.2,1); }
+    .op-ind-img { position: relative; height: 250px; overflow: hidden; transition: height .9s cubic-bezier(.2,.7,.2,1); background-color: #3A3D36; }
+    .op-ind-img img { width: 100%; height: 100% !important; max-width: 100%; object-fit: cover; display: block; transition: transform 1.4s cubic-bezier(.2,.7,.2,1), filter .6s ease; }
+    .op-ind-lab { position: absolute; top: 14px; left: 0; right: 0; text-align: center; z-index: 2; color: #ffffff; font-size: 13px; text-shadow: 0 1px 12px rgba(0,0,0,0.45); }
+    .op-ind-txt { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .8s ease, opacity .6s ease .2s; }
+    .op-ind.op-on { width: 420px; }
+    .op-ind.op-on .op-ind-img { height: 500px; }
+    .op-ind.op-on .op-ind-txt { max-height: 260px; opacity: 1; }
+    .op-ind:not(.op-on) .op-ind-img img { filter: saturate(.75); }
+    .op-ind:hover .op-ind-img img { transform: scale(1.03); }
+    .op-dots { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 30px; background-color: #EEEDE9; }
+    .op-dot { width: 6px; height: 6px; border-radius: 6px; border: 0; padding: 0; cursor: pointer; background-color: #BDBBB5; transition: width .5s ease, background-color .5s ease; }
+    .op-dot.op-on { width: 22px; background-color: #0D1016 !important; }
+
+    /* image fallbacks: if a photo cannot load, a tinted gradient stands in */
+    .op-img-fallback { background-image: radial-gradient(90% 70% at 70% 30%, rgba(172,215,25,0.18), rgba(0,0,0,0) 60%), linear-gradient(160deg, #2B3037 0%, #12151A 100%); }
+
+    /* ---------- ROI / CASE STUDY ---------- */
+    .op-roi-hero { position: relative; min-height: 80vh; overflow: hidden; display: flex; align-items: flex-start; width: 100%; }
+    .op-roi-grid { display: flex; gap: 60px; align-items: flex-start; }
+    .op-roi-l { flex: 1 1 45%; }
+    .op-roi-r { flex: 1 1 55%; }
+    .op-stat { display: flex; align-items: baseline; gap: 36px; padding: 34px 0 58px; border-top: 1px solid #DAD8D2; }
+    .op-stat-n { flex: 0 0 auto; min-width: 340px; font-variant-numeric: tabular-nums; color: #0D1016; font-size: 96px; line-height: 0.95; letter-spacing: -0.045em; font-weight: 300; }
+
+    /* ---------- STORY ---------- */
+    .op-story { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .op-par { will-change: transform; }
+
+    /* ---------- SECURITY ---------- */
+    .op-sec-grid { display: grid; grid-template-columns: repeat(5, 1fr); }
+    .op-sec-card { padding: 30px 26px 30px; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; border-top: 1px solid rgba(230,230,230,0.14); border-bottom: 1px solid rgba(230,230,230,0.14); transition: background-color .4s ease; }
+    .op-sec-card:hover { background-color: rgba(255,255,255,0.03); }
+    .op-sec-card + .op-sec-card { border-left: 1px solid rgba(230,230,230,0.14); }
+    .op-badge { width: 66px; height: 66px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 9px; letter-spacing: .04em; line-height: 1.15; position: relative; border: 1px solid rgba(172,215,25,0.6); color: #ACD719; }
+    .op-badge:before { content: ""; position: absolute; inset: 4px; border-radius: 50%; border: 1px dashed rgba(230,230,230,.35); }
+
+    /* ---------- FAQ ---------- */
+    .op-faq { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
+    .op-faq-l { position: sticky; top: 110px; }
+    .op-q { width: 100%; background: none; border: 0; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 0; }
+    .op-q > span:first-child { color: #0D1016; font-size: 18px; letter-spacing: -0.015em; }
+    .op-q-i { flex: 0 0 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; background-color: #E6E6E4; color: #0D1016; transition: transform .4s ease, background-color .3s ease; }
+    .op-a { max-height: 0; overflow: hidden; transition: max-height .5s cubic-bezier(.2,.7,.2,1); }
+    .op-a p { color: #56544E; font-size: 15px; line-height: 1.6; padding: 0 48px 24px 0; }
+
+    /* ---------- CTA ---------- */
+    .op-cta { display: flex; border-radius: 16px; overflow: hidden; min-height: 460px; }
+    .op-cta-l { flex: 1 1 50%; padding: 48px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
+    .op-cta-r { flex: 1 1 50%; display: flex; align-items: center; justify-content: center; padding: 30px; }
+
+    /* ---------- FOOTER ---------- */
+    .op-foot { display: grid; grid-template-columns: 2.2fr 1fr 1.4fr 1fr 1fr; gap: 40px; }
+    .op-foot a { display: block; text-decoration: none; margin-bottom: 9px; color: #0D1016; font-size: 13px; transition: opacity .3s ease; }
+    .op-foot a:hover { opacity: .6; }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 1100px) {
+        .op-pills { flex-basis: 340px; }
+        .op-stack { transform: scale(.8); }
+        .op-sec-grid { grid-template-columns: repeat(3, 1fr); }
+        .op-sec-card:nth-child(4) { border-left: 0; }
+        .op-foot { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+        .is-container .row { flex-direction: column !important; gap: 16px !important; }
+        .is-container .row .column { width: 100% !important; flex: 0 0 100% !important; max-width: 100% !important; }
+        .is-container h1 { font-size: 40px !important; line-height: 1.05 !important; }
+        .is-container h2 { font-size: 32px !important; line-height: 1.1 !important; }
+        .op-wrap { padding-left: 16px; padding-right: 16px; }
+        .op-nav-links { display: none !important; }
+        .op-nav-right .op-nl-login { display: none !important; }
+        .op-nav-logo { flex: 1 1 auto; }
+        .op-hero-in { padding-bottom: 48px; }
+        .op-hero-row { flex-direction: column; gap: 14px; }
+        .op-proof { grid-template-columns: 1fr; }
+        .op-proof > div { padding: 16px 0; }
+        .op-mq-set { gap: 44px; }
+        .op-pin { height: 560vh; }
+        .op-stage-grid { flex-direction: column-reverse; gap: 0; justify-content: center; height: 100vh; }
+        .op-stack-wrap { height: 44vh; width: 100%; }
+        .op-stack { transform: scale(.52); margin-top: 40px; }
+        .op-pills { flex: 0 0 auto; width: 100%; gap: 6px; }
+        .op-pill { max-width: 100%; padding: 8px 14px; }
+        .op-pill.op-on { padding: 14px 18px 16px; }
+        .op-prog { display: none; }
+        .op-card { flex-basis: calc(100vw - 64px); width: calc(100vw - 64px); }
+        .op-viz { height: 360px; }
+        .op-dg { grid-template-columns: 1fr 1fr; }
+        .op-dg-core { grid-column: 1 / -1; order: -1; }
+        .op-ind { width: 110px; }
+        .op-ind-img { height: 150px; }
+        .op-ind.op-on { width: calc(100vw - 96px); }
+        .op-ind.op-on .op-ind-img { height: 360px; }
+        .op-roi-hero { min-height: 70vh; }
+        .op-roi-grid { flex-direction: column; gap: 24px; }
+        .op-stat { flex-direction: column; gap: 8px; padding: 24px 0 30px; }
+        .op-stat-n { min-width: 0; font-size: 64px !important; }
+        .op-story { grid-template-columns: 1fr; gap: 32px; }
+        .op-par { transform: none !important; }
+        .op-story-img { margin-top: 28px !important; max-width: 100% !important; }
+        .op-sec-grid { grid-template-columns: 1fr; }
+        .op-sec-card { min-height: 0; gap: 28px; border-left: 0 !important; }
+        .op-faq { grid-template-columns: 1fr; gap: 28px; }
+        .op-faq-l { position: relative; top: 0; }
+        .op-cta { flex-direction: column; }
+        .op-cta-l { padding: 32px 24px; }
+        .op-foot { grid-template-columns: 1fr 1fr; gap: 28px; }
+        .op-foot > div:first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 480px) {
+        .is-container h1 { font-size: 34px !important; }
+        .is-container h2 { font-size: 28px !important; }
+        .op-stack { transform: scale(.44); }
+        .op-viz { height: 340px; }
+        .op-ind.op-on .op-ind-img { height: 300px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .op-kb, .op-mq-track, .op-scan, .op-fl, .op-orbit, .op-seq, .op-scanx, .op-dash path, .op-dg-core { animation: none !important; }
+        .op-js .op-rv { opacity: 1; transform: none; filter: none; }
+    }
+</style>
+<div class="is-wrapper">
+<div class="is-section is-box box-autofit is-section-0 is-light-text op-font op-nav-host" style="background-color: transparent;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div id="op-nav" class="op-nav" style="background-color: transparent;">
+                    <div class="op-wrap op-nav-in">
+                        <div class="op-nav-links">
+                            <a class="op-nl" href="#product">Product</a>
+                            <a class="op-nl" href="#why">Solutions</a>
+                            <a class="op-nl" href="#tools">Integrations</a>
+                            <a class="op-nl" href="#industries">Industries</a>
+                            <a class="op-nl" href="#story">Company</a>
+                        </div>
+                        <a class="op-nav-logo" href="#top" aria-label="ACME AI home"><span class="acme-logo" style="display:inline-flex;align-items:center;gap:9px;"><svg class="acme-mark" width="24" height="24" viewBox="0 0 32 32" aria-hidden="true" style="display:block;flex:0 0 auto;"><path d="M6.5 26.5 L16 6 L25.5 26.5" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 19 H21.4" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round"/><circle cx="16" cy="6" r="3.1" fill="#ACD719"/><circle cx="6.5" cy="26.5" r="2.2" fill="#ACD719"/><circle cx="25.5" cy="26.5" r="2.2" fill="#ACD719"/></svg><span class="acme-logo-t" style="font-family:'Inter',system-ui,sans-serif !important;font-weight:700;font-size:15px;letter-spacing:0.14em;color:#ffffff;line-height:1;white-space:nowrap;">ACME&nbsp;AI</span></span></a>
+                        <div class="op-nav-right">
+                            <a class="op-nl op-nl-login" href="#results">Customer stories</a>
+                            <a href="#demo" role="button" class="op-pillbtn" style="font-size: 13px; padding: 8px 8px 8px 16px; gap: 10px;">Book a demo <i aria-hidden="true" style="width: 22px; height: 22px;">&#8599;</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-light-text op-font op-band" style="background-color: #0B0E12;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-hero" id="top">
+                    <div class="op-hero-media op-img-fallback">
+                        <img class="op-hero-img op-kb" src="https://images.unsplash.com/photo-1524282592407-25bf4101ac81?auto=format&fit=crop&w=2000&q=80" alt="Aerial view of a city at night" onerror="opImgFail(this)" style="object-position: 50% 45%;">
+                    </div>
+                    <div class="op-hero-shade" style="background: linear-gradient(180deg, rgba(6,8,10,0.62) 0%, rgba(6,8,10,0.28) 26%, rgba(6,8,10,0.40) 52%, rgba(6,8,10,0.94) 100%);"></div>
+                    <div class="op-scan" aria-hidden="true"></div>
+                    <div class="op-hero-in op-wrap">
+                        <h1 id="op-hero-h1" style="color: #ffffff; font-size: 80px; line-height: 1.02; letter-spacing: -0.045em; font-weight: 400; max-width: 1100px; margin: 0 auto; text-shadow: 0 2px 30px rgba(0,0,0,0.45);">AI for your teams&#8217; most <span style="color: #ACD719;">busy work</span></h1>
+                        <div class="op-hero-row">
+                            <p style="color: rgba(255,255,255,0.92); font-size: 15px; text-shadow: 0 1px 12px rgba(0,0,0,0.5); line-height: 1.5; max-width: 560px; text-align: left;">Acme AI drafts, updates, chases and files the repetitive work that fills your team&#8217;s week, so people get back to the work only they can do.</p>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                                <a href="#demo" role="button" class="op-pillbtn">Book a demo <i aria-hidden="true">&#8594;</i></a>
+                                <a href="#results" role="button" class="op-ghostbtn">See customer stories &#8594;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-dark-text op-font " style="background-color: #FEFEFC;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-wrap" style="padding-top: 18px;">
+                    <div class="op-proof" style="border-bottom: 1px solid #E6E5E0;">
+                        <div class="op-rv">
+                            <p style="color: #0D1016; font-size: 14px; font-weight: 500; margin-bottom: 6px;">In use at 1,200+ teams</p>
+                            <p style="color: #68655E; font-size: 13px; line-height: 1.5;">Around 48,000 tasks completed every week across finance, operations, sales and support.</p>
+                        </div>
+                        <div class="op-rv op-d1">
+                            <p style="color: #0D1016; font-size: 14px; font-weight: 500; margin-bottom: 6px;">Cloud, private cloud or on-prem</p>
+                            <p style="color: #68655E; font-size: 13px; line-height: 1.5;">Runs where your data needs to live, behind your single sign-on and access rules.</p>
+                        </div>
+                        <div class="op-rv op-d2">
+                            <p style="color: #0D1016; font-size: 14px; font-weight: 500; margin-bottom: 6px;">ISO 27001 &#183; SOC 2 &#183; GDPR ready</p>
+                            <p style="color: #68655E; font-size: 13px; line-height: 1.5;">Independently audited, with privacy controls built into the platform.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="tools" style="padding: 28px 0 28px;">
+                    <p style="color: #68655E; font-size: 12px; text-align: center; margin-bottom: 22px;">Works with the tools you already use</p>
+                    <div class="op-mq">
+                        <div class="op-mq-track">
+                            <div class="op-mq-set"><span><b aria-hidden="true"></b>Mail</span><span><b aria-hidden="true"></b>Calendar</span><span><b aria-hidden="true"></b>Docs</span><span><b aria-hidden="true"></b>Sheets</span><span><b aria-hidden="true"></b>Team chat</span><span><b aria-hidden="true"></b>CRM</span><span><b aria-hidden="true"></b>Helpdesk</span><span><b aria-hidden="true"></b>Wiki</span><span><b aria-hidden="true"></b>Project boards</span></div>
+                            <div class="op-mq-set" aria-hidden="true"><span><b aria-hidden="true"></b>Mail</span><span><b aria-hidden="true"></b>Calendar</span><span><b aria-hidden="true"></b>Docs</span><span><b aria-hidden="true"></b>Sheets</span><span><b aria-hidden="true"></b>Team chat</span><span><b aria-hidden="true"></b>CRM</span><span><b aria-hidden="true"></b>Helpdesk</span><span><b aria-hidden="true"></b>Wiki</span><span><b aria-hidden="true"></b>Project boards</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-dark-text op-font " style="background-color: #FEFEFC;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-wrap" id="product" style="padding-top: 72px; padding-bottom: 56px; display: flex; justify-content: flex-end;">
+                    <div style="max-width: 720px; text-align: center;">
+                        <p class="op-rv" style="color: #68655E; font-size: 13px; margin-bottom: 18px;">What is Acme AI</p>
+                        <h2 class="op-rv" style="color: #0D1016; font-size: 52px; line-height: 1.04; letter-spacing: -0.035em;">Busywork, handled end to end</h2>
+                        <p class="op-rv op-d1" style="color: #3E3C37; font-size: 15px; line-height: 1.55; margin-top: 20px;">Acme AI is the AI work platform for operations, finance, sales and support teams.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-dark-text op-font op-pin-host" style="background-color: #E6E6E4;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div id="op-pin" class="op-pin">
+                    <div class="op-stage">
+                        <div class="op-wrap op-stage-grid">
+                            <div class="op-pills" id="op-pills">
+                                <div class="op-pill op-on" data-op-i="0" role="button" tabindex="0" aria-expanded="true">
+                                    <div class="op-pill-h"><span class="op-pill-t">Private AI Models</span><span class="op-pill-plus" aria-hidden="true">+</span></div>
+                                    <div class="op-pill-b"><p>Models run in our cloud, your private cloud or on your own hardware, and your data is never used to train them.</p></div>
+                                </div>
+                                <div class="op-pill" data-op-i="1" role="button" tabindex="0" aria-expanded="false">
+                                    <div class="op-pill-h"><span class="op-pill-t">Acme Relay</span><span class="op-pill-plus" aria-hidden="true">+</span></div>
+                                    <div class="op-pill-b"><p>The work engine. Relay picks up a request, gathers context from every connected tool, drafts the result with sources, and delivers it once the right person signs off.</p></div>
+                                </div>
+                                <div class="op-pill" data-op-i="2" role="button" tabindex="0" aria-expanded="false">
+                                    <div class="op-pill-h"><span class="op-pill-t">Connectors</span><span class="op-pill-plus" aria-hidden="true">+</span></div>
+                                    <div class="op-pill-b"><p>The connection layer. Connectors bring context in from the tools you already use and carry finished work back out, so Acme AI fits your stack instead of replacing it.</p></div>
+                                </div>
+                                <div class="op-pill" data-op-i="3" role="button" tabindex="0" aria-expanded="false">
+                                    <div class="op-pill-h"><span class="op-pill-t">Playbooks</span><span class="op-pill-plus" aria-hidden="true">+</span></div>
+                                    <div class="op-pill-b"><p>The way your best people handle a task becomes a versioned Playbook that Runner can execute and Scout can check, so know-how lives in the system rather than in one inbox.</p></div>
+                                </div>
+                                <div class="op-pill" data-op-i="4" role="button" tabindex="0" aria-expanded="false">
+                                    <div class="op-pill-h"><span class="op-pill-t">Ten Work Modules</span><span class="op-pill-plus" aria-hidden="true">+</span></div>
+                                    <div class="op-pill-b"><p>Reports, Inbox, Tickets, Meetings, Docs, Spreadsheets, Follow-ups, Approvals, Research and Onboarding, each switched on independently.</p></div>
+                                </div>
+                                <div class="op-pill" data-op-i="5" role="button" tabindex="0" aria-expanded="false">
+                                    <div class="op-pill-h"><span class="op-pill-t">Workshop</span><span class="op-pill-plus" aria-hidden="true">+</span></div>
+                                    <div class="op-pill-b"><p>Build, tailor and own your workflows in Workshop: your logic, your IP, in plain readable steps.</p></div>
+                                </div>
+                                <div class="op-pill" data-op-i="6" role="button" tabindex="0" aria-expanded="false">
+                                    <div class="op-pill-h"><span class="op-pill-t">Vault Layer</span><span class="op-pill-plus" aria-hidden="true">+</span></div>
+                                    <div class="op-pill-b"><p>The privacy layer. It masks sensitive fields before anything reaches a model and keeps a full record of what was used, when and by whom.</p></div>
+                                </div>
+                                <div class="op-prog"><i id="op-prog-bar"></i></div>
+                            </div>
+                            <div class="op-stack-wrap">
+                                <div class="op-stack" id="op-stack">
+                                    <div class="op-plate op-on" data-op-i="0" aria-hidden="true"><span class="op-glint"></span><span class="op-plate-l">Private AI Models</span></div>
+                                    <div class="op-plate" data-op-i="1" aria-hidden="true"><span class="op-glint"></span><span class="op-plate-l">Acme Relay</span></div>
+                                    <div class="op-plate" data-op-i="2" aria-hidden="true"><span class="op-glint"></span><span class="op-plate-l">Connectors</span></div>
+                                    <div class="op-plate" data-op-i="3" aria-hidden="true"><span class="op-glint"></span><span class="op-plate-l">Playbooks</span></div>
+                                    <div class="op-plate" data-op-i="4" aria-hidden="true"><span class="op-glint"></span><span class="op-plate-l">Ten Work Modules</span></div>
+                                    <div class="op-plate" data-op-i="5" aria-hidden="true"><span class="op-glint"></span><span class="op-plate-l">Workshop</span></div>
+                                    <div class="op-plate" data-op-i="6" aria-hidden="true"><span class="op-glint"></span><span class="op-plate-l">Vault Layer</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-dark-text op-font " style="background-color: #FEFEFC;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-wrap" style="padding-top: 28px; padding-bottom: 28px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; flex-wrap: wrap; border-top: 1px solid #E6E5E0;">
+                    <p class="op-rv" style="color: #3E3C37; font-size: 15px; line-height: 1.5; max-width: 460px;">It connects your tools, your team&#8217;s know-how and your approval rules under one AI core, so routine work runs itself.</p>
+                    <a class="op-rv op-d1 op-link-ul" href="#why">&#8627; See how the modules fit together</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-dark-text op-font " style="background-color: #FEFEFC;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-wrap" id="why" style="padding-top: 80px; padding-bottom: 96px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; margin-bottom: 56px;">
+                        <div style="max-width: 560px;">
+                            <p class="op-rv" style="color: #68655E; font-size: 13px; margin-bottom: 16px;">Why Acme AI</p>
+                            <h2 class="op-rv" style="color: #0D1016; font-size: 52px; line-height: 1.04; letter-spacing: -0.035em; margin-bottom: 22px;">One closed loop, across every team</h2>
+                            <p class="op-rv op-d1" style="color: #3E3C37; font-size: 15px; line-height: 1.55;">Acme Relay connects your tools and know-how, Scout checks the facts, and Runner carries out approved work. Your team stays in control, in the cloud, a private cloud or on-prem.</p>
+                        </div>
+                        <div class="op-arrows">
+                            <button class="op-arrow" type="button" onclick="opCards(-1)" aria-label="Previous">&#8592;</button>
+                            <button class="op-arrow" type="button" onclick="opCards(1)" aria-label="Next">&#8594;</button>
+                        </div>
+                    </div>
+                    <div class="op-cards" id="op-cards">
+                        <div class="op-card op-rv">
+                            <div class="op-viz"><div class="op-viz-in"><svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 360 400" preserveAspectRatio="none" aria-hidden="true"><g stroke="#B9B8B2" stroke-width="1" stroke-dasharray="3 5" fill="none" class="op-dash"><path d="M70 80 L180 200"/><path d="M290 70 L180 200"/><path d="M40 210 L180 200"/><path d="M320 220 L180 200"/><path d="M80 330 L180 200"/><path d="M280 330 L180 200"/></g></svg><div class="op-fl op-glass op-chipx" style="left: 8%; top: 16%; animation-delay: 0s;">Mail</div><div class="op-fl op-glass op-chipx" style="left: 62%; top: 13%; animation-delay: 1.2s;">Team chat</div><div class="op-fl op-glass op-chipx" style="left: 3%; top: 49%; animation-delay: 2.1s;">Sheets</div><div class="op-fl op-glass op-chipx" style="left: 72%; top: 51%; animation-delay: 0.6s;">CRM</div><div class="op-fl op-glass op-chipx" style="left: 10%; top: 79%; animation-delay: 1.7s;">Helpdesk</div><div class="op-fl op-glass op-chipx" style="left: 70%; top: 79%; animation-delay: 2.6s;">Docs</div><div class="op-glass" style="position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; margin: -46px 0 0 -46px; border-radius: 22px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 44px -12px rgba(13,16,22,0.35), 0 0 0 8px rgba(172,215,25,0.12);"><svg class="acme-mark" width="46" height="46" viewBox="0 0 32 32" aria-hidden="true" style="display:block;flex:0 0 auto;"><path d="M6.5 26.5 L16 6 L25.5 26.5" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 19 H21.4" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round"/><circle cx="16" cy="6" r="3.1" fill="#ACD719"/><circle cx="6.5" cy="26.5" r="2.2" fill="#ACD719"/><circle cx="25.5" cy="26.5" r="2.2" fill="#ACD719"/></svg></div></div></div>
+                            <div class="op-bar"><i></i></div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 6px;">01 &#183; End Tab Overload</p>
+                            <h3 style="color: #0D1016; font-size: 19px; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 10px;">Your team is drowning in tabs, not answers.</h3>
+                            <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">Acme AI puts one layer over the tools your team already uses, so every request lands in one place and nobody rebuilds context tab by tab.</p>
+                            <a class="op-link" href="#demo">&#8627; See how the modules fit together</a>
+                        </div>
+                        <div class="op-card op-rv">
+                            <div class="op-viz"><div class="op-viz-in"><div class="op-glass" style="position: absolute; left: 50%; top: 50%; width: 82%; max-width: 290px; transform: translate(-50%,-50%); padding: 16px 16px 10px;"><div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;"><span class="op-pulse" style="width: 8px; height: 8px; border-radius: 50%; background-color: #E5484D;"></span><span style="font-size: 11px; color: #68655E;">Due today &#183; 5:00 pm</span></div><p style="font-size: 14px; color: #0D1016; margin-bottom: 10px;">Monthly pipeline report</p><div class="op-seq" style="animation-delay: 0.0s;"><span style="font-size: 11.5px; color: #0D1016;">Pulling CRM, sheets and mail</span><span class="op-tick">&#10003;</span></div><div class="op-seq" style="animation-delay: 0.7s;"><span style="font-size: 11.5px; color: #0D1016;">Comparing against last month</span><span class="op-tick">&#10003;</span></div><div class="op-seq" style="animation-delay: 1.4s;"><span style="font-size: 11.5px; color: #0D1016;">Draft ready, with sources</span><span class="op-tick">&#10003;</span></div><div class="op-seq" style="animation-delay: 2.1s;"><span style="font-size: 11.5px; color: #0D1016;">Approval requested: send</span><span class="op-tick" style="color: #0D1016; background: #ACD719;">&#8594;</span></div><p style="font-size: 10.5px; color: #68655E; margin-top: 8px;">Relay worked across every connected tool at once</p></div></div></div>
+                            <div class="op-bar"><i></i></div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 6px;">02 &#183; Done, Not Just Drafted</p>
+                            <h3 style="color: #0D1016; font-size: 19px; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 10px;">Suggestions are easy. Finished work is the job.</h3>
+                            <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">When a request comes in, Relay gathers context from every connected tool at once and hands back finished work with sources, usually in minutes.</p>
+                            <a class="op-link" href="#demo">&#8627; Watch Relay finish a real request</a>
+                        </div>
+                        <div class="op-card op-rv">
+                            <div class="op-viz"><div class="op-viz-in"><div style="position: absolute; inset: 0;"><div class="op-mplate op-fl" style="animation-delay: 0.00s; top: 58%;"><span style="font-size: 10px; color: #3E3C37; white-space: nowrap;">Full audit trail</span></div><div class="op-mplate op-fl" style="animation-delay: 0.35s; top: 47%;"><span style="font-size: 10px; color: #3E3C37; white-space: nowrap;">Role-based access</span></div><div class="op-mplate op-fl" style="animation-delay: 0.70s; top: 36%;"><span style="font-size: 10px; color: #3E3C37; white-space: nowrap;">Single sign-on</span></div><div class="op-mplate op-fl" style="animation-delay: 1.05s; top: 25%;"><span style="font-size: 10px; color: #3E3C37; white-space: nowrap;">Admin controls</span></div></div></div></div>
+                            <div class="op-bar"><i></i></div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 6px;">03 &#183; Built for Real Teams</p>
+                            <h3 style="color: #0D1016; font-size: 19px; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 10px;">Ready for real work from day one.</h3>
+                            <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">Acme AI was shaped by busy month-ends, audits and Monday-morning queues. Security and admin controls are the default, not an upgrade.</p>
+                            <a class="op-link" href="#demo">&#8627; Read the customer stories</a>
+                        </div>
+                        <div class="op-card op-rv">
+                            <div class="op-viz"><div class="op-viz-in"><div class="op-glass" style="position: absolute; left: 7%; top: 14%; width: 56%; padding: 12px 14px;"><p style="font-size: 11px; color: #68655E; margin-bottom: 6px;">Raw company data</p><p class="op-mono" style="font-size: 10.5px; color: #0D1016; padding: 5px 0; border-top: 1px solid #ECEBE7;"><span style="color: #68655E;">user:</span> j.smith@company.example</p><p class="op-mono" style="font-size: 10.5px; color: #0D1016; padding: 5px 0; border-top: 1px solid #ECEBE7;"><span style="color: #68655E;">account:</span> ACCT-448120</p><p class="op-mono" style="font-size: 10.5px; color: #0D1016; padding: 5px 0; border-top: 1px solid #ECEBE7;"><span style="color: #68655E;">phone:</span> +1 555 0142</p></div><div style="position: absolute; left: 50%; top: 47%; transform: translateX(-50%); background-color: #0D1016; color: #ACD719; font-size: 10.5px; padding: 6px 12px; border-radius: 30px; white-space: nowrap; z-index: 3;">Vault Layer</div><div class="op-glass" style="position: absolute; right: 7%; bottom: 13%; width: 56%; padding: 12px 14px; overflow: hidden;"><p style="font-size: 11px; color: #68655E; margin-bottom: 6px;">What the model sees</p><p class="op-mono" style="font-size: 10.5px; color: #0D1016; padding: 5px 0; border-top: 1px solid #ECEBE7;"><span style="color: #68655E;">user:</span> <span style="background-color: #0D1016; color: #0D1016; border-radius: 3px;">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</span></p><p class="op-mono" style="font-size: 10.5px; color: #0D1016; padding: 5px 0; border-top: 1px solid #ECEBE7;"><span style="color: #68655E;">account:</span> <span style="background-color: #0D1016; color: #0D1016; border-radius: 3px;">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</span></p><p class="op-mono" style="font-size: 10.5px; color: #0D1016; padding: 5px 0; border-top: 1px solid #ECEBE7;"><span style="color: #68655E;">phone:</span> <span style="background-color: #0D1016; color: #0D1016; border-radius: 3px;">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</span></p><span class="op-scanx"></span></div></div></div>
+                            <div class="op-bar"><i></i></div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 6px;">04 &#183; Trustworthy AI</p>
+                            <h3 style="color: #0D1016; font-size: 19px; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 10px;">AI you can trust with company data.</h3>
+                            <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">The Vault Layer masks sensitive data before it reaches any model, access is least-privilege, and every output is explained with sources you can check.</p>
+                            <a class="op-link" href="#demo">&#8627; Read the security overview</a>
+                        </div>
+                        <div class="op-card op-rv">
+                            <div class="op-viz"><div class="op-viz-in"><div class="op-glass" style="position: absolute; left: 50%; top: 50%; width: 84%; max-width: 300px; transform: translate(-50%,-48%); padding: 14px;"><p style="font-size: 11px; color: #68655E; margin-bottom: 4px;">Playbook library</p><p style="font-size: 14px; color: #0D1016; margin-bottom: 6px;">Versioned, reusable know-how</p><div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; background: rgba(255,255,255,0.9); border: 1px solid #ECEBE7; border-radius: 8px; padding: 9px 10px; margin-top: 6px;"><span style="font-size: 11.5px; color: #0D1016;">Weekly status report</span><span style="font-size: 10px; color: #68655E; background-color: #F1F0EC; border-radius: 20px; padding: 2px 7px;">v3</span></div><div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; background: rgba(255,255,255,0.9); border: 1px solid #ECEBE7; border-radius: 8px; padding: 9px 10px; margin-top: 6px;"><span style="font-size: 11.5px; color: #0D1016;">New hire onboarding</span><span style="font-size: 10px; color: #68655E; background-color: #F1F0EC; border-radius: 20px; padding: 2px 7px;">v7</span></div><div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; background: rgba(255,255,255,0.9); border: 1px solid #ECEBE7; border-radius: 8px; padding: 9px 10px; margin-top: 6px;"><span style="font-size: 11.5px; color: #0D1016;">Invoice follow-up</span><span style="font-size: 10px; color: #68655E; background-color: #F1F0EC; border-radius: 20px; padding: 2px 7px;">v2</span></div><div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; background: rgba(255,255,255,0.9); border: 1px solid #ECEBE7; border-radius: 8px; padding: 9px 10px; margin-top: 6px;"><span style="font-size: 11.5px; color: #0D1016;">Quarterly vendor review</span><span style="font-size: 10px; color: #68655E; background-color: #F1F0EC; border-radius: 20px; padding: 2px 7px;">v5</span></div><p style="font-size: 10.5px; color: #6B8A00; margin-top: 10px;">&#10003; Checked by Scout against live data</p></div></div></div>
+                            <div class="op-bar"><i></i></div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 6px;">05 &#183; Knowledge That Stays</p>
+                            <h3 style="color: #0D1016; font-size: 19px; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 10px;">Know-how that stops walking out the door.</h3>
+                            <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">New joiners inherit years of know-how from their first week. They run proven Playbooks instead of learning by mistake.</p>
+                            <a class="op-link" href="#demo">&#8627; Browse the Playbook library</a>
+                        </div>
+                        <div class="op-card op-rv">
+                            <div class="op-viz"><div class="op-viz-in"><div style="position: absolute; left: 8%; top: 14%; right: 8%; bottom: 22%; border: 1.5px dashed #9C9A93; border-radius: 18px;"></div><p style="position: absolute; left: 12%; top: 16.5%; font-size: 10.5px; color: #68655E;">Your cloud &#183; private</p><div class="op-fl op-glass op-chipx" style="left: 16%; top: 30%; animation-delay: 0s;">Your data</div><div class="op-fl op-glass op-chipx" style="left: 54%; top: 26%; animation-delay: 0.5s;">Your models</div><div class="op-fl op-glass op-chipx" style="left: 18%; top: 56%; animation-delay: 1.0s;">AI inference</div><div class="op-fl op-glass op-chipx" style="left: 56%; top: 58%; animation-delay: 1.5s;">Built-in audit</div><div style="position: absolute; left: 50%; bottom: 7%; transform: translateX(-50%); display: flex; gap: 8px; align-items: center; white-space: nowrap;"><span style="font-size: 10.5px; color: #8A877F; text-decoration: line-through;">Training on your data</span><span style="background-color: #0D1016; color: #ACD719; font-size: 10.5px; padding: 5px 10px; border-radius: 30px;">0 data used for training</span></div></div></div>
+                            <div class="op-bar"><i></i></div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 6px;">06 &#183; Your Cloud or Ours</p>
+                            <h3 style="color: #0D1016; font-size: 19px; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 10px;">Cloud, private cloud or on-prem.</h3>
+                            <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">Acme AI runs wherever your data needs to live, and that includes the AI models themselves. Nothing you share is used to train them.</p>
+                            <a class="op-link" href="#demo">&#8627; Compare deployment options</a>
+                        </div>
+                        <div class="op-card op-rv">
+                            <div class="op-viz"><div class="op-viz-in"><div style="position: absolute; inset: 0; background-image: radial-gradient(#C9C8C2 1px, transparent 1px); background-size: 16px 16px; opacity: 0.7;"></div><svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 360 400" preserveAspectRatio="none" aria-hidden="true"><g stroke="#ACD719" stroke-width="1.6" fill="none" class="op-dash"><path d="M110 95 C 160 95, 170 150, 200 150"/><path d="M200 185 C 150 190, 150 230, 110 240"/><path d="M110 275 C 160 290, 170 320, 200 318"/></g></svg><div class="op-glass" style="position: absolute; left: 10%; top: 14%; width: 44%; padding: 9px 11px;"><p style="font-size: 9.5px; color: #6B8A00; margin-bottom: 2px;">Trigger</p><p style="font-size: 12px; color: #0D1016;">Form submitted</p></div><div class="op-glass" style="position: absolute; left: 46%; top: 32%; width: 44%; padding: 9px 11px;"><p style="font-size: 9.5px; color: #6B8A00; margin-bottom: 2px;">Agent</p><p style="font-size: 12px; color: #0D1016;">Draft the reply</p></div><div class="op-glass" style="position: absolute; left: 12%; top: 55%; width: 44%; padding: 9px 11px;"><p style="font-size: 9.5px; color: #6B8A00; margin-bottom: 2px;">Playbook</p><p style="font-size: 12px; color: #0D1016;">Update records</p></div><div class="op-glass" style="position: absolute; left: 46%; top: 74%; width: 44%; padding: 9px 11px;"><p style="font-size: 9.5px; color: #6B8A00; margin-bottom: 2px;">Approval</p><p style="font-size: 12px; color: #0D1016;">Reversible, logged</p></div><span style="position: absolute; right: 7%; top: 7%; font-size: 10px; color: #68655E; background: rgba(255,255,255,0.85); border-radius: 20px; padding: 3px 9px;">Your IP &#183; v12</span></div></div>
+                            <div class="op-bar"><i></i></div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 6px;">07 &#183; Own Your Workflows</p>
+                            <h3 style="color: #0D1016; font-size: 19px; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 10px;">Own your workflows. Not another vendor&#8217;s roadmap.</h3>
+                            <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">Every workflow, Playbook and dashboard your team builds is your IP: versioned, portable and yours to keep.</p>
+                            <a class="op-link" href="#demo">&#8627; Build your first workflow in Workshop</a>
+                        </div>
+                        <div class="op-card op-rv">
+                            <div class="op-viz"><div class="op-viz-in"><div style="position: absolute; left: 50%; top: 50%; width: 230px; height: 230px; margin: -115px 0 0 -115px; border-radius: 50%; border: 1.5px dashed #B9B8B2;"></div><div class="op-orbit" style="position: absolute; left: 50%; top: 50%; width: 230px; height: 230px; margin: -115px 0 0 -115px;"><span style="position: absolute; left: 50%; top: -6px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background-color: #ACD719; box-shadow: 0 0 0 6px rgba(172,215,25,0.25);"></span></div><div class="op-glass" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 12px 14px; text-align: center; width: 132px;"><p style="font-size: 10px; color: #6B8A00;">Delivered</p><p style="font-size: 12px; color: #0D1016;">Report sent, sources attached</p></div><div class="op-fl op-glass op-chipx" style="left: 42%; top: 14%; animation-delay: 0s;">Capture</div><div class="op-fl op-glass op-chipx" style="left: 72%; top: 46%; animation-delay: 0.5s;">Draft</div><div class="op-fl op-glass op-chipx" style="left: 43%; top: 78%; animation-delay: 1s;">Deliver</div><div class="op-fl op-glass op-chipx" style="left: 10%; top: 46%; animation-delay: 1.5s;">Review</div></div></div>
+                            <div class="op-bar"><i></i></div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 6px;">08 &#183; Work as a Service</p>
+                            <h3 style="color: #0D1016; font-size: 19px; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 10px;">Software that finishes the work.</h3>
+                            <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">Work as a service means the outcome itself: Acme AI carries a request from intake to a checked, delivered result, and value is measured in hours handed back.</p>
+                            <a class="op-link" href="#demo">&#8627; Read what work as a service means</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-dark-text op-font " style="background-color: #FEFEFC;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-wrap" id="industries" style="padding-top: 40px; padding-bottom: 40px; text-align: center;">
+                    <p class="op-rv" style="color: #68655E; font-size: 13px; margin-bottom: 16px;">Seven industries &#183; One platform</p>
+                    <h2 class="op-rv" style="color: #0D1016; font-size: 52px; line-height: 1.04; letter-spacing: -0.035em; max-width: 760px; margin: 0 auto;">Built for teams that are always at capacity.</h2>
+                    <p class="op-rv op-d1" style="color: #3E3C37; font-size: 15px; line-height: 1.55; max-width: 520px; margin: 22px auto 0;">Acme AI is made for the industries where busywork piles up fastest, and where getting it wrong costs time, money and trust.</p>
+                </div>
+                <div class="op-wrap" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px;">
+                    <button class="op-arrow" type="button" onclick="opIndStep(-1)" aria-label="Previous industry">&#8592;</button>
+                    <div class="op-dots" id="op-dots"><button class="op-dot" type="button" onclick="opInd(0)" aria-label="Financial Services"></button><button class="op-dot" type="button" onclick="opInd(1)" aria-label="Professional Services"></button><button class="op-dot" type="button" onclick="opInd(2)" aria-label="Technology / SaaS"></button><button class="op-dot op-on" type="button" onclick="opInd(3)" aria-label="Telecommunications"></button><button class="op-dot" type="button" onclick="opInd(4)" aria-label="Healthcare"></button><button class="op-dot" type="button" onclick="opInd(5)" aria-label="Retail &amp; E-Commerce"></button><button class="op-dot" type="button" onclick="opInd(6)" aria-label="Shared Services"></button></div>
+                    <button class="op-arrow" type="button" onclick="opIndStep(1)" aria-label="Next industry">&#8594;</button>
+                </div>
+                <div class="op-ind-view" id="op-ind-view" style="padding-bottom: 120px;">
+                    <div class="op-ind-track" id="op-ind-track" style="text-align: left;">
+                        <div class="op-ind" data-op-i="0" onclick="opInd(0)">
+                            <div class="op-ind-img">
+                                <img src="https://images.unsplash.com/photo-1767424412548-1a1ac7f4b9bc?auto=format&fit=crop&w=1000&q=80" alt="Trading charts on multiple screens" loading="lazy" onerror="opImgFail(this)" style="">
+                                <p class="op-ind-lab">Financial Services</p>
+                            </div>
+                            <div class="op-ind-txt">
+                                <h3 style="color: #0D1016; font-size: 20px; letter-spacing: -0.02em; margin: 18px 0 10px;">Banks &#183; Payments &#183; Insurance</h3>
+                                <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 14px;">Month-end, reconciliations and client reporting land on the same few people every cycle. Acme AI takes the repeatable parts off their desk.</p>
+                                <a class="op-link" href="#demo">&#8627; Read more</a>
+                            </div>
+                        </div>
+                        <div class="op-ind" data-op-i="1" onclick="opInd(1)">
+                            <div class="op-ind-img">
+                                <img src="https://images.unsplash.com/photo-1559612589-9df3eaf13f28?auto=format&fit=crop&w=1000&q=80" alt="Corporate office towers" loading="lazy" onerror="opImgFail(this)" style="">
+                                <p class="op-ind-lab">Professional Services</p>
+                            </div>
+                            <div class="op-ind-txt">
+                                <h3 style="color: #0D1016; font-size: 20px; letter-spacing: -0.02em; margin: 18px 0 10px;">Consulting &#183; Legal &#183; Accounting</h3>
+                                <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 14px;">Acme AI turns hours of research, formatting and status updates into minutes, so senior people spend their time on the client.</p>
+                                <a class="op-link" href="#demo">&#8627; Read more</a>
+                            </div>
+                        </div>
+                        <div class="op-ind" data-op-i="2" onclick="opInd(2)">
+                            <div class="op-ind-img">
+                                <img src="https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?auto=format&fit=crop&w=1000&q=80" alt="Engineers working at monitors" loading="lazy" onerror="opImgFail(this)" style="">
+                                <p class="op-ind-lab">Technology / SaaS</p>
+                            </div>
+                            <div class="op-ind-txt">
+                                <h3 style="color: #0D1016; font-size: 20px; letter-spacing: -0.02em; margin: 18px 0 10px;">Software &#183; Platforms &#183; Startups</h3>
+                                <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 14px;">For fast-growing software teams, internal busywork scales faster than headcount. Acme AI keeps the CRM, tickets and docs current on its own.</p>
+                                <a class="op-link" href="#demo">&#8627; Read more</a>
+                            </div>
+                        </div>
+                        <div class="op-ind op-on" data-op-i="3" onclick="opInd(3)">
+                            <div class="op-ind-img">
+                                <img src="https://images.unsplash.com/photo-1602823284936-463177448097?auto=format&fit=crop&w=1000&q=80" alt="Telecom tower against a blue sky" loading="lazy" onerror="opImgFail(this)" style="">
+                                <p class="op-ind-lab">Telecommunications</p>
+                            </div>
+                            <div class="op-ind-txt">
+                                <h3 style="color: #0D1016; font-size: 20px; letter-spacing: -0.02em; margin: 18px 0 10px;">Carriers &#183; Networks &#183; Field teams</h3>
+                                <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 14px;">When every region runs its own spreadsheets and inboxes, reporting takes days. Acme AI pulls it together overnight.</p>
+                                <a class="op-link" href="#demo">&#8627; Read more</a>
+                            </div>
+                        </div>
+                        <div class="op-ind" data-op-i="4" onclick="opInd(4)">
+                            <div class="op-ind-img">
+                                <img src="https://images.unsplash.com/photo-1777269749032-d8d458ae594d?auto=format&fit=crop&w=1000&q=80" alt="Modern hospital corridor" loading="lazy" onerror="opImgFail(this)" style="">
+                                <p class="op-ind-lab">Healthcare</p>
+                            </div>
+                            <div class="op-ind-txt">
+                                <h3 style="color: #0D1016; font-size: 20px; letter-spacing: -0.02em; margin: 18px 0 10px;">Hospitals &#183; Clinics &#183; Life sciences</h3>
+                                <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 14px;">Acme AI handles scheduling, forms and admin follow-ups so care teams get time back without adding headcount.</p>
+                                <a class="op-link" href="#demo">&#8627; Read more</a>
+                            </div>
+                        </div>
+                        <div class="op-ind" data-op-i="5" onclick="opInd(5)">
+                            <div class="op-ind-img">
+                                <img src="https://images.unsplash.com/photo-1764795850238-7a024db5e3ee?auto=format&fit=crop&w=1000&q=80" alt="Modern retail store interior" loading="lazy" onerror="opImgFail(this)" style="">
+                                <p class="op-ind-lab">Retail &amp; E-Commerce</p>
+                            </div>
+                            <div class="op-ind-txt">
+                                <h3 style="color: #0D1016; font-size: 20px; letter-spacing: -0.02em; margin: 18px 0 10px;">Stores &#183; Marketplaces &#183; Supply chain</h3>
+                                <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 14px;">From supplier emails to returns queues, Acme AI clears the repetitive work before peak season turns it into a backlog.</p>
+                                <a class="op-link" href="#demo">&#8627; Read more</a>
+                            </div>
+                        </div>
+                        <div class="op-ind" data-op-i="6" onclick="opInd(6)">
+                            <div class="op-ind-img">
+                                <img src="https://images.unsplash.com/photo-1506399558188-acca6f8cbf41?auto=format&fit=crop&w=1000&q=80" alt="Rows of server racks in a data centre" loading="lazy" onerror="opImgFail(this)" style="">
+                                <p class="op-ind-lab">Shared Services</p>
+                            </div>
+                            <div class="op-ind-txt">
+                                <h3 style="color: #0D1016; font-size: 20px; letter-spacing: -0.02em; margin: 18px 0 10px;">Shared services &#183; Outsourcing &#183; Back office</h3>
+                                <p style="color: #56544E; font-size: 14px; line-height: 1.5; margin-bottom: 14px;">Acme AI is built for high-volume, multi-team request queues, with approvals and a full history for every task.</p>
+                                <a class="op-link" href="#demo">&#8627; Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-light-text op-font op-band" style="background-color: #0A0C0A;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-roi-hero" id="results">
+                    <div class="op-hero-media op-img-fallback">
+                        <img class="op-hero-img" src="https://images.unsplash.com/photo-1533664488202-6af66d26c44a?auto=format&fit=crop&w=2000&q=80" alt="City towers at sunset" loading="lazy" onerror="opImgFail(this)" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%;">
+                    </div>
+                    <div class="op-hero-shade" style="background: linear-gradient(180deg, rgba(6,8,10,0.82) 0%, rgba(6,8,10,0.45) 40%, rgba(6,8,10,0.35) 70%, rgba(6,8,10,0.55) 100%);"></div>
+                    <div class="op-wrap" style="width: 100%; padding-top: 96px; text-align: center; position: relative; z-index: 3;">
+                        <p class="op-rv" style="color: rgba(255,255,255,0.78); font-size: 13px; margin-bottom: 14px;">Customer story &#183; fictional example</p>
+                        <h2 class="op-rv" style="color: #ffffff; font-size: 52px; line-height: 1.04; letter-spacing: -0.035em;">9,000 hours a year handed back to one finance team</h2>
+                        <a class="op-rv op-d1" href="#demo" style="display: inline-block; margin-top: 14px; color: rgba(255,255,255,0.85); font-size: 28px; letter-spacing: -0.02em; text-decoration: none;">&#8627; Read the story</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-dark-text op-font " style="background-color: #FEFEFC;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-wrap op-roi-grid" style="padding-top: 80px; padding-bottom: 80px;">
+                    <div class="op-roi-l">
+                        <p class="op-rv" style="color: #0D1016; font-size: 24px; line-height: 1.3; letter-spacing: -0.02em;">In use with busy teams today</p>
+                        <p class="op-rv op-d1" style="color: #68655E; font-size: 14px; line-height: 1.55; margin-top: 18px; max-width: 440px;">Averages across customer workspaces. Figures on this page are illustrative for this design showcase.</p>
+                    </div>
+                    <div class="op-roi-r">
+                        <div class="op-stat op-rv"><span class="op-stat-n op-count">43%</span><p style="color: #3E3C37; font-size: 15px; line-height: 1.45;">less time spent on routine work</p></div>
+                        <div class="op-stat op-rv"><span class="op-stat-n op-count">~60%</span><p style="color: #3E3C37; font-size: 15px; line-height: 1.45;">of repeat requests finished end to end</p></div>
+                        <div class="op-stat op-rv"><span class="op-stat-n op-count">300+</span><p style="color: #3E3C37; font-size: 15px; line-height: 1.45;">ready-made connectors</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-dark-text op-font " style="background-color: #E1DFDA;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-wrap op-story" id="story" style="padding-top: 96px; padding-bottom: 100px;">
+                    <div>
+                        <h2 class="op-rv" style="color: #0D1016; font-size: 52px; line-height: 1.04; letter-spacing: -0.035em;">Our story</h2>
+                        <div class="op-story-img" style="margin-top: 72px; max-width: 360px;">
+                            <div class="op-img-fallback" style="overflow: hidden; aspect-ratio: 4 / 5;"><div class="op-par" data-op-speed="0.06" style="height: 112%; margin-top: -6%;"><img src="https://images.unsplash.com/photo-1639313521811-fdfb1c040ddb?auto=format&fit=crop&w=900&q=80" alt="A team working in an operations room" loading="lazy" onerror="opImgFail(this)" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div></div>
+                            <p style="color: #0D1016; font-size: 15px; margin-top: 14px;">The founding team</p>
+                            <p style="color: #68655E; font-size: 13px; margin-top: 2px;">Operators turned builders</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="op-rv" style="color: #0D1016; font-size: 24px; line-height: 1.32; letter-spacing: -0.02em;">A handful of people who spent years buried in status reports, follow-ups and spreadsheets built the tool they kept wishing for. The three things that hurt most became three parts of the product.</p>
+                        <p class="op-rv" style="color: #3E3C37; font-size: 15px; line-height: 1.6; margin-top: 26px;">Between them they had watched every generation of productivity software promise to save time, then quietly add one more tab to check. Their conclusion was not that the tools were bad. It was that nobody had ever given busy teams a single place where the routine work actually gets done.</p>
+                        <p class="op-rv" style="color: #3E3C37; font-size: 15px; line-height: 1.6; margin-top: 18px;">Every one of them had also seen an automation fire at the wrong moment and create more work than it saved. So the rule was set early: anything Acme AI does on your behalf carries the same checks a colleague&#8217;s work would, and can be stopped by the same people.</p>
+                        <a class="op-rv op-link-ul" href="#faq" style="margin-top: 22px;">&#8627; Why we built Acme AI</a>
+                        <div class="op-img-fallback" style="margin-top: 48px; overflow: hidden; aspect-ratio: 3 / 2;"><div class="op-par" data-op-speed="0.08" style="height: 116%; margin-top: -8%;"><img src="https://images.unsplash.com/photo-1680992046626-418f7e910589?auto=format&fit=crop&w=1200&q=80" alt="Server rack with green status lights" loading="lazy" onerror="opImgFail(this)" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-light-text op-font " style="background-color: #0D1016;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-wrap" id="security" style="padding-top: 96px; padding-bottom: 96px;">
+                    <h2 class="op-rv" style="color: #FEFEFC; font-size: 52px; line-height: 1.04; letter-spacing: -0.035em; max-width: 760px;">ISO 27001 &#183; SOC 2 &#183; GDPR ready</h2>
+                    <a class="op-rv op-d1" href="#faq" style="display: inline-block; margin-top: 8px; color: rgba(254,254,252,0.55); font-size: 40px; letter-spacing: -0.03em; text-decoration: none;">&#8627; Read more</a>
+                    <p class="op-rv op-d2" style="color: rgba(230,230,230,0.8); font-size: 14px; line-height: 1.55; max-width: 520px; margin-top: 40px; margin-bottom: 72px;">Independently audited, with privacy controls built into the platform. Your inbox, files and customer records are sensitive, and most AI tools ask you to hand them over blind.</p>
+                    <div class="op-sec-grid">
+                        <div class="op-sec-card op-rv">
+                            <div>
+                                <p style="color: #E6E6E6; font-size: 14px; font-weight: 500; margin-bottom: 10px;">Security first, certified to prove it</p>
+                                <p style="color: rgba(230,230,230,0.62); font-size: 13px; line-height: 1.5;">Single sign-on, role-based access, encryption and a full audit trail as the baseline, audited to ISO 27001 and SOC 2 with GDPR-ready data handling.</p>
+                            </div>
+                            <div class="op-badge" aria-hidden="true">ISO<br>27001</div>
+                        </div>
+                        <div class="op-sec-card op-rv">
+                            <div>
+                                <p style="color: #E6E6E6; font-size: 14px; font-weight: 500; margin-bottom: 10px;">Masked before any model</p>
+                                <p style="color: rgba(230,230,230,0.62); font-size: 13px; line-height: 1.5;">Sensitive fields never reach a model; the Vault Layer filters and masks them first.</p>
+                            </div>
+                            <div class="op-badge" aria-hidden="true">SOC 2</div>
+                        </div>
+                        <div class="op-sec-card op-rv">
+                            <div>
+                                <p style="color: #E6E6E6; font-size: 14px; font-weight: 500; margin-bottom: 10px;">Least-privilege access</p>
+                                <p style="color: rgba(230,230,230,0.62); font-size: 13px; line-height: 1.5;">Scout can read, Runner can act, each under explicit, scoped permissions. Nothing holds more access than its job needs.</p>
+                            </div>
+                            <div class="op-badge" aria-hidden="true">GDPR</div>
+                        </div>
+                        <div class="op-sec-card op-rv">
+                            <div>
+                                <p style="color: #E6E6E6; font-size: 14px; font-weight: 500; margin-bottom: 10px;">Explained, with sources</p>
+                                <p style="color: rgba(230,230,230,0.62); font-size: 13px; line-height: 1.5;">Every output links to the evidence behind it. Ask why something was done and you get the answer, not a black box.</p>
+                            </div>
+                            <div class="op-badge" aria-hidden="true">AUDIT<br>TRAIL</div>
+                        </div>
+                        <div class="op-sec-card op-rv">
+                            <div>
+                                <p style="color: #E6E6E6; font-size: 14px; font-weight: 500; margin-bottom: 10px;">Private cloud is the same platform</p>
+                                <p style="color: rgba(230,230,230,0.62); font-size: 13px; line-height: 1.5;">Full capability inside your environment, updated on your schedule. Not a cut-down edition.</p>
+                            </div>
+                            <div class="op-badge" aria-hidden="true">0<br>TRAINING</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-dark-text op-font " style="background-color: #FEFEFC;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-wrap op-faq" id="faq" style="padding-top: 96px; padding-bottom: 96px;">
+                    <div class="op-faq-l">
+                        <p class="op-rv" style="color: #68655E; font-size: 13px; margin-bottom: 16px;">Common questions</p>
+                        <h2 class="op-rv" style="color: #0D1016; font-size: 44px; line-height: 1.05; letter-spacing: -0.035em;">Asked in every first call. Answered here.</h2>
+                        <p class="op-rv op-d1" style="color: #3E3C37; font-size: 15px; line-height: 1.55; margin-top: 20px;">Nine questions that come up in nearly every first conversation, answered plainly. Pricing, pilots and connector details live on the full FAQ page.</p>
+                        <a class="op-rv op-d2 op-link-ul" href="#demo" style="margin-top: 22px;">&#8627; Browse all questions</a>
+                    </div>
+                    <div id="op-faq" style="border-top: 1px solid #DAD8D2;">
+                        <div class="op-faq-item" style="border-bottom: 1px solid #DAD8D2;">
+                            <button class="op-q" type="button" onclick="opFaq(this)" aria-expanded="false"><span>What is Acme AI?</span><span class="op-q-i" aria-hidden="true">+</span></button>
+                            <div class="op-a"><p>Acme AI is an AI work platform for busy teams. At its centre is Acme Relay, an engine that picks up requests, gathers context from your tools, drafts the work and delivers it once the right person signs off.</p></div>
+                        </div>
+                        <div class="op-faq-item" style="border-bottom: 1px solid #DAD8D2;">
+                            <button class="op-q" type="button" onclick="opFaq(this)" aria-expanded="false"><span>Is Acme AI just another chatbot?</span><span class="op-q-i" aria-hidden="true">+</span></button>
+                            <div class="op-a"><p>No. A chatbot answers questions; Acme AI finishes tasks. It reads from and writes to the tools you already use, follows your approval rules, and hands back completed work with sources attached.</p></div>
+                        </div>
+                        <div class="op-faq-item" style="border-bottom: 1px solid #DAD8D2;">
+                            <button class="op-q" type="button" onclick="opFaq(this)" aria-expanded="false"><span>Do we need to replace our existing tools?</span><span class="op-q-i" aria-hidden="true">+</span></button>
+                            <div class="op-a"><p>No. Acme AI sits on top of your mail, docs, CRM, helpdesk and finance tools and makes them work together. Those tools keep doing what they do well.</p></div>
+                        </div>
+                        <div class="op-faq-item" style="border-bottom: 1px solid #DAD8D2;">
+                            <button class="op-q" type="button" onclick="opFaq(this)" aria-expanded="false"><span>What does &#8220;work as a service&#8221; mean?</span><span class="op-q-i" aria-hidden="true">+</span></button>
+                            <div class="op-a"><p>Instead of another tool your team has to operate, Acme AI delivers the outcome: the report written, the queue cleared, the follow-up sent. Every action is scoped, approval-gated where your policy says so, reversible and logged.</p></div>
+                        </div>
+                        <div class="op-faq-item" style="border-bottom: 1px solid #DAD8D2;">
+                            <button class="op-q" type="button" onclick="opFaq(this)" aria-expanded="false"><span>Can Acme AI run in our own cloud?</span><span class="op-q-i" aria-hidden="true">+</span></button>
+                            <div class="op-a"><p>Yes. It runs in our cloud, your private cloud or on your own hardware, including the AI models. Your data is never used to train models.</p></div>
+                        </div>
+                        <div class="op-faq-item" style="border-bottom: 1px solid #DAD8D2;">
+                            <button class="op-q" type="button" onclick="opFaq(this)" aria-expanded="false"><span>Why can&#8217;t our team just automate this themselves?</span><span class="op-q-i" aria-hidden="true">+</span></button>
+                            <div class="op-a"><p>Many teams already have a few rule-based automations, and Acme AI keeps them. But rules break the moment a request is slightly different. Acme AI handles the judgement in between, with approvals and a full history.</p></div>
+                        </div>
+                        <div class="op-faq-item" style="border-bottom: 1px solid #DAD8D2;">
+                            <button class="op-q" type="button" onclick="opFaq(this)" aria-expanded="false"><span>What happens if Acme AI is down, or if we leave?</span><span class="op-q-i" aria-hidden="true">+</span></button>
+                            <div class="op-a"><p>Your work keeps moving. Acme AI is a layer over your tools, not a replacement, so your team can always work directly. If you leave, every Playbook and workflow you built exports with you.</p></div>
+                        </div>
+                        <div class="op-faq-item" style="border-bottom: 1px solid #DAD8D2;">
+                            <button class="op-q" type="button" onclick="opFaq(this)" aria-expanded="false"><span>What can Acme AI do that our team can&#8217;t today?</span><span class="op-q-i" aria-hidden="true">+</span></button>
+                            <div class="op-a"><p>Nothing your people lack the skill for. It simply works across every tool at once, never loses context between tasks, and runs your best Playbooks at any hour.</p></div>
+                        </div>
+                        <div class="op-faq-item" style="border-bottom: 1px solid #DAD8D2;">
+                            <button class="op-q" type="button" onclick="opFaq(this)" aria-expanded="false"><span>Why should we trust AI with real work?</span><span class="op-q-i" aria-hidden="true">+</span></button>
+                            <div class="op-a"><p>Trust comes from control. Every output shows its sources and reasoning, anything that changes records or leaves the company goes through your approvals, and every action can be reviewed and undone.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-dark-text op-font " style="background-color: #FEFEFC;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-wrap" id="demo" style="padding-bottom: 120px;">
+                    <div class="op-cta op-rv" style="background-color: #121A0B;">
+                        <div class="op-cta-l" style="background: radial-gradient(120% 120% at 0% 100%, rgba(172,215,25,0.18) 0%, rgba(18,26,11,0) 55%), #121A0B;">
+                            <div>
+                                <h2 style="color: #ffffff; font-size: 44px; line-height: 1.08; letter-spacing: -0.03em; max-width: 480px;">One platform. Everything in.</h2>
+                                <p style="color: rgba(255,255,255,0.72); font-size: 14px; line-height: 1.55; margin-top: 22px; max-width: 420px;">The core comes with every workspace. You choose which of the ten work modules to switch on.</p>
+                            </div>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <a href="#top" role="button" class="op-pillbtn">Book a demo <i aria-hidden="true">&#8594;</i></a>
+                                <a href="#product" role="button" class="op-ghostbtn" style="background-color: transparent; border-color: rgba(255,255,255,0.3);">See the modules</a>
+                            </div>
+                        </div>
+                        <div class="op-cta-r" style="background: linear-gradient(180deg, #F3F3F1 0%, #E4E4E0 60%, #D9D9D4 100%); flex-direction: column; gap: 14px;">
+                            <p style="color: #68655E; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">Ten work modules &#183; One Acme Relay core</p>
+                            <div class="op-dg">
+                                <div class="op-dg-col"><div class="op-dg-p op-dg-g op-fl" style="animation-delay: 0.0s;">Reports</div><div class="op-dg-p op-dg-g op-fl" style="animation-delay: 0.4s;">Inbox</div><div class="op-dg-p op-dg-g op-fl" style="animation-delay: 0.8s;">Tickets</div><div class="op-dg-p op-dg-g op-fl" style="animation-delay: 1.2s;">Meetings</div><div class="op-dg-p op-dg-g op-fl" style="animation-delay: 1.6s;">Docs</div></div>
+                                <div class="op-dg-core op-dg-g">
+                                    <div class="op-dg-p" style="background-color: #F1F0EC; color: #0D1016;">Scout<br><span style="color: #6B8A00; font-size: 10px;">Checking</span></div>
+                                    <div>
+                                        <div style="width: 58px; height: 58px; margin: 0 auto 8px; border-radius: 16px; background: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px rgba(172,215,25,0.14), 0 12px 26px -12px rgba(13,16,22,0.35);"><svg class="acme-mark" width="34" height="34" viewBox="0 0 32 32" aria-hidden="true" style="display:block;flex:0 0 auto;"><path d="M6.5 26.5 L16 6 L25.5 26.5" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 19 H21.4" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round"/><circle cx="16" cy="6" r="3.1" fill="#ACD719"/><circle cx="6.5" cy="26.5" r="2.2" fill="#ACD719"/><circle cx="25.5" cy="26.5" r="2.2" fill="#ACD719"/></svg></div>
+                                        <p style="color: #0D1016; font-size: 20px; letter-spacing: -0.02em;">Acme Relay</p>
+                                        <p style="color: #68655E; font-size: 10.5px; margin-top: 2px;">The work engine</p>
+                                    </div>
+                                    <div class="op-dg-p" style="background-color: #F1F0EC; color: #0D1016;">Runner<br><span style="color: #6B8A00; font-size: 10px;">Doing</span></div>
+                                </div>
+                                <div class="op-dg-col"><div class="op-dg-p op-dg-g op-fl" style="animation-delay: 2.0s;">Spreadsheets</div><div class="op-dg-p op-dg-g op-fl" style="animation-delay: 2.4s;">Follow-ups</div><div class="op-dg-p op-dg-g op-fl" style="animation-delay: 2.8s;">Approvals</div><div class="op-dg-p op-dg-g op-fl" style="animation-delay: 3.2s;">Research</div><div class="op-dg-p op-dg-g op-fl" style="animation-delay: 3.6s;">Onboarding</div></div>
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: 520px;">
+                                <span class="op-dg-p" style="background-color: #0D1016; color: #ACD719; border-radius: 30px;">Connectors</span>
+                                <span class="op-dg-p" style="background-color: #0D1016; color: #ACD719; border-radius: 30px;">Vault Layer</span>
+                                <span class="op-dg-p" style="background-color: #0D1016; color: #ACD719; border-radius: 30px;">Rules &amp; Approvals</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-section-0 is-dark-text op-font is-section-footer" style="background-color: #FAFAF9;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2 op-full">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-wrap" style="padding-top: 72px; padding-bottom: 32px; border-top: 1px solid #E6E5E0;">
+                    <div class="op-foot">
+                        <div>
+                            <a href="#top" style="display: inline-block; margin-bottom: 18px;" aria-label="ACME AI home"><span class="acme-logo" style="display:inline-flex;align-items:center;gap:9px;"><svg class="acme-mark" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" style="display:block;flex:0 0 auto;"><path d="M6.5 26.5 L16 6 L25.5 26.5" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 19 H21.4" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round"/><circle cx="16" cy="6" r="3.1" fill="#ACD719"/><circle cx="6.5" cy="26.5" r="2.2" fill="#ACD719"/><circle cx="25.5" cy="26.5" r="2.2" fill="#ACD719"/></svg><span class="acme-logo-t" style="font-family:'Inter',system-ui,sans-serif !important;font-weight:700;font-size:18px;letter-spacing:0.14em;color:#0D1016;line-height:1;white-space:nowrap;">ACME&nbsp;AI</span></span></a>
+                            <p style="color: #56544E; font-size: 13px; line-height: 1.55; max-width: 320px; margin-bottom: 16px;">The AI work platform for busy teams: capture, draft, review and deliver under one governed layer.</p>
+                            <p style="color: #68655E; font-size: 13px; line-height: 1.6;">hello@acme-ai.example<br>Remote-first, worldwide<br>Support around the clock</p>
+                        </div>
+                        <div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 14px;">Product</p>
+                            <a href="#top">Acme Relay</a>
+                            <a href="#top">Playbooks</a>
+                            <a href="#top">Connectors</a>
+                            <a href="#top">Workshop</a>
+                            <a href="#top">Vault Layer</a>
+                        </div>
+                        <div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 14px;">Solutions</p>
+                            <a href="#top">Status reporting</a>
+                            <a href="#top">Ticket triage</a>
+                            <a href="#top">Meeting follow-ups</a>
+                            <a href="#top">Finance operations</a>
+                            <a href="#top">HR requests</a>
+                            <a href="#top">Sales operations</a>
+                            <a href="#top">Customer support</a>
+                        </div>
+                        <div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 14px;">Resources</p>
+                            <a href="#top">Blog</a>
+                            <a href="#top">Customer stories</a>
+                            <a href="#top">Videos</a>
+                            <a href="#top">FAQs</a>
+                            <a href="#top">Glossary</a>
+                        </div>
+                        <div>
+                            <p style="color: #8A877F; font-size: 12px; margin-bottom: 14px;">Company</p>
+                            <a href="#top">Why Acme AI</a>
+                            <a href="#top">Our story</a>
+                            <a href="#top">About</a>
+                            <a href="#top">Careers</a>
+                            <a href="#top">Pricing</a>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 56px; padding-top: 22px; border-top: 1px solid #E6E5E0;">
+                        <p style="color: #8A877F; font-size: 12px;">ACME AI &#169; 2026 &#183; A fictional company, designed for a portfolio showcase</p>
+                        <div style="display: flex; gap: 20px;">
+                            <a href="#top" style="color: #8A877F; font-size: 12px; text-decoration: none;">Privacy Policy</a>
+                            <a href="#top" style="color: #8A877F; font-size: 12px; text-decoration: none;">Terms &amp; Conditions</a>
+                            <a href="#top" style="color: #8A877F; font-size: 12px; text-decoration: none;">Security</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<a class="sc-back" href="../../" aria-label="Back to the showcase"><span aria-hidden="true">&#8592;</span> Showcase</a>
+
+<script>
+/* ===== ACME AI · Cinematic Light homepage · page script ===== */
+
+/* Why-cards row arrows */
+function opCards(dir){
+    var t = document.getElementById('op-cards'); if(!t) return;
+    var c = t.querySelector('.op-card'); var step = c ? c.getBoundingClientRect().width + 20 : 380;
+    t.scrollBy({ left: dir * step, behavior: 'smooth' });
+}
+
+/* Industry carousel */
+var opIndState = { i: 3, timer: null, hover: false };
+function opIndSizes(){
+    var m = window.innerWidth <= 768;
+    return { s: m ? 110 : 210, a: m ? (window.innerWidth - 96) : 420, g: 24 };
+}
+function opInd(i){
+    var track = document.getElementById('op-ind-track'), view = document.getElementById('op-ind-view');
+    if(!track || !view) return;
+    var cards = track.querySelectorAll('.op-ind'); var n = cards.length; if(!n) return;
+    i = (i + n) % n; opIndState.i = i;
+    for(var k = 0; k < n; k++){ cards[k].classList.toggle('op-on', k === i); cards[k].setAttribute('aria-current', k === i ? 'true' : 'false'); }
+    var dots = document.querySelectorAll('#op-dots .op-dot');
+    for(var d = 0; d < dots.length; d++){ dots[d].classList.toggle('op-on', d === i); }
+    var z = opIndSizes();
+    var x = view.clientWidth / 2 - (i * (z.s + z.g) + z.a / 2);
+    track.style.transform = 'translate3d(' + x + 'px,0,0)';
+}
+function opIndStep(dir){ opInd(opIndState.i + dir); opIndRestart(); }
+function opIndRestart(){
+    if(opIndState.timer) clearInterval(opIndState.timer);
+    opIndState.timer = setInterval(function(){ if(!opIndState.hover) opInd(opIndState.i + 1); }, 5000);
+}
+
+/* FAQ accordion, one open at a time */
+function opFaq(btn){
+    var item = btn.parentNode, ans = item.querySelector('.op-a'), icon = btn.querySelector('.op-q-i');
+    var open = ans.style.maxHeight && ans.style.maxHeight !== '0px';
+    var all = document.querySelectorAll('#op-faq .op-faq-item');
+    for(var k = 0; k < all.length; k++){
+        var a = all[k].querySelector('.op-a'), ic = all[k].querySelector('.op-q-i'), q = all[k].querySelector('.op-q');
+        a.style.maxHeight = '0px'; if(q) q.setAttribute('aria-expanded', 'false');
+        if(ic){ ic.style.transform = 'none'; ic.style.backgroundColor = '#E6E6E4'; }
+    }
+    if(!open){ ans.style.maxHeight = ans.scrollHeight + 'px'; btn.setAttribute('aria-expanded', 'true'); if(icon){ icon.style.transform = 'rotate(45deg)'; icon.style.backgroundColor = '#ACD719'; } }
+}
+
+var docReady = function(fn) {
+    var run = function(){ try { fn(); } catch (e) { if (window.console) console.warn('acme-home', e); } };
+    if (document.readyState === 'complete') run(); else window.addEventListener('load', run);
+};
+
+
+docReady(function() {
+    document.documentElement.classList.add('op-js');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- 1. Nav: transparent over hero, light glass after scroll ---- */
+    var nav = document.getElementById('op-nav');
+    function navState(){ if(nav) nav.classList.toggle('op-solid', window.scrollY > 60); }
+
+    /* ---- 2. Hero headline: word-by-word blur reveal ---- */
+    var h1 = document.getElementById('op-hero-h1');
+    if (h1 && !reduce) {
+        var idx = 0;
+        (function wrap(node){
+            var kids = Array.prototype.slice.call(node.childNodes);
+            kids.forEach(function(ch){
+                if (ch.nodeType === 3) {
+                    var parts = ch.textContent.split(/(\s+)/), frag = document.createDocumentFragment();
+                    parts.forEach(function(p){
+                        if (!p) return;
+                        if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+                        var s = document.createElement('span'); s.className = 'op-w'; s.textContent = p;
+                        s.style.animationDelay = (0.25 + idx * 0.09) + 's'; idx++; frag.appendChild(s);
+                    });
+                    node.replaceChild(frag, ch);
+                } else if (ch.nodeType === 1) { wrap(ch); }
+            });
+        })(h1);
+    }
+
+    /* ---- 3. Scroll reveal ---- */
+    var rv = document.querySelectorAll('.op-rv');
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('op-in'); io.unobserve(e.target); } }); }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        rv.forEach(function(el){ io.observe(el); });
+    } else { rv.forEach(function(el){ el.classList.add('op-in'); }); }
+
+    /* ---- 4. Pinned glass-plate stack ---- */
+    var pin = document.getElementById('op-pin');
+    var pills = document.querySelectorAll('#op-pills .op-pill');
+    var plates = document.querySelectorAll('#op-stack .op-plate');
+    var bar = document.getElementById('op-prog-bar');
+    var stage = pin ? pin.querySelector('.op-stage') : null, stageFallback = false;
+    var N = plates.length, active = -1;
+    function setLayer(a){
+        if (a === active) return; active = a;
+        for (var i = 0; i < N; i++) {
+            var slot = (3 - i) * 26, y, op = 1, z = 10 + i;
+            if (i < a)      { y = slot + 46; }
+            else if (i === a){ y = slot - 70; z = 60; }
+            else            { y = slot - 170 - (i - a) * 12; op = 0.12; }
+            plates[i].style.setProperty('--op-y', y + 'px');
+            plates[i].style.opacity = op; plates[i].style.zIndex = z;
+            plates[i].classList.toggle('op-on', i === a);
+            if (pills[i]) { pills[i].classList.toggle('op-on', i === a); pills[i].setAttribute('aria-expanded', i === a ? 'true' : 'false'); }
+        }
+    }
+    function stackScroll(){
+        if (!pin || !N) return;
+        var r = pin.getBoundingClientRect(), total = pin.offsetHeight - window.innerHeight;
+        var p = Math.min(1, Math.max(0, -r.top / (total || 1)));
+        /* fallback pinning if a parent's overflow breaks position:sticky */
+        if (stage) {
+            if (!stageFallback && r.top < -20 && r.bottom > window.innerHeight + 20 && Math.abs(stage.getBoundingClientRect().top) > 4) {
+                stageFallback = true; stage.style.position = 'relative'; stage.style.top = '0px';
+            }
+            if (stageFallback) stage.style.transform = 'translate3d(0,' + Math.min(total, Math.max(0, -r.top)).toFixed(1) + 'px,0)';
+        }
+        setLayer(Math.min(N - 1, Math.floor(p * N * 0.999)));
+        if (bar) bar.style.width = (p * 100) + '%';
+    }
+    pills.forEach(function(pl, i){
+        function go(){
+            if (!pin) return;
+            var total = pin.offsetHeight - window.innerHeight;
+            var top = pin.getBoundingClientRect().top + window.scrollY + total * ((i + 0.5) / N);
+            window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
+        }
+        pl.addEventListener('click', go);
+        pl.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    });
+    active = -1; setLayer(0);
+
+    /* ---- 5. Industry carousel: autoplay, hover pause, swipe ---- */
+    var view = document.getElementById('op-ind-view');
+    if (view) {
+        opInd(opIndState.i); if (!reduce) opIndRestart();
+        view.addEventListener('mouseenter', function(){ opIndState.hover = true; });
+        view.addEventListener('mouseleave', function(){ opIndState.hover = false; });
+        var sx = null;
+        view.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, { passive: true });
+        view.addEventListener('touchend', function(e){ if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) opIndStep(dx < 0 ? 1 : -1); sx = null; });
+    }
+
+    /* ---- 6. Stat count-up (reads the number written in the markup) ---- */
+    function countUp(el){
+        var raw = el.textContent.trim(), m = raw.match(/^([^\d]*)([\d,.]+)(.*)$/); if (!m) return;
+        var pre = m[1], numStr = m[2], suf = m[3], comma = numStr.indexOf(',') > -1;
+        var target = parseFloat(numStr.replace(/,/g, '')), dec = (numStr.split('.')[1] || '').length, t0 = null, dur = 1800;
+        function fmt(v){ var s = v.toFixed(dec); if (comma) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ','); return pre + s + suf; }
+        function step(ts){ if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / dur); k = 1 - Math.pow(1 - k, 3); el.textContent = fmt(target * k); if (k < 1) requestAnimationFrame(step); else el.textContent = raw; }
+        el.textContent = fmt(0); requestAnimationFrame(step);
+    }
+    var cnt = document.querySelectorAll('.op-count');
+    if ('IntersectionObserver' in window && !reduce) {
+        var co = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ countUp(e.target); co.unobserve(e.target); } }); }, { threshold: 0.6 });
+        cnt.forEach(function(el){ co.observe(el); });
+    }
+
+    /* ---- 7. Parallax images in Our Story ---- */
+    var par = document.querySelectorAll('.op-par');
+    function parallax(){
+        if (reduce || window.innerWidth <= 768) return;
+        par.forEach(function(el){
+            var sp = parseFloat(el.getAttribute('data-op-speed') || '0.1'), r = el.parentNode.getBoundingClientRect();
+            var c = r.top + r.height / 2 - window.innerHeight / 2;
+            el.style.transform = 'translate3d(0,' + (-c * sp).toFixed(1) + 'px,0)';
+        });
+    }
+
+    /* ---- scroll / resize loop ---- */
+    var ticking = false;
+    function onScroll(){ if (ticking) return; ticking = true; requestAnimationFrame(function(){ navState(); stackScroll(); parallax(); ticking = false; }); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function(){ opInd(opIndState.i); onScroll(); });
+    onScroll();
+});
+</script>
+</body>
+</html>

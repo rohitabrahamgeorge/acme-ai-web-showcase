@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACME AI · Editorial Dark homepage</title>
+<meta name="description" content="ACME AI homepage concept: dark editorial layout with a Three.js work loop, bento grid, animated stats and chapter tabs. A fictional brand built as a web design showcase.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="../../assets/img/acme-mark.svg">
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../../assets/css/builder-shim.css">
+</head>
+<body>
+
+<style>
+    body { background-color: #050605; }
+    .is-container.v2 { max-width: 1200px !important; }
+    .op-sec, .op-sec p, .op-sec a, .op-sec span, .op-sec li, .op-sec button, .op-sec div { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    .op-sec h1, .op-sec h2, .op-sec h3, .op-sec h4 { margin-top: 0; }
+    .op-sec a { text-decoration: none; }
+    .op-sec img { display: block; }
+    .op-serif { font-family: 'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif !important; font-weight: 400; }
+    .op-sec .op-serif span { font-family: inherit !important; }
+
+    /* ---------- reveal (only active once the script runs) ---------- */
+    .op-js .op-reveal { opacity: 0; transform: translateY(26px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
+    .op-js .op-reveal.op-in { opacity: 1; transform: none; }
+    .op-js .op-d1 { transition-delay: .08s; } .op-js .op-d2 { transition-delay: .16s; } .op-js .op-d3 { transition-delay: .24s; } .op-js .op-d4 { transition-delay: .32s; }
+
+    /* ---------- NAV ---------- */
+    .op-nav { position: sticky; top: 0; z-index: 60; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+    .op-nav-bar { display: flex; align-items: center; gap: 36px; min-height: 64px; }
+    .op-nav-links { display: flex; align-items: center; gap: 30px; flex: 1 1 auto; }
+    .op-nav-cta { display: flex; align-items: center; gap: 18px; }
+    .op-burger { display: none; }
+    .op-mobile-menu { display: none; }
+
+    /* ---------- HERO ---------- */
+    .op-hero-grid { position: relative; min-height: calc(100vh - 64px); max-height: 940px; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 110px; }
+    .op-hero-copy { position: relative; z-index: 2; max-width: 580px; padding-bottom: 56px; }
+    .op-ring-hero { position: absolute; z-index: 1; top: -60px; left: 44%; right: -30%; height: calc(100% + 60px); pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 24%); mask-image: linear-gradient(90deg, transparent 0%, #000 24%); }
+    .op-ring-label { position: absolute; left: 0; top: 0; white-space: nowrap; pointer-events: none; opacity: 0; will-change: transform, opacity; transition: opacity .25s linear; }
+    .op-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .op-hero-checks { display: flex; flex-wrap: wrap; gap: 10px 26px; }
+    .op-hero-strip { position: relative; z-index: 2; display: flex; }
+    .op-hero-strip > div { flex: 1 1 0; }
+
+    /* ---------- BENTO ---------- */
+    .op-bento { display: flex; flex-direction: column; gap: 12px; }
+    .op-bento-row { display: flex; gap: 12px; }
+    .op-b-wide { flex: 0 0 calc(64% - 6px); }
+    .op-b-narrow { flex: 1 1 auto; min-width: 0; }
+    .op-b-card { position: relative; overflow: hidden; }
+    .op-ring-card { position: absolute; inset: 0; pointer-events: none; }
+    .op-stage-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .op-stage { transition: background-color .35s ease, color .35s ease, border-color .35s ease; }
+    .op-feed { position: absolute; left: 0; right: 0; top: 0; bottom: 0; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 16%, #000 84%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 16%, #000 84%, transparent 100%); }
+    .op-feed-track { display: flex; flex-direction: column; gap: 10px; animation: op-feed 26s linear infinite; }
+    .op-feed-item { background-color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.7); border-radius: 5px; padding: 9px 12px; color: #2E3328; font-size: 14px; }
+    @keyframes op-feed { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+    .op-float { animation: op-float 6s ease-in-out infinite; }
+    @keyframes op-float { 0%,100% { transform: translateY(-50%) translateY(0); } 50% { transform: translateY(-50%) translateY(-8px); } }
+    .op-mq { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+    .op-mq-track { display: flex; gap: 10px; width: max-content; }
+    .op-mq-l { animation: op-mql 38s linear infinite; }
+    .op-mq-r { animation: op-mqr 44s linear infinite; }
+    @keyframes op-mql { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes op-mqr { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+    .op-chip { display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto; background-color: #26291F; border: 1px solid rgba(255,255,255,0.07); border-radius: 100px; padding: 5px 13px 5px 5px; color: #E6E8E0; font-size: 13px; white-space: nowrap; }
+    .op-chip i { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; align-items: center; justify-content: center; color: #FFFFFF; font-size: 10px; font-weight: 700; font-style: normal; }
+    .op-table-wrap { overflow: hidden; }
+    .op-table { width: 100%; min-width: 860px; border-collapse: collapse; font-size: 12.5px; color: #1B1E17; }
+    .op-table td, .op-table th { white-space: nowrap; transition: background-color .5s ease; padding: 9px 12px; border-bottom: 1px solid #F0F1EC; border-right: 1px solid #F3F4F0; text-align: left; }
+    .op-table th { font-weight: 500; color: #667085; font-size: 12px; padding: 10px 12px; border-bottom-color: #EAECE6; background-color: #FAFAF8; }
+    .op-table td.op-n { color: #98A2B3; }
+    .op-table td.op-svc { font-weight: 600; }
+    .op-table td.op-svc::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: #ACD719; margin-right: 8px; vertical-align: middle; }
+    .op-table td.op-src { color: #475467; }
+    .op-table td.op-src em { font-style: normal; display: inline-block; font-size: 11px; color: #667085; background-color: #F2F4F7; border-radius: 4px; padding: 1px 5px; margin-left: 4px; }
+    .op-table td.op-txt { color: #344054; }
+    .op-tag { display: inline-block; font-size: 11.5px; font-weight: 600; border-radius: 4px; padding: 3px 7px; }
+
+    /* ---------- STATS ---------- */
+    .op-stats { display: flex; gap: 20px; }
+    .op-stats > div { flex: 1 1 0; min-width: 0; }
+    .op-dots { display: grid; grid-template-columns: repeat(26, 1fr); gap: 4px; }
+    .op-dot { width: 100%; padding-top: 100%; border-radius: 50%; }
+    .op-dot-on { animation: op-tw 3.2s ease-in-out infinite; }
+    @keyframes op-tw { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+    .op-rows-track { animation: op-feed 18s linear infinite; }
+    .op-log { display: flex; gap: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important; font-size: 11.5px; line-height: 1.3; white-space: nowrap; }
+    .op-log span { font-family: inherit !important; }
+    .op-eq { display: flex; align-items: flex-end; gap: 3px; height: 100%; }
+    .op-eq i { display: block; flex: 1 1 0; height: 100%; transform-origin: bottom; animation: op-eq 5.5s cubic-bezier(.45,0,.55,1) infinite; }
+    @keyframes op-eq { 0%,100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
+
+    /* ---------- CHAPTER TABS ---------- */
+    .op-tabs { display: flex; gap: 28px; align-items: flex-start; }
+    .op-tab-list { flex: 0 0 29%; display: flex; flex-direction: column; }
+    .op-tab { position: relative; display: flex; align-items: baseline; gap: 14px; width: 100%; text-align: left; background-color: transparent; border: 0; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 17px 16px; cursor: pointer; color: #8D9286; font-size: 15px; line-height: 1.35; transition: color .3s ease, background-color .3s ease; }
+    .op-tab:hover { color: #D9DCD2; }
+    .op-tab-stage { flex: 1 1 auto; min-width: 0; }
+    .op-tab-panel { display: flex; gap: 30px; margin-bottom: 16px; background-color: #11130F; border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 34px; }
+    .op-js .op-tab-panel { display: none; margin-bottom: 0; }
+    .op-js .op-tab-panel.op-active { display: flex; animation: op-fadein .6s cubic-bezier(.2,.7,.2,1); }
+    @keyframes op-fadein { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    .op-tab-text { flex: 1 1 58%; min-width: 0; }
+    .op-tab-visual { flex: 1 1 42%; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+    .op-points { display: flex; flex-direction: column; gap: 12px; }
+    .op-tick { flex: 0 0 auto; display: inline-flex; width: 18px; height: 18px; margin-top: 2px; border-radius: 50%; align-items: center; justify-content: center; background-color: rgba(172,215,25,0.14); color: #ACD719; font-size: 10px; }
+    .op-illo { border-radius: 8px; background-color: #0A0B09; border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; padding: 14px; height: 210px; overflow: hidden; }
+    .op-illo > svg { width: 100%; height: 100%; max-height: 182px; }
+    .op-illo .op-dash { stroke-dasharray: 4 6; animation: op-dashmove 2.4s linear infinite; }
+    @keyframes op-dashmove { to { stroke-dashoffset: -40; } }
+    .op-illo .op-pulse-dot { animation: op-tw 2.4s ease-in-out infinite; }
+
+    /* ---------- CASE CAROUSEL ---------- */
+    .op-case-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+    .op-case-track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 4px; }
+    .op-case-track::-webkit-scrollbar { display: none; }
+    .op-case-card { flex: 0 0 auto; width: 320px; scroll-snap-align: start; display: block; border-radius: 8px; overflow: hidden; background-color: #121410; border: 1px solid rgba(255,255,255,0.07); transition: border-color .3s ease, transform .3s ease; }
+    .op-case-card:hover { border-color: rgba(172,215,25,0.45); transform: translateY(-2px); }
+    .op-case-arrows { display: flex; gap: 8px; }
+    .op-round { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); background-color: transparent; color: #F4F5EF; font-size: 16px; cursor: pointer; transition: background-color .2s ease; }
+    .op-round:hover { background-color: rgba(255,255,255,0.08); }
+
+    /* ---------- SECURITY GRID ---------- */
+    .op-sec-grid { display: flex; flex-wrap: wrap; }
+    .op-sec-grid > div { flex: 0 0 33.333%; }
+
+    /* ---------- FAQ ---------- */
+    .op-faq-grid { display: flex; gap: 64px; align-items: flex-start; }
+    .op-faq-left { flex: 0 0 36%; position: sticky; top: 110px; }
+    .op-faq-right { flex: 1 1 auto; min-width: 0; }
+    .op-faq-q { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 20px; background-color: transparent; border: 0; padding: 22px 0; cursor: pointer; text-align: left; color: #F0F2EA; font-size: 17px; font-weight: 500; line-height: 1.4; }
+    .op-faq-panel { max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+    .op-faq-panel p { color: #A9AE9F; font-size: 15.5px; line-height: 1.7; margin: 0; padding: 0 44px 24px 0; }
+    .op-faq-icon { flex: 0 0 auto; display: inline-flex; width: 28px; height: 28px; border-radius: 50%; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.18); color: #ACD719; font-size: 18px; font-weight: 300; transition: transform .35s ease; }
+
+    /* ---------- LINKS / BUTTONS ---------- */
+    .op-btn { display: inline-block; white-space: nowrap; font-weight: 600; border-radius: 4px; line-height: 1.2; transition: background-color .2s ease, color .2s ease; }
+    .op-btn-lime { color: #0A0B08 !important; background-color: #ACD719; border: 1px solid #ACD719; }
+    .op-btn-lime:hover { background-color: #C3EA3A; }
+    .op-btn-ghost { color: #F4F5EF !important; background-color: transparent; border: 1px solid rgba(255,255,255,0.24); }
+    .op-btn-ghost:hover { background-color: rgba(255,255,255,0.08); }
+    .op-nl { color: #E6E8E0 !important; font-size: 14px; transition: color .2s ease; }
+    .op-nl:hover { color: #ACD719 !important; }
+    .op-lime-link { color: #ACD719 !important; transition: color .2s ease; }
+    .op-lime-link:hover { color: #C3EA3A !important; }
+    .op-ul-link { display: inline-block; margin-top: 24px; color: #ACD719 !important; font-size: 14.5px; font-weight: 500; border-bottom: 1px solid rgba(172,215,25,0.35); padding-bottom: 3px; transition: border-color .2s ease; }
+    .op-ul-link:hover { border-bottom-color: #ACD719; }
+    .op-foot-link { display: block; color: #C9CCC2 !important; font-size: 13.5px; line-height: 1.4; margin: 0 0 10px 0; transition: color .2s ease; }
+    .op-foot-link:hover { color: #ACD719 !important; }
+
+    /* ---------- FOOTER ---------- */
+    .op-foot-top { display: flex; gap: 48px; }
+    .op-foot-brand { flex: 0 0 30%; }
+    .op-foot-cols { flex: 1 1 auto; display: flex; gap: 28px; }
+    .op-foot-cols > div { flex: 1 1 0; min-width: 0; }
+    .op-foot-word { white-space: nowrap; line-height: .8; }
+
+    /* ================= TABLET ================= */
+    @media (max-width: 1024px) {
+        .op-nav-links { gap: 20px; }
+        .op-ring-hero { left: 46%; right: -44%; opacity: .7; }
+        .op-faq-grid { gap: 36px; }
+    }
+
+    /* ================= MOBILE 768 ================= */
+    @media (max-width: 768px) {
+        .is-section-50 { padding: 72px 0; }
+        .is-section-75 { padding: 88px 0; }
+        .is-container .row { flex-direction: column !important; gap: 16px !important; }
+        .is-container .row .column { width: 100% !important; flex: 0 0 100% !important; max-width: 100% !important; }
+        .is-container.v2 { padding-left: 16px !important; padding-right: 16px !important; }
+
+        .op-nav-links, .op-hide-m { display: none !important; }
+        .op-burger { display: inline-flex !important; }
+        .op-nav-bar { gap: 12px; min-height: 58px; justify-content: space-between; }
+
+        .is-container h1.op-h1 { font-size: 46px !important; line-height: 1 !important; }
+        .is-container h2.op-h2 { font-size: 36px !important; line-height: 1.08 !important; }
+        .is-container h3.op-h3 { font-size: 30px !important; line-height: 1.1 !important; }
+        .op-hero-grid { min-height: 0; max-height: none; padding-top: 300px; }
+        .op-ring-hero { top: -40px; left: -25% !important; right: -25% !important; width: auto !important; height: 440px; opacity: .9; -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%) !important; mask-image: linear-gradient(180deg, #000 60%, transparent 100%) !important; }
+        .op-ring-label { display: none !important; }
+        .op-hero-copy { padding-bottom: 36px; }
+        .op-hero-strip { flex-direction: column !important; }
+        .op-hero-strip > div { border-left: 0 !important; border-top: 1px solid rgba(255,255,255,0.08) !important; padding-left: 0 !important; }
+
+        .op-bento-row { flex-direction: column !important; }
+        .op-b-wide, .op-b-narrow { flex: 1 1 100% !important; width: 100% !important; }
+        .op-b-card { min-height: 460px !important; }
+
+        .op-stats { flex-direction: column !important; }
+        .op-tabs { flex-direction: column !important; gap: 16px !important; }
+        .op-tab-list { flex: 1 1 100% !important; width: 100% !important; flex-direction: row !important; overflow-x: auto !important; border-top: 0 !important; scrollbar-width: none; }
+        .op-tab-list::-webkit-scrollbar { display: none; }
+        .op-tab { flex: 0 0 auto !important; width: auto !important; white-space: nowrap !important; padding: 12px 14px !important; font-size: 14px !important; }
+        .op-tab-stage { width: 100% !important; }
+        .op-tab-panel, .op-js .op-tab-panel.op-active { flex-direction: column !important; gap: 20px !important; padding: 24px 20px !important; }
+
+        .op-case-head { flex-direction: column !important; align-items: flex-start !important; }
+        .op-case-card { width: calc(100vw - 64px) !important; }
+
+        .op-sec-grid { gap: 1px !important; background-color: rgba(255,255,255,0.07) !important; overflow: hidden !important; }
+        .op-sec-grid > div { flex: 0 0 calc(50% - 0.5px) !important; border: 0 !important; background-color: #0E100C !important; padding: 30px 14px 26px 14px !important; }
+        .op-faq-grid { flex-direction: column !important; gap: 24px !important; }
+        .op-faq-left { position: relative !important; top: 0 !important; flex: 1 1 100% !important; }
+
+        .op-foot-top { flex-direction: column !important; gap: 32px !important; }
+        .op-foot-cols { flex-wrap: wrap !important; gap: 24px 16px !important; }
+        .op-foot-cols > div { flex: 0 0 calc(50% - 8px) !important; }
+    }
+
+    /* ================= PHONE 480 ================= */
+    @media (max-width: 480px) {
+        .is-container h1.op-h1 { font-size: 40px !important; }
+        .is-container h2.op-h2 { font-size: 31px !important; }
+        .is-container h3.op-h3 { font-size: 27px !important; }
+        .op-hero-actions a { width: 100% !important; text-align: center !important; }
+        .op-foot-cols > div { flex: 0 0 100% !important; }
+        .op-dots { grid-template-columns: repeat(20, 1fr) !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .op-feed-track, .op-mq-l, .op-mq-r, .op-rows-track, .op-eq i, .op-dot-on, .op-float, .op-illo .op-dash, .op-illo .op-pulse-dot { animation: none !important; }
+    }
+</style>
+<div class="is-wrapper">
+<div class="is-section is-box box-autofit is-light-text is-section-0 op-nav op-sec" style="background-color: rgba(8, 9, 7, 0.96); border-bottom: 1px solid rgba(255, 255, 255, 0.07);">
+    <div class="is-overlay"></div>
+    <div class="is-container v2">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-nav-bar">
+                    <a href="#top" aria-label="ACME AI home" style="display: inline-flex; align-items: center;"><span class="acme-logo" style="display:inline-flex;align-items:center;gap:9px;"><svg class="acme-mark" width="24" height="24" viewBox="0 0 32 32" aria-hidden="true" style="display:block;flex:0 0 auto;"><path d="M6.5 26.5 L16 6 L25.5 26.5" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 19 H21.4" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round"/><circle cx="16" cy="6" r="3.1" fill="#ACD719"/><circle cx="6.5" cy="26.5" r="2.2" fill="#ACD719"/><circle cx="25.5" cy="26.5" r="2.2" fill="#ACD719"/></svg><span class="acme-logo-t" style="font-family:'Inter',system-ui,sans-serif !important;font-weight:700;font-size:16px;letter-spacing:0.14em;color:#F4F5EF;line-height:1;white-space:nowrap;">ACME&nbsp;AI</span></span></a>
+                    <div class="op-nav-links">
+                        <a class="op-nl" href="#product">Product</a>
+                        <a class="op-nl" href="#how">Solutions</a>
+                        <a class="op-nl" href="#integrations">Integrations</a>
+                        <a class="op-nl" href="#stories">Customers</a>
+                        <a class="op-nl" href="#faq">Company</a>
+                    </div>
+                    <div class="op-nav-cta">
+                        <a class="op-nl op-hide-m" href="#stories">Customer stories</a>
+                        <a href="#demo" role="button" class="op-btn op-btn-lime" style="padding: 9px 14px; font-size: 14px;">Book a demo</a>
+                        <button type="button" class="op-burger" onclick="opToggleMenu(this)" aria-label="Open menu" aria-expanded="false" aria-controls="op-mobile-menu" style="align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.16); background-color: transparent; color: #E6E8E0; cursor: pointer; padding: 0;"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 5h14M2 9h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+                    </div>
+                </div>
+                <div id="op-mobile-menu" class="op-mobile-menu" data-open="0" style="padding: 8px 0 18px 0; border-top: 1px solid rgba(255,255,255,0.07);">
+                    <a href="#product" style="display: block; color: #E6E8E0; font-size: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">Product</a>
+                    <a href="#how" style="display: block; color: #E6E8E0; font-size: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">Solutions</a>
+                    <a href="#integrations" style="display: block; color: #E6E8E0; font-size: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">Integrations</a>
+                    <a href="#stories" style="display: block; color: #E6E8E0; font-size: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">Customers</a>
+                    <a href="#faq" style="display: block; color: #E6E8E0; font-size: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">Company</a>
+                    <a href="#stories" style="display: block; color: #ACD719; font-size: 16px; padding: 12px 0;">Customer stories</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-light-text is-section-0 op-sec" style="background-color: #050605; overflow: hidden;">
+    <div class="is-overlay"><div class="is-overlay-bg" style="background-image: radial-gradient(55% 65% at 80% 42%, rgba(172, 215, 25, 0.11) 0%, rgba(172, 215, 25, 0.03) 40%, rgba(0, 0, 0, 0) 70%);"></div></div>
+    <div class="is-container v2">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-hero-grid" id="top">
+
+                    <!-- 3D work loop (Three.js renders here). The ten labels ride the ten module nodes. -->
+                    <div id="op-ring-hero" class="op-ring-hero" data-theme="hero" aria-hidden="true">
+                        <span class="op-ring-label" style="color: #E9EBE3; font-size: 12px; letter-spacing: 0.04em;">Reports</span>
+                        <span class="op-ring-label" style="color: #E9EBE3; font-size: 12px; letter-spacing: 0.04em;">Inbox</span>
+                        <span class="op-ring-label" style="color: #E9EBE3; font-size: 12px; letter-spacing: 0.04em;">Tickets</span>
+                        <span class="op-ring-label" style="color: #E9EBE3; font-size: 12px; letter-spacing: 0.04em;">Meetings</span>
+                        <span class="op-ring-label" style="color: #E9EBE3; font-size: 12px; letter-spacing: 0.04em;">Docs</span>
+                        <span class="op-ring-label" style="color: #E9EBE3; font-size: 12px; letter-spacing: 0.04em;">Spreadsheets</span>
+                        <span class="op-ring-label" style="color: #E9EBE3; font-size: 12px; letter-spacing: 0.04em;">Follow-ups</span>
+                        <span class="op-ring-label" style="color: #E9EBE3; font-size: 12px; letter-spacing: 0.04em;">Approvals</span>
+                        <span class="op-ring-label" style="color: #E9EBE3; font-size: 12px; letter-spacing: 0.04em;">Research</span>
+                        <span class="op-ring-label" style="color: #E9EBE3; font-size: 12px; letter-spacing: 0.04em;">Onboarding</span>
+                    </div>
+
+                    <div class="op-hero-copy">
+                        <p class="op-reveal" style="color: #9EA396; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 18px 0;">The AI work platform for teams</p>
+                        <h1 class="op-h1 op-reveal op-d1 op-serif" style="font-size: 80px; line-height: 0.96; letter-spacing: 0.012em; text-transform: uppercase; color: #F4F5EF; margin: 0 0 26px 0;">AI for your teams&#8217; most <span style="color: #ACD719; font-style: italic; text-transform: none;">busy</span> work</h1>
+                        <p class="op-reveal op-d2" style="color: #D3D6CC; font-size: 18px; line-height: 1.55; max-width: 540px; margin: 0 0 30px 0;">Acme AI drafts, updates, chases and files the repetitive work that eats your team&#8217;s week. It plugs into the tools you already use, works inside the guardrails you set, and hands back finished work with every source attached.</p>
+                        <div class="op-hero-actions op-reveal op-d3" style="margin-bottom: 30px;">
+                            <a href="#demo" role="button" class="op-btn op-btn-lime" style="padding: 13px 20px; font-size: 15px;">Book a demo &#8594;</a>
+                            <a href="#stories" role="button" class="op-btn op-btn-ghost" style="padding: 13px 20px; font-size: 15px;">See customer stories &#8594;</a>
+                        </div>
+                        <div class="op-hero-checks op-reveal op-d4">
+                            <span style="display: inline-flex; align-items: center; gap: 8px; color: #BFC3B7; font-size: 14px;"><span style="display: inline-flex; width: 16px; height: 16px; border-radius: 50%; align-items: center; justify-content: center; background-color: rgba(172,215,25,0.16); color: #ACD719; font-size: 10px;">&#10003;</span>Plugs into the tools you already use</span>
+                            <span style="display: inline-flex; align-items: center; gap: 8px; color: #BFC3B7; font-size: 14px;"><span style="display: inline-flex; width: 16px; height: 16px; border-radius: 50%; align-items: center; justify-content: center; background-color: rgba(172,215,25,0.16); color: #ACD719; font-size: 10px;">&#10003;</span>Asks before it acts, logs every step</span>
+                            <span style="display: inline-flex; align-items: center; gap: 8px; color: #BFC3B7; font-size: 14px;"><span style="display: inline-flex; width: 16px; height: 16px; border-radius: 50%; align-items: center; justify-content: center; background-color: rgba(172,215,25,0.16); color: #ACD719; font-size: 10px;">&#10003;</span>Scout checks the facts, Runner does the work</span>
+                        </div>
+                    </div>
+
+                    <div class="op-hero-strip" style="border-top: 1px solid rgba(255,255,255,0.09);">
+                        <div style="padding: 20px 24px 22px 0;">
+                            <p style="color: #ACD719; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 6px 0;">In use today</p>
+                            <p style="color: #C9CCC2; font-size: 14px; line-height: 1.5; margin: 0;">1,200+ teams, with around 48,000 tasks completed every week</p>
+                        </div>
+                        <div style="padding: 20px 24px 22px 24px; border-left: 1px solid rgba(255,255,255,0.09);">
+                            <p style="color: #ACD719; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 6px 0;">Deployment</p>
+                            <p style="color: #C9CCC2; font-size: 14px; line-height: 1.5; margin: 0;">Cloud, private cloud or on-prem</p>
+                        </div>
+                        <div style="padding: 20px 0 22px 24px; border-left: 1px solid rgba(255,255,255,0.09);">
+                            <p style="color: #ACD719; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 6px 0;">Assurance</p>
+                            <p style="color: #C9CCC2; font-size: 14px; line-height: 1.5; margin: 0;">ISO 27001 &#183; SOC 2 &#183; GDPR ready</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-light-text is-section-50 op-sec" style="background-color: #0B0C0A;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div id="product" style="text-align: center; max-width: 820px; margin: 0 auto 44px auto;">
+                    <h2 class="op-h2 op-reveal op-serif" style="font-size: 50px; line-height: 1.05; color: #F4F5EF; margin: 0 0 16px 0;">One AI layer over the tools your team already runs</h2>
+                    <p class="op-reveal op-d1" style="color: #A3A79B; font-size: 17px; line-height: 1.55; margin: 0;">Every request lands in one place, and nobody copies context from tab to tab.</p>
+                </div>
+
+                <div class="op-bento">
+                    <!-- ROW 1 -->
+                    <div class="op-bento-row">
+                        <!-- CARD A: Acme Relay + 3D work loop -->
+                        <div class="op-b-card op-b-wide op-reveal" style="min-height: 560px; border-radius: 8px; background-color: #0A120E; background-image: radial-gradient(120% 85% at 50% 128%, rgba(172, 215, 25, 0.50) 0%, rgba(120, 165, 20, 0.16) 36%, rgba(0, 0, 0, 0) 64%), linear-gradient(180deg, #08100C 0%, #0F1C15 55%, #173024 100%);">
+                            <div id="op-ring-card" class="op-ring-card" data-theme="card" aria-hidden="true"></div>
+                            <div style="position: relative; z-index: 2; padding: 22px 24px;">
+                                <h3 style="color: #F4F5EF; font-size: 17px; font-weight: 500; margin: 0 0 4px 0;">Acme Relay</h3>
+                                <p style="color: #A8B0A2; font-size: 14px; margin: 0;">The work engine</p>
+                            </div>
+                            <div id="op-stage-chips" class="op-stage-chips" style="position: absolute; z-index: 2; left: 24px; bottom: 22px;">
+                                <span class="op-stage" style="display: inline-block; font-size: 12px; letter-spacing: 0.04em; padding: 6px 11px; border-radius: 100px; border: 1px solid rgba(172,215,25,0.9); color: #0A0B08; background-color: #ACD719;">Capture</span>
+                                <span class="op-stage" style="display: inline-block; font-size: 12px; letter-spacing: 0.04em; padding: 6px 11px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.18); color: #D9DCD2; background-color: rgba(0,0,0,0.35);">Draft</span>
+                                <span class="op-stage" style="display: inline-block; font-size: 12px; letter-spacing: 0.04em; padding: 6px 11px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.18); color: #D9DCD2; background-color: rgba(0,0,0,0.35);">Review</span>
+                                <span class="op-stage" style="display: inline-block; font-size: 12px; letter-spacing: 0.04em; padding: 6px 11px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.18); color: #D9DCD2; background-color: rgba(0,0,0,0.35);">Deliver</span>
+                            </div>
+                            <p class="op-hide-m" style="position: absolute; z-index: 2; right: 24px; bottom: 26px; margin: 0; color: #A8B0A2; font-size: 12px; text-align: right; max-width: 230px; line-height: 1.45;">Relay drafts the work, your team signs it off</p>
+                        </div>
+
+                        <!-- CARD B: approval-gated task feed -->
+                        <div class="op-b-card op-b-narrow op-reveal op-d1" style="min-height: 560px; border-radius: 8px; background-color: #BFC7B2; background-image: linear-gradient(180deg, #C9D0BC 0%, #AFB8A1 100%);">
+                            <div style="position: relative; z-index: 3; padding: 22px 24px 0 24px;">
+                                <h3 style="color: #10120D; font-size: 17px; font-weight: 600; margin: 0 0 6px 0;">Asks first, audits every step</h3>
+                                <p style="color: #3E4536; font-size: 14px; line-height: 1.5; margin: 0;">Routine tasks run on their own under approval rules your team defines.</p>
+                            </div>
+                            <div style="position: absolute; left: 24px; right: 24px; top: 150px; bottom: 0;">
+                                <div class="op-feed"><div class="op-feed-track"><div class="op-feed-item op-serif" style="width: 78%;">Weekly status report</div><div class="op-feed-item op-serif" style="width: 70%; margin-left: 10%;">Chase three overdue invoices</div><div class="op-feed-item op-serif" style="width: 74%;">Summarise the client call</div><div class="op-feed-item op-serif" style="width: 66%; margin-left: 6%;">Update the CRM from email</div><div class="op-feed-item op-serif" style="width: 80%;">Triage 40 new tickets</div><div class="op-feed-item op-serif" style="width: 62%; margin-left: 12%;">Book the onboarding sessions</div><div class="op-feed-item op-serif" style="width: 72%;">Reconcile the expense sheet</div><div class="op-feed-item op-serif" style="width: 68%; margin-left: 8%;">Draft the board update</div><!-- duplicate set for a seamless loop --><div aria-hidden="true" class="op-feed-item op-serif" style="width: 78%;">Weekly status report</div><div aria-hidden="true" class="op-feed-item op-serif" style="width: 70%; margin-left: 10%;">Chase three overdue invoices</div><div aria-hidden="true" class="op-feed-item op-serif" style="width: 74%;">Summarise the client call</div><div aria-hidden="true" class="op-feed-item op-serif" style="width: 66%; margin-left: 6%;">Update the CRM from email</div><div aria-hidden="true" class="op-feed-item op-serif" style="width: 80%;">Triage 40 new tickets</div><div aria-hidden="true" class="op-feed-item op-serif" style="width: 62%; margin-left: 12%;">Book the onboarding sessions</div><div aria-hidden="true" class="op-feed-item op-serif" style="width: 72%;">Reconcile the expense sheet</div><div aria-hidden="true" class="op-feed-item op-serif" style="width: 68%; margin-left: 8%;">Draft the board update</div></div></div>
+                                <!-- featured request card -->
+                                <div class="op-float" style="position: absolute; z-index: 4; top: 50%; left: 0; right: -6px; background-color: #FFFFFF; border-radius: 8px; padding: 16px 16px 14px 16px; box-shadow: 0 18px 50px rgba(20, 28, 12, 0.28);">
+                                    <div style="display: flex; gap: 6px; position: absolute; top: -12px; right: 14px;">
+                                        <span style="display: inline-block; font-size: 10px; font-weight: 600; color: #FFFFFF; background-color: #E0663A; border-radius: 4px; padding: 4px 6px;">DOCS</span>
+                                        <span style="display: inline-block; font-size: 10px; font-weight: 600; color: #FFFFFF; background-color: #3E7BE0; border-radius: 4px; padding: 4px 6px;">SHEETS</span>
+                                        <span style="display: inline-block; font-size: 10px; font-weight: 600; color: #FFFFFF; background-color: #2F9E63; border-radius: 4px; padding: 4px 6px;">MAIL</span>
+                                    </div>
+                                    <p class="op-serif" style="color: #10120D; font-size: 20px; line-height: 1.15; margin: 0 0 6px 0;">Pipeline report due at 5 pm?</p>
+                                    <p style="color: #545A4C; font-size: 13px; line-height: 1.45; margin: 0 0 14px 0;">One request, drafted from every source in a single pass.</p>
+                                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                                        <div style="display: flex; align-items: center;"><span style="display: inline-flex; width: 24px; height: 24px; border-radius: 50%; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #10120D; background-color: #DDE6C4; border: 2px solid #FFFFFF;">OPS</span><span style="display: inline-flex; width: 24px; height: 24px; border-radius: 50%; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #10120D; background-color: #C9D8E8; border: 2px solid #FFFFFF; margin-left: -7px;">FIN</span><span style="display: inline-flex; width: 24px; height: 24px; border-radius: 50%; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #10120D; background-color: #E8D6C9; border: 2px solid #FFFFFF; margin-left: -7px;">CS</span><span style="display: inline-flex; width: 24px; height: 24px; border-radius: 50%; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: #545A4C; background-color: #EEF0EA; border: 2px solid #FFFFFF; margin-left: -7px;">+9</span></div>
+                                        <span style="color: #545A4C; font-size: 12px;">14 sources &#183; 3 citations</span>
+                                    </div>
+                                    <a href="#how" role="button" class="op-btn op-btn-lime" style="position: absolute; left: -12px; bottom: -16px; padding: 7px 12px; font-size: 12px; box-shadow: 0 8px 20px rgba(120,160,20,0.45);">Approve</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROW 2 -->
+                    <div class="op-bento-row">
+                        <!-- CARD C: integrations marquee -->
+                        <div id="integrations" class="op-b-card op-b-narrow op-reveal" style="min-height: 520px; border-radius: 8px; background-color: #1B1D18;">
+                            <div style="padding: 22px 24px 0 24px;">
+                                <h3 style="color: #F4F5EF; font-size: 17px; font-weight: 500; margin: 0 0 4px 0;">Works with the tools you already use</h3>
+                                <p style="color: #A3A79B; font-size: 14px; line-height: 1.5; margin: 0;">300+ ready-made connectors</p>
+                            </div>
+                            <div style="position: absolute; left: 0; right: 0; bottom: 26px; display: flex; flex-direction: column; gap: 10px;">
+                                <div class="op-mq"><div class="op-mq-track op-mq-l" style="animation-duration: 34s;"><span class="op-chip"><i style="background-color: #6F2DA8;">M</i>Mail</span><span class="op-chip"><i style="background-color: #3E7BE0;">C</i>Calendar</span><span class="op-chip"><i style="background-color: #2F9E63;">D</i>Docs</span><span class="op-chip"><i style="background-color: #1E8E3E;">S</i>Sheets</span><span class="op-chip"><i style="background-color: #E0663A;">TC</i>Team chat</span><span class="op-chip"><i style="background-color: #6F2DA8;">M</i>Mail</span><span class="op-chip"><i style="background-color: #3E7BE0;">C</i>Calendar</span><span class="op-chip"><i style="background-color: #2F9E63;">D</i>Docs</span><span class="op-chip"><i style="background-color: #1E8E3E;">S</i>Sheets</span><span class="op-chip"><i style="background-color: #E0663A;">TC</i>Team chat</span></div></div>
+                                <div class="op-mq"><div class="op-mq-track op-mq-r" style="animation-duration: 39s;"><span class="op-chip"><i style="background-color: #F46800;">CR</i>CRM</span><span class="op-chip"><i style="background-color: #06AC38;">H</i>Helpdesk</span><span class="op-chip"><i style="background-color: #425CC7;">W</i>Wiki</span><span class="op-chip"><i style="background-color: #2684FF;">PB</i>Project boards</span><span class="op-chip"><i style="background-color: #5B6B7A;">CD</i>Cloud drive</span><span class="op-chip"><i style="background-color: #F46800;">CR</i>CRM</span><span class="op-chip"><i style="background-color: #06AC38;">H</i>Helpdesk</span><span class="op-chip"><i style="background-color: #425CC7;">W</i>Wiki</span><span class="op-chip"><i style="background-color: #2684FF;">PB</i>Project boards</span><span class="op-chip"><i style="background-color: #5B6B7A;">CD</i>Cloud drive</span></div></div>
+                                <div class="op-mq"><div class="op-mq-track op-mq-l" style="animation-duration: 44s;"><span class="op-chip"><i style="background-color: #EE0000;">B</i>Billing</span><span class="op-chip"><i style="background-color: #3776AB;">A</i>Accounting</span><span class="op-chip"><i style="background-color: #231F20;">E</i>Expenses</span><span class="op-chip"><i style="background-color: #8A5CF6;">P</i>Payroll</span><span class="op-chip"><i style="background-color: #326CE5;">ES</i>E-signature</span><span class="op-chip"><i style="background-color: #EE0000;">B</i>Billing</span><span class="op-chip"><i style="background-color: #3776AB;">A</i>Accounting</span><span class="op-chip"><i style="background-color: #231F20;">E</i>Expenses</span><span class="op-chip"><i style="background-color: #8A5CF6;">P</i>Payroll</span><span class="op-chip"><i style="background-color: #326CE5;">ES</i>E-signature</span></div></div>
+                                <div class="op-mq"><div class="op-mq-track op-mq-r" style="animation-duration: 49s;"><span class="op-chip"><i style="background-color: #FF4F8B;">HR</i>HR system</span><span class="op-chip"><i style="background-color: #0078D4;">AT</i>Applicant tracking</span><span class="op-chip"><i style="background-color: #E6522C;">F</i>Forms</span><span class="op-chip"><i style="background-color: #EF7B4D;">S</i>Surveys</span><span class="op-chip"><i style="background-color: #2088FF;">VC</i>Video calls</span><span class="op-chip"><i style="background-color: #FF4F8B;">HR</i>HR system</span><span class="op-chip"><i style="background-color: #0078D4;">AT</i>Applicant tracking</span><span class="op-chip"><i style="background-color: #E6522C;">F</i>Forms</span><span class="op-chip"><i style="background-color: #EF7B4D;">S</i>Surveys</span><span class="op-chip"><i style="background-color: #2088FF;">VC</i>Video calls</span></div></div>
+                                <div class="op-mq"><div class="op-mq-track op-mq-l" style="animation-duration: 54s;"><span class="op-chip"><i style="background-color: #D24939;">BI</i>BI dashboards</span><span class="op-chip"><i style="background-color: #29B5E8;">DW</i>Data warehouse</span><span class="op-chip"><i style="background-color: #FF3621;">PA</i>Product analytics</span><span class="op-chip"><i style="background-color: #1F6FEB;">SP</i>Status page</span><span class="op-chip"><i style="background-color: #FE5000;">CR</i>Code repos</span><span class="op-chip"><i style="background-color: #D24939;">BI</i>BI dashboards</span><span class="op-chip"><i style="background-color: #29B5E8;">DW</i>Data warehouse</span><span class="op-chip"><i style="background-color: #FF3621;">PA</i>Product analytics</span><span class="op-chip"><i style="background-color: #1F6FEB;">SP</i>Status page</span><span class="op-chip"><i style="background-color: #FE5000;">CR</i>Code repos</span></div></div>
+                                <div class="op-mq"><div class="op-mq-track op-mq-r" style="animation-duration: 59s;"><span class="op-chip"><i style="background-color: #C8102E;">KB</i>Knowledge base</span><span class="op-chip"><i style="background-color: #EB5424;">SS</i>Single sign-on</span><span class="op-chip"><i style="background-color: #DD344C;">I</i>Inventory</span><span class="op-chip"><i style="background-color: #00BFB3;">S</i>Shipping</span><span class="op-chip"><i style="background-color: #01A982;">AP</i>Ad platforms</span><span class="op-chip"><i style="background-color: #C8102E;">KB</i>Knowledge base</span><span class="op-chip"><i style="background-color: #EB5424;">SS</i>Single sign-on</span><span class="op-chip"><i style="background-color: #DD344C;">I</i>Inventory</span><span class="op-chip"><i style="background-color: #00BFB3;">S</i>Shipping</span><span class="op-chip"><i style="background-color: #01A982;">AP</i>Ad platforms</span></div></div>
+                            </div>
+                        </div>
+
+                        <!-- CARD D: cited work log -->
+                        <div class="op-b-card op-b-wide op-reveal op-d1" style="min-height: 520px; border-radius: 8px; background-color: #46503F; background-image: linear-gradient(180deg, #4E5946 0%, #3B4435 100%);">
+                            <div style="padding: 22px 24px 0 24px;">
+                                <h3 style="color: #F4F5EF; font-size: 17px; font-weight: 500; margin: 0 0 4px 0;">A work log with receipts</h3>
+                                <p style="color: #C8CFBF; font-size: 14px; line-height: 1.5; margin: 0;">Every output links back to its sources, so anyone can check the work.</p>
+                            </div>
+                            <div class="op-table-wrap" style="position: absolute; left: 24px; right: 0; top: 104px; bottom: 0; background-color: #FFFFFF; border-radius: 6px 0 0 0; border: 1px solid #E5E7E1;">
+                                <table id="op-log-table" class="op-table"><thead><tr><th scope="col">#</th><th scope="col">Task</th><th scope="col">Sources</th><th scope="col">Priority</th><th scope="col">Output (cited)</th><th scope="col">Next step</th><th scope="col">Status</th></tr></thead><tbody><tr class="op-log-row"><td class="op-n">1</td><td class="op-svc">weekly-status-report</td><td class="op-src">Docs, tasks <em>+11</em></td><td><span class="op-tag" style="color: #B42318; background-color: #FEE4E2;">High</span></td><td class="op-txt">Drafted from 14 updates &#183; 3 citations</td><td class="op-txt">Send to leadership</td><td><span class="op-tag" style="color: #B54708; background-color: #FEF0C7;">Awaiting approval</span></td></tr><tr class="op-log-row"><td class="op-n">2</td><td class="op-svc">invoice-follow-ups</td><td class="op-src">Billing, mail <em>+6</em></td><td><span class="op-tag" style="color: #6941C6; background-color: #F1E9FF;">Finance</span></td><td class="op-txt">3 overdue accounts &#183; 5 citations</td><td class="op-txt">Send reminders</td><td><span class="op-tag" style="color: #175CD3; background-color: #E0ECFF;">Owner reviewing</span></td></tr><tr class="op-log-row"><td class="op-n">3</td><td class="op-svc">support-ticket-triage</td><td class="op-src">Helpdesk, chat <em>+4</em></td><td><span class="op-tag" style="color: #B42318; background-color: #FEE4E2;">High</span></td><td class="op-txt">40 tickets tagged and routed &#183; 2 citations</td><td class="op-txt">Assign to queues</td><td><span class="op-tag" style="color: #067647; background-color: #DCFAE6;">Done &#183; checked</span></td></tr><tr class="op-log-row"><td class="op-n">4</td><td class="op-svc">crm-cleanup</td><td class="op-src">CRM, mail <em>+9</em></td><td><span class="op-tag" style="color: #B54708; background-color: #FEF0C7;">Medium</span></td><td class="op-txt">212 records updated &#183; 4 citations</td><td class="op-txt">Merge duplicates</td><td><span class="op-tag" style="color: #4D6A00; background-color: #EEF7C8;">Running playbook</span></td></tr><tr class="op-log-row"><td class="op-n">5</td><td class="op-svc">interview-scheduling</td><td class="op-src">Calendar, ATS <em>+3</em></td><td><span class="op-tag" style="color: #0E7C86; background-color: #D9F6F4;">Planned</span></td><td class="op-txt">6 panels booked &#183; 2 citations</td><td class="op-txt">Send invites</td><td><span class="op-tag" style="color: #067647; background-color: #DCFAE6;">Done &#183; checked</span></td></tr><tr class="op-log-row"><td class="op-n">6</td><td class="op-svc">expense-reconciliation</td><td class="op-src">Sheets, billing <em>+5</em></td><td><span class="op-tag" style="color: #B54708; background-color: #FEF0C7;">Medium</span></td><td class="op-txt">18 receipts matched &#183; 3 citations</td><td class="op-txt">Flag 2 mismatches</td><td><span class="op-tag" style="color: #067647; background-color: #DCFAE6;">Done &#183; checked</span></td></tr><tr class="op-log-row"><td class="op-n">7</td><td class="op-svc">client-call-summary</td><td class="op-src">Video, notes <em>+7</em></td><td><span class="op-tag" style="color: #B42318; background-color: #FEE4E2;">High</span></td><td class="op-txt">Action items extracted &#183; 4 citations</td><td class="op-txt">Share the recap</td><td><span class="op-tag" style="color: #067647; background-color: #DCFAE6;">Done &#183; checked</span></td></tr><tr class="op-log-row"><td class="op-n">8</td><td class="op-svc">contract-renewals</td><td class="op-src">E-sign, CRM <em>+2</em></td><td><span class="op-tag" style="color: #475467; background-color: #EEF0F2;">Low</span></td><td class="op-txt">4 renewals due &#183; 1 citation</td><td class="op-txt">Draft renewal emails</td><td><span class="op-tag" style="color: #067647; background-color: #DCFAE6;">Done &#183; checked</span></td></tr><tr class="op-log-row"><td class="op-n">9</td><td class="op-svc">new-hire-onboarding</td><td class="op-src">HR, wiki <em>+10</em></td><td><span class="op-tag" style="color: #B54708; background-color: #FEF0C7;">Medium</span></td><td class="op-txt">Welcome pack assembled &#183; 3 citations</td><td class="op-txt">Grant tool access</td><td><span class="op-tag" style="color: #B54708; background-color: #FEF0C7;">Awaiting approval</span></td></tr><tr class="op-log-row"><td class="op-n">10</td><td class="op-svc">board-deck-numbers</td><td class="op-src">BI, sheets <em>+8</em></td><td><span class="op-tag" style="color: #475467; background-color: #EEF0F2;">Low</span></td><td class="op-txt">Metrics refreshed &#183; 2 citations</td><td class="op-txt">Update the charts</td><td><span class="op-tag" style="color: #4D6A00; background-color: #EEF7C8;">Running playbook</span></td></tr><tr class="op-log-row"><td class="op-n">11</td><td class="op-svc">vendor-questionnaire</td><td class="op-src">Wiki, docs <em>+6</em></td><td><span class="op-tag" style="color: #B54708; background-color: #FEF0C7;">Medium</span></td><td class="op-txt">64 answers drafted &#183; 1 citation</td><td class="op-txt">Legal review</td><td><span class="op-tag" style="color: #B54708; background-color: #FEF0C7;">Awaiting approval</span></td></tr><tr class="op-log-row"><td class="op-n">12</td><td class="op-svc">friday-inbox-sweep</td><td class="op-src">Mail, tasks <em>+3</em></td><td><span class="op-tag" style="color: #475467; background-color: #EEF0F2;">Low</span></td><td class="op-txt">57 emails sorted &#183; 2 citations</td><td class="op-txt">Reply to 5 threads</td><td><span class="op-tag" style="color: #067647; background-color: #DCFAE6;">Done &#183; checked</span></td></tr></tbody></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-light-text is-section-50 op-sec" style="background-color: #0B0C0A;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div style="text-align: center; margin: 0 auto 50px auto; max-width: 760px;">
+                    <h2 class="op-h2 op-reveal op-serif" style="font-size: 50px; line-height: 1.05; color: #F4F5EF; margin: 0;">Trusted by busy teams,<br>every working day</h2>
+                </div>
+                <div class="op-stats">
+                    <div class="op-reveal ">
+                        <div style="position: relative; height: 250px; border-radius: 6px; overflow: hidden; background-color: #121410; border: 1px solid rgba(255,255,255,0.06); margin-bottom: 22px;" aria-hidden="true"><div id="op-dots" class="op-dots" style="position: absolute; left: 22px; right: 22px; top: 50%; transform: translateY(-50%);"></div></div>
+                        <p class="op-count op-serif" style="font-size: 68px; line-height: 1; color: #F4F5EF; margin: 0 0 10px 0;">1,200</p>
+                        <p style="color: #9EA396; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin: 0;">teams working with Acme AI</p>
+                    </div>
+                    <div class="op-reveal op-d1">
+                        <div style="position: relative; height: 250px; border-radius: 6px; overflow: hidden; background-color: #121410; border: 1px solid rgba(255,255,255,0.06); margin-bottom: 22px;" aria-hidden="true"><div style="position: absolute; inset: 0; overflow: hidden; padding: 0 18px; -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);"><div class="op-rows-track" style="display: flex; flex-direction: column; gap: 9px; padding-top: 12px;"><div class="op-log"><span style="color: #6B7064;">09:04:31.218</span><span style="color: #ACD719; width: 72px;">docs</span><span style="color: #D6D9CF;">weekly-status</span><span style="color: #8D9286;">draft v2 ready</span></div><div class="op-log"><span style="color: #6B7064;">09:04:31.221</span><span style="color: #ACD719; width: 72px;">mail</span><span style="color: #D6D9CF;">invoice-chaser</span><span style="color: #8D9286;">3 reminders queued</span></div><div class="op-log"><span style="color: #6B7064;">09:04:31.224</span><span style="color: #ACD719; width: 72px;">crm</span><span style="color: #D6D9CF;">lead-updates</span><span style="color: #8D9286;">12 records synced</span></div><div class="op-log"><span style="color: #6B7064;">09:04:31.227</span><span style="color: #ACD719; width: 72px;">tickets</span><span style="color: #D6D9CF;">support-triage</span><span style="color: #8D9286;">routed to billing</span></div><div class="op-log"><span style="color: #6B7064;">09:04:32.230</span><span style="color: #ACD719; width: 72px;">sheets</span><span style="color: #D6D9CF;">expense-recon</span><span style="color: #8D9286;">18 rows matched</span></div><div class="op-log"><span style="color: #6B7064;">09:04:32.233</span><span style="color: #ACD719; width: 72px;">calendar</span><span style="color: #D6D9CF;">interviews</span><span style="color: #8D9286;">2 slots booked</span></div><div class="op-log"><span style="color: #6B7064;">09:04:32.236</span><span style="color: #ACD719; width: 72px;">notes</span><span style="color: #D6D9CF;">client-call</span><span style="color: #8D9286;">5 actions found</span></div><div class="op-log"><span style="color: #6B7064;">09:04:32.239</span><span style="color: #ACD719; width: 72px;">approvals</span><span style="color: #D6D9CF;">REQ-2041</span><span style="color: #8D9286;">sent to owner</span></div><div class="op-log"><span style="color: #6B7064;">09:04:33.242</span><span style="color: #ACD719; width: 72px;">research</span><span style="color: #D6D9CF;">vendor-review</span><span style="color: #8D9286;">4 sources cited</span></div><div class="op-log"><span style="color: #6B7064;">09:04:33.245</span><span style="color: #ACD719; width: 72px;">hr</span><span style="color: #D6D9CF;">onboarding</span><span style="color: #8D9286;">pack assembled</span></div><div class="op-log"><span style="color: #6B7064;">09:04:33.248</span><span style="color: #ACD719; width: 72px;">wiki</span><span style="color: #D6D9CF;">policy-faq</span><span style="color: #8D9286;">answer updated</span></div><div class="op-log"><span style="color: #6B7064;">09:04:33.251</span><span style="color: #ACD719; width: 72px;">bi</span><span style="color: #D6D9CF;">board-metrics</span><span style="color: #8D9286;">charts refreshed</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:31.218</span><span style="color: #ACD719; width: 72px;">docs</span><span style="color: #D6D9CF;">weekly-status</span><span style="color: #8D9286;">draft v2 ready</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:31.221</span><span style="color: #ACD719; width: 72px;">mail</span><span style="color: #D6D9CF;">invoice-chaser</span><span style="color: #8D9286;">3 reminders queued</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:31.224</span><span style="color: #ACD719; width: 72px;">crm</span><span style="color: #D6D9CF;">lead-updates</span><span style="color: #8D9286;">12 records synced</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:31.227</span><span style="color: #ACD719; width: 72px;">tickets</span><span style="color: #D6D9CF;">support-triage</span><span style="color: #8D9286;">routed to billing</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:32.230</span><span style="color: #ACD719; width: 72px;">sheets</span><span style="color: #D6D9CF;">expense-recon</span><span style="color: #8D9286;">18 rows matched</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:32.233</span><span style="color: #ACD719; width: 72px;">calendar</span><span style="color: #D6D9CF;">interviews</span><span style="color: #8D9286;">2 slots booked</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:32.236</span><span style="color: #ACD719; width: 72px;">notes</span><span style="color: #D6D9CF;">client-call</span><span style="color: #8D9286;">5 actions found</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:32.239</span><span style="color: #ACD719; width: 72px;">approvals</span><span style="color: #D6D9CF;">REQ-2041</span><span style="color: #8D9286;">sent to owner</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:33.242</span><span style="color: #ACD719; width: 72px;">research</span><span style="color: #D6D9CF;">vendor-review</span><span style="color: #8D9286;">4 sources cited</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:33.245</span><span style="color: #ACD719; width: 72px;">hr</span><span style="color: #D6D9CF;">onboarding</span><span style="color: #8D9286;">pack assembled</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:33.248</span><span style="color: #ACD719; width: 72px;">wiki</span><span style="color: #D6D9CF;">policy-faq</span><span style="color: #8D9286;">answer updated</span></div><div class="op-log" aria-hidden="true"><span style="color: #6B7064;">09:04:33.251</span><span style="color: #ACD719; width: 72px;">bi</span><span style="color: #D6D9CF;">board-metrics</span><span style="color: #8D9286;">charts refreshed</span></div></div></div></div>
+                        <p class="op-count op-serif" style="font-size: 68px; line-height: 1; color: #F4F5EF; margin: 0 0 10px 0;">~48,000</p>
+                        <p style="color: #9EA396; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin: 0;">tasks completed every week</p>
+                    </div>
+                    <div class="op-reveal op-d2">
+                        <div style="position: relative; height: 250px; border-radius: 6px; overflow: hidden; background-color: #121410; border: 1px solid rgba(255,255,255,0.06); margin-bottom: 22px;" aria-hidden="true"><div style="position: absolute; left: 22px; right: 22px; top: 34px; bottom: 34px;"><div id="op-eq" class="op-eq" style="background-image: repeating-linear-gradient(90deg, rgba(172,215,25,0.35) 0 5px, transparent 5px 8px);"></div></div></div>
+                        <p class="op-count op-serif" style="font-size: 68px; line-height: 1; color: #F4F5EF; margin: 0 0 10px 0;">9,000+</p>
+                        <p style="color: #9EA396; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin: 0;">hours handed back every month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-light-text is-section-50 op-sec" style="background-color: #0B0C0A;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div id="how" style="text-align: center; margin: 0 auto 44px auto; max-width: 820px;">
+                    <p class="op-reveal" style="color: #ACD719; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 16px 0;">Capture &#183; Draft &#183; Review &#183; Deliver</p>
+                    <h2 class="op-h2 op-reveal op-d1 op-serif" style="font-size: 50px; line-height: 1.05; color: #F4F5EF; margin: 0;">Capture, draft, review and deliver in one governed flow.</h2>
+                </div>
+                <div id="op-tabs" class="op-tabs op-reveal op-d2">
+                    <div class="op-tab-list" role="tablist" style="border-top: 1px solid rgba(255,255,255,0.07);">
+                        <button type="button" class="op-tab" role="tab" aria-selected="true" onclick="opTabClick(0)" style="background-color: rgba(255,255,255,0.035); color: #F4F5EF;">
+                            <span style="color: #ACD719; font-size: 12px; letter-spacing: 0.08em;">01</span>
+                            <span>End Tab Overload</span>
+                            <span class="op-tab-bar" style="position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background-color: #ACD719;"></span>
+                        </button>
+                        <button type="button" class="op-tab" role="tab" aria-selected="false" onclick="opTabClick(1)">
+                            <span style="color: #ACD719; font-size: 12px; letter-spacing: 0.08em;">02</span>
+                            <span>Done, Not Just Drafted</span>
+                            <span class="op-tab-bar" style="position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background-color: #ACD719;"></span>
+                        </button>
+                        <button type="button" class="op-tab" role="tab" aria-selected="false" onclick="opTabClick(2)">
+                            <span style="color: #ACD719; font-size: 12px; letter-spacing: 0.08em;">03</span>
+                            <span>Built for Real Teams</span>
+                            <span class="op-tab-bar" style="position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background-color: #ACD719;"></span>
+                        </button>
+                        <button type="button" class="op-tab" role="tab" aria-selected="false" onclick="opTabClick(3)">
+                            <span style="color: #ACD719; font-size: 12px; letter-spacing: 0.08em;">04</span>
+                            <span>Trustworthy AI</span>
+                            <span class="op-tab-bar" style="position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background-color: #ACD719;"></span>
+                        </button>
+                        <button type="button" class="op-tab" role="tab" aria-selected="false" onclick="opTabClick(4)">
+                            <span style="color: #ACD719; font-size: 12px; letter-spacing: 0.08em;">05</span>
+                            <span>Knowledge That Stays</span>
+                            <span class="op-tab-bar" style="position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background-color: #ACD719;"></span>
+                        </button>
+                        <button type="button" class="op-tab" role="tab" aria-selected="false" onclick="opTabClick(5)">
+                            <span style="color: #ACD719; font-size: 12px; letter-spacing: 0.08em;">06</span>
+                            <span>Your Cloud or Ours</span>
+                            <span class="op-tab-bar" style="position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background-color: #ACD719;"></span>
+                        </button>
+                        <button type="button" class="op-tab" role="tab" aria-selected="false" onclick="opTabClick(6)">
+                            <span style="color: #ACD719; font-size: 12px; letter-spacing: 0.08em;">07</span>
+                            <span>Own Your Workflows</span>
+                            <span class="op-tab-bar" style="position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background-color: #ACD719;"></span>
+                        </button>
+                        <button type="button" class="op-tab" role="tab" aria-selected="false" onclick="opTabClick(7)">
+                            <span style="color: #ACD719; font-size: 12px; letter-spacing: 0.08em;">08</span>
+                            <span>Work as a Service</span>
+                            <span class="op-tab-bar" style="position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background-color: #ACD719;"></span>
+                        </button>
+                    </div>
+                    <div class="op-tab-stage">
+                        <div class="op-tab-panel op-active" role="tabpanel">
+                            <div class="op-tab-text">
+                                <p style="color: #9EA396; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 14px 0;"><span style="color: #ACD719;">01</span>&nbsp;&nbsp;End Tab Overload</p>
+                                <h3 class="op-h3 op-serif" style="font-size: 38px; line-height: 1.05; color: #F4F5EF; margin: 0 0 22px 0;">Your team is drowning in tabs, not answers.</h3>
+                                <div class="op-points"><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">One layer, not another app:</strong> Acme AI works with the tools your team already lives in. Nothing gets replaced; the tools finally start working together.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Context from every tool:</strong> It pulls from mail, docs, CRM, helpdesk and finance at once, so a request gets answered with the whole picture.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Open by design:</strong> Standard connectors and plain exports mean your data and your workflows stay portable.</p></div></div>
+                                <a class="op-ul-link" href="#demo">See how the modules fit together &#8594;</a>
+                            </div>
+                            <div class="op-tab-visual">
+                                <div class="op-illo"><svg viewBox="0 0 360 180" fill="none" aria-hidden="true"><rect x="14" y="12" width="54" height="34" rx="5" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M21 23h40" stroke="rgba(255,255,255,0.22)" stroke-width="2"/><path class="op-dash" d="M41 29 L180 90" stroke="#ACD719" stroke-width="1.4"/><rect x="14" y="72" width="54" height="34" rx="5" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M21 83h40" stroke="rgba(255,255,255,0.22)" stroke-width="2"/><path class="op-dash" d="M41 89 L180 90" stroke="#ACD719" stroke-width="1.4"/><rect x="14" y="132" width="54" height="34" rx="5" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M21 143h40" stroke="rgba(255,255,255,0.22)" stroke-width="2"/><path class="op-dash" d="M41 149 L180 90" stroke="#ACD719" stroke-width="1.4"/><rect x="292" y="12" width="54" height="34" rx="5" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M299 23h40" stroke="rgba(255,255,255,0.22)" stroke-width="2"/><path class="op-dash" d="M319 29 L180 90" stroke="#ACD719" stroke-width="1.4"/><rect x="292" y="72" width="54" height="34" rx="5" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M299 83h40" stroke="rgba(255,255,255,0.22)" stroke-width="2"/><path class="op-dash" d="M319 89 L180 90" stroke="#ACD719" stroke-width="1.4"/><rect x="292" y="132" width="54" height="34" rx="5" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M299 143h40" stroke="rgba(255,255,255,0.22)" stroke-width="2"/><path class="op-dash" d="M319 149 L180 90" stroke="#ACD719" stroke-width="1.4"/><rect x="140" y="58" width="80" height="64" rx="12" fill="#1B2012" stroke="#ACD719" stroke-width="1.6"/><g transform="translate(166 74)"><svg x="0" y="0" class="acme-mark" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" style="display:block;flex:0 0 auto;"><path d="M6.5 26.5 L16 6 L25.5 26.5" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 19 H21.4" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round"/><circle cx="16" cy="6" r="3.1" fill="#ACD719"/><circle cx="6.5" cy="26.5" r="2.2" fill="#ACD719"/><circle cx="25.5" cy="26.5" r="2.2" fill="#ACD719"/></svg></g></svg></div>
+                                <div style="border-radius: 8px; background-color: #0A0B09; border: 1px solid rgba(172,215,25,0.18); padding: 18px 20px;">
+                                    <p class="op-serif" style="font-size: 48px; line-height: 1; color: #ACD719; margin: 0 0 8px 0;">300+</p>
+                                    <p style="color: #EEF0E8; font-size: 13.5px; font-weight: 500; line-height: 1.45; margin: 0;">ready-made connectors</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="op-tab-panel" role="tabpanel">
+                            <div class="op-tab-text">
+                                <p style="color: #9EA396; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 14px 0;"><span style="color: #ACD719;">02</span>&nbsp;&nbsp;Done, Not Just Drafted</p>
+                                <h3 class="op-h3 op-serif" style="font-size: 38px; line-height: 1.05; color: #F4F5EF; margin: 0 0 22px 0;">Suggestions are easy. Finished work is the job.</h3>
+                                <div class="op-points"><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Finished, with receipts:</strong> Every report, reply and update comes back complete, and every figure links to where it came from.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Ask in plain English:</strong> Anyone on the team can hand over a task in a sentence. No prompts to learn, no templates to fill.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Proactive, human in the loop:</strong> Invoice overdue by a week? Acme AI drafts the reminder and asks the owner before it goes out.</p></div></div>
+                                <a class="op-ul-link" href="#demo">Watch Relay finish a real request &#8594;</a>
+                            </div>
+                            <div class="op-tab-visual">
+                                <div class="op-illo"><svg viewBox="0 0 360 180" fill="none" aria-hidden="true"><rect x="40" y="18" width="150" height="144" rx="10" fill="#141711" stroke="rgba(255,255,255,0.22)"/><circle cx="64" cy="48" r="9" fill="rgba(172,215,25,0.16)"/><path d="M60 48 l3 3 6-6" stroke="#ACD719" stroke-width="2" stroke-linecap="round"/><path d="M82 48h84" stroke="rgba(255,255,255,0.22)" stroke-width="3" stroke-linecap="round"/><circle cx="64" cy="80" r="9" fill="rgba(172,215,25,0.16)"/><path d="M60 80 l3 3 6-6" stroke="#ACD719" stroke-width="2" stroke-linecap="round"/><path d="M82 80h64" stroke="rgba(255,255,255,0.22)" stroke-width="3" stroke-linecap="round"/><circle cx="64" cy="112" r="9" fill="rgba(172,215,25,0.16)"/><path d="M60 112 l3 3 6-6" stroke="#ACD719" stroke-width="2" stroke-linecap="round"/><path d="M82 112h76" stroke="rgba(255,255,255,0.22)" stroke-width="3" stroke-linecap="round"/><path class="op-dash" d="M196 90 H262" stroke="#ACD719" stroke-width="1.6"/><path d="M270 70 L322 90 L270 110 L282 90 Z" fill="rgba(172,215,25,0.18)" stroke="#ACD719" stroke-width="1.6" stroke-linejoin="round"/><circle class="op-pulse-dot" cx="64" cy="144" r="4" fill="#ACD719"/></svg></div>
+                                <div style="border-radius: 8px; background-color: #0A0B09; border: 1px solid rgba(172,215,25,0.18); padding: 18px 20px;">
+                                    <p class="op-serif" style="font-size: 48px; line-height: 1; color: #ACD719; margin: 0 0 8px 0;">43%</p>
+                                    <p style="color: #EEF0E8; font-size: 13.5px; font-weight: 500; line-height: 1.45; margin: 0;">less time spent on routine work</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="op-tab-panel" role="tabpanel">
+                            <div class="op-tab-text">
+                                <p style="color: #9EA396; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 14px 0;"><span style="color: #ACD719;">03</span>&nbsp;&nbsp;Built for Real Teams</p>
+                                <h3 class="op-h3 op-serif" style="font-size: 38px; line-height: 1.05; color: #F4F5EF; margin: 0 0 22px 0;">Ready for real work from day one.</h3>
+                                <div class="op-points"><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Built by people who ran busy teams:</strong> We spent years in operations, finance and support before building this, and it shows in the defaults.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Secure by default:</strong> Single sign-on, role-based access and a full audit trail are switched on from the first login, not sold as add-ons.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Scales with you:</strong> Hundreds of tasks run in parallel, so a busy Monday morning feels the same as a quiet Friday afternoon.</p></div></div>
+                                <a class="op-ul-link" href="#demo">Read the customer stories &#8594;</a>
+                            </div>
+                            <div class="op-tab-visual">
+                                <div class="op-illo"><svg viewBox="0 0 360 180" fill="none" aria-hidden="true"><path d="M180 98 L262 124 L180 150 L98 124 Z" fill="#141711" stroke="rgba(255,255,255,0.22)" stroke-width="1.4"/><path d="M180 74 L262 100 L180 126 L98 100 Z" fill="#141711" stroke="rgba(255,255,255,0.22)" stroke-width="1.4"/><path d="M180 50 L262 76 L180 102 L98 76 Z" fill="#141711" stroke="rgba(255,255,255,0.22)" stroke-width="1.4"/><path d="M180 26 L262 52 L180 78 L98 52 Z" fill="#1B2012" stroke="#ACD719" stroke-width="1.4"/><circle class="op-pulse-dot" cx="180" cy="52" r="4" fill="#ACD719"/></svg></div>
+                                <div style="border-radius: 8px; background-color: #0A0B09; border: 1px solid rgba(172,215,25,0.18); padding: 18px 20px;">
+                                    <p class="op-serif" style="font-size: 48px; line-height: 1; color: #ACD719; margin: 0 0 8px 0;">2 weeks</p>
+                                    <p style="color: #EEF0E8; font-size: 13.5px; font-weight: 500; line-height: 1.45; margin: 0;">average time to a first live workflow</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="op-tab-panel" role="tabpanel">
+                            <div class="op-tab-text">
+                                <p style="color: #9EA396; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 14px 0;"><span style="color: #ACD719;">04</span>&nbsp;&nbsp;Trustworthy AI</p>
+                                <h3 class="op-h3 op-serif" style="font-size: 38px; line-height: 1.05; color: #F4F5EF; margin: 0 0 22px 0;">AI you can trust with company data.</h3>
+                                <div class="op-points"><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Masked before any model:</strong> The Vault Layer strips out names, numbers and secrets before anything reaches a model.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Least-privilege by design:</strong> Scout can read, Runner can act, and each only gets the access its job needs.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Explained, with sources:</strong> Ask why something was done and you get the answer and the evidence behind it, not a black box.</p></div></div>
+                                <a class="op-ul-link" href="#demo">Read the security overview &#8594;</a>
+                            </div>
+                            <div class="op-tab-visual">
+                                <div class="op-illo"><svg viewBox="0 0 360 180" fill="none" aria-hidden="true"><rect x="16" y="30" width="110" height="120" rx="8" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M30 56h70" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><path d="M30 80h82" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><path d="M30 104h60" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><path d="M30 128h76" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><path d="M150 50 H210 L190 90 V130 L170 120 V90 Z" fill="#1B2012" stroke="#ACD719" stroke-width="1.6" stroke-linejoin="round"/><path class="op-dash" d="M126 90 H150 M210 90 H234" stroke="#ACD719" stroke-width="1.4"/><rect x="234" y="30" width="110" height="120" rx="8" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M248 56h22" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><rect x="276" y="52" width="50" height="8" rx="2" fill="#ACD719" opacity="0.8"/><path d="M248 80h22" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><rect x="276" y="76" width="44" height="8" rx="2" fill="#ACD719" opacity="0.8"/><path d="M248 104h22" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><rect x="276" y="100" width="54" height="8" rx="2" fill="#ACD719" opacity="0.8"/><path d="M248 128h22" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><rect x="276" y="124" width="40" height="8" rx="2" fill="#ACD719" opacity="0.8"/></svg></div>
+                                <div style="border-radius: 8px; background-color: #0A0B09; border: 1px solid rgba(172,215,25,0.18); padding: 18px 20px;">
+                                    <p class="op-serif" style="font-size: 48px; line-height: 1; color: #ACD719; margin: 0 0 8px 0;">Every</p>
+                                    <p style="color: #EEF0E8; font-size: 13.5px; font-weight: 500; line-height: 1.45; margin: 0;">output explained, with sources</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="op-tab-panel" role="tabpanel">
+                            <div class="op-tab-text">
+                                <p style="color: #9EA396; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 14px 0;"><span style="color: #ACD719;">05</span>&nbsp;&nbsp;Knowledge That Stays</p>
+                                <h3 class="op-h3 op-serif" style="font-size: 38px; line-height: 1.05; color: #F4F5EF; margin: 0 0 22px 0;">Know-how that stops walking out the door.</h3>
+                                <div class="op-points"><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Written once, run forever:</strong> The way your best people handle a task becomes a Playbook anyone, or Acme AI itself, can run.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Checked, not assumed:</strong> Scout compares every result against live data and flags anything that does not add up.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Day-one ready:</strong> New joiners run proven Playbooks from their first week instead of learning by mistake.</p></div></div>
+                                <a class="op-ul-link" href="#demo">Browse the Playbook library &#8594;</a>
+                            </div>
+                            <div class="op-tab-visual">
+                                <div class="op-illo"><svg viewBox="0 0 360 180" fill="none" aria-hidden="true"><rect x="36" y="40" width="92" height="100" rx="8" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M82 40 V140" stroke="rgba(255,255,255,0.22)"/><path class="op-dash" d="M128 90 C 170 90, 180 40, 222 40" stroke="#ACD719" stroke-width="1.4"/><rect x="222" y="27" width="104" height="26" rx="13" fill="#1B2012" stroke="rgba(255,255,255,0.22)"/><circle cx="238" cy="40" r="4" fill="#ACD719"/><path d="M250 40h56" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-linecap="round"/><path class="op-dash" d="M128 90 C 170 90, 180 90, 222 90" stroke="#ACD719" stroke-width="1.4"/><rect x="222" y="77" width="104" height="26" rx="13" fill="#1B2012" stroke="rgba(255,255,255,0.22)"/><circle cx="238" cy="90" r="4" fill="#ACD719"/><path d="M250 90h56" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-linecap="round"/><path class="op-dash" d="M128 90 C 170 90, 180 140, 222 140" stroke="#ACD719" stroke-width="1.4"/><rect x="222" y="127" width="104" height="26" rx="13" fill="#1B2012" stroke="rgba(255,255,255,0.22)"/><circle cx="238" cy="140" r="4" fill="#ACD719"/><path d="M250 140h56" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-linecap="round"/></svg></div>
+                                <div style="border-radius: 8px; background-color: #0A0B09; border: 1px solid rgba(172,215,25,0.18); padding: 18px 20px;">
+                                    <p class="op-serif" style="font-size: 48px; line-height: 1; color: #ACD719; margin: 0 0 8px 0;">~60%</p>
+                                    <p style="color: #EEF0E8; font-size: 13.5px; font-weight: 500; line-height: 1.45; margin: 0;">of repeat tasks automated</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="op-tab-panel" role="tabpanel">
+                            <div class="op-tab-text">
+                                <p style="color: #9EA396; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 14px 0;"><span style="color: #ACD719;">06</span>&nbsp;&nbsp;Your Cloud or Ours</p>
+                                <h3 class="op-h3 op-serif" style="font-size: 38px; line-height: 1.05; color: #F4F5EF; margin: 0 0 22px 0;">Cloud, private cloud or on-prem.</h3>
+                                <div class="op-points"><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">The AI stays with your data:</strong> Run models in our cloud, your private cloud or on your own hardware. Nothing is used to train anyone else&#8217;s model.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Same product everywhere:</strong> Every deployment gets the full platform, updated on your schedule. No cut-down edition.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Ready for strict reviews:</strong> Data residency, audit trails and access logs are built in for regulated teams.</p></div></div>
+                                <a class="op-ul-link" href="#demo">Compare deployment options &#8594;</a>
+                            </div>
+                            <div class="op-tab-visual">
+                                <div class="op-illo"><svg viewBox="0 0 360 180" fill="none" aria-hidden="true"><rect x="30" y="16" width="300" height="148" rx="18" stroke="rgba(255,255,255,0.22)" stroke-dasharray="6 6"/><rect x="72" y="52" width="70" height="76" rx="8" fill="#141711" stroke="rgba(255,255,255,0.22)"/><rect x="82" y="62" width="50" height="12" rx="3" fill="#1B2012" stroke="rgba(255,255,255,0.22)"/><circle cx="90" cy="68" r="2.5" fill="#ACD719"/><rect x="82" y="84" width="50" height="12" rx="3" fill="#1B2012" stroke="rgba(255,255,255,0.22)"/><circle cx="90" cy="90" r="2.5" fill="#ACD719"/><rect x="82" y="106" width="50" height="12" rx="3" fill="#1B2012" stroke="rgba(255,255,255,0.22)"/><circle cx="90" cy="112" r="2.5" fill="#ACD719"/><path d="M222 110 a24 24 0 0 1 4-47 a30 30 0 0 1 56 8 a20 20 0 0 1 -2 39 Z" fill="#1B2012" stroke="#ACD719" stroke-width="1.6"/><path class="op-dash" d="M142 90 H212" stroke="#ACD719" stroke-width="1.4"/><text x="44" y="36" fill="rgba(255,255,255,0.45)" font-size="10" font-family="Inter, sans-serif">your perimeter</text></svg></div>
+                                <div style="border-radius: 8px; background-color: #0A0B09; border: 1px solid rgba(172,215,25,0.18); padding: 18px 20px;">
+                                    <p class="op-serif" style="font-size: 48px; line-height: 1; color: #ACD719; margin: 0 0 8px 0;">0</p>
+                                    <p style="color: #EEF0E8; font-size: 13.5px; font-weight: 500; line-height: 1.45; margin: 0;">of your data used for model training</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="op-tab-panel" role="tabpanel">
+                            <div class="op-tab-text">
+                                <p style="color: #9EA396; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 14px 0;"><span style="color: #ACD719;">07</span>&nbsp;&nbsp;Own Your Workflows</p>
+                                <h3 class="op-h3 op-serif" style="font-size: 38px; line-height: 1.05; color: #F4F5EF; margin: 0 0 22px 0;">Own your workflows. Not another vendor&#8217;s roadmap.</h3>
+                                <div class="op-points"><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Your logic, your IP:</strong> What your team builds in Workshop stays yours: versioned, exportable and reusable across teams.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">No lock-in language:</strong> Workflows are plain, readable steps, so nothing you build is trapped in a proprietary format.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Build without a services army:</strong> Drag-and-drop building means your team tailors Acme AI themselves.</p></div></div>
+                                <a class="op-ul-link" href="#demo">Build your first workflow in Workshop &#8594;</a>
+                            </div>
+                            <div class="op-tab-visual">
+                                <div class="op-illo"><svg viewBox="0 0 360 180" fill="none" aria-hidden="true"><path class="op-dash" d="M96 46 C 140 46, 130 90, 170 90 M226 90 C 262 90, 250 134, 290 134 M226 90 C 262 90, 250 46, 290 46" stroke="#ACD719" stroke-width="1.5"/><rect x="20" y="30" width="76" height="32" rx="8" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M32 46h46" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><rect x="170" y="74" width="56" height="32" rx="8" fill="#1B2012" stroke="#ACD719"/><path d="M182 90h26" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><rect x="290" y="30" width="56" height="32" rx="8" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M302 46h26" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><rect x="290" y="118" width="56" height="32" rx="8" fill="#141711" stroke="rgba(255,255,255,0.22)"/><path d="M302 134h26" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round"/><circle class="op-pulse-dot" cx="198" cy="90" r="5" fill="#ACD719"/></svg></div>
+                                <div style="border-radius: 8px; background-color: #0A0B09; border: 1px solid rgba(172,215,25,0.18); padding: 18px 20px;">
+                                    <p class="op-serif" style="font-size: 48px; line-height: 1; color: #ACD719; margin: 0 0 8px 0;">100%</p>
+                                    <p style="color: #EEF0E8; font-size: 13.5px; font-weight: 500; line-height: 1.45; margin: 0;">of what you build is yours</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="op-tab-panel" role="tabpanel">
+                            <div class="op-tab-text">
+                                <p style="color: #9EA396; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 14px 0;"><span style="color: #ACD719;">08</span>&nbsp;&nbsp;Work as a Service</p>
+                                <h3 class="op-h3 op-serif" style="font-size: 38px; line-height: 1.05; color: #F4F5EF; margin: 0 0 22px 0;">Software that finishes the work.</h3>
+                                <div class="op-points"><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Outcomes over seats:</strong> You are not buying another screen to operate. You get finished reports, cleared queues and sent follow-ups.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">From doers to directors:</strong> Your team sets the rules, approvals and limits, and Acme AI takes on more as trust grows.</p></div><div style="display: flex; gap: 12px;"><span class="op-tick">&#10003;</span><p style="color: #A9AE9F; font-size: 14px; line-height: 1.55; margin: 0;"><strong style="color: #EEF0E8; font-weight: 600;">Done, and done well:</strong> Every result is explained and checked, so quality is measured rather than hoped for.</p></div></div>
+                                <a class="op-ul-link" href="#demo">Read what work as a service means &#8594;</a>
+                            </div>
+                            <div class="op-tab-visual">
+                                <div class="op-illo"><svg viewBox="0 0 360 180" fill="none" aria-hidden="true"><circle cx="180" cy="90" r="62" stroke="rgba(255,255,255,0.22)" stroke-dasharray="5 7"/><circle cx="180" cy="28" r="11" fill="#1B2012" stroke="#ACD719" stroke-width="1.6"/><circle cx="242" cy="90" r="11" fill="#1B2012" stroke="#ACD719" stroke-width="1.6"/><circle cx="180" cy="152" r="11" fill="#1B2012" stroke="#ACD719" stroke-width="1.6"/><circle cx="118" cy="90" r="11" fill="#1B2012" stroke="#ACD719" stroke-width="1.6"/><circle cx="180" cy="90" r="26" fill="rgba(172,215,25,0.14)" stroke="#ACD719" stroke-width="1.6"/><path d="M169 90 l7 7 14-14" stroke="#ACD719" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle class="op-pulse-dot" cx="224" cy="46" r="4" fill="#ACD719"/></svg></div>
+                                <div style="border-radius: 8px; background-color: #0A0B09; border: 1px solid rgba(172,215,25,0.18); padding: 18px 20px;">
+                                    <p class="op-serif" style="font-size: 48px; line-height: 1; color: #ACD719; margin: 0 0 8px 0;">~60%</p>
+                                    <p style="color: #EEF0E8; font-size: 13.5px; font-weight: 500; line-height: 1.45; margin: 0;">of recurring requests finished end to end</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-light-text is-section-50 op-sec" style="background-color: #0B0C0A;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div id="stories" class="op-case-head" style="margin-bottom: 30px;">
+                    <div>
+                        <h2 class="op-h2 op-reveal op-serif" style="font-size: 46px; line-height: 1.05; color: #F4F5EF; margin: 0;">Customer stories, results stated</h2>
+                        <p class="op-reveal op-d1" style="color: #7E8378; font-size: 13px; margin: 10px 0 0 0;">All customers shown are fictional, created for this design showcase.</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 18px;">
+                        <a class="op-lime-link" href="#demo" style="font-size: 15px;">All customer stories &#8594;</a>
+                        <div class="op-case-arrows"><button type="button" class="op-round" onclick="opCarousel(-1)" aria-label="Previous">&#8592;</button><button type="button" class="op-round" onclick="opCarousel(1)" aria-label="Next">&#8594;</button></div>
+                    </div>
+                </div>
+                <div id="op-case-track" class="op-case-track">
+                        <a class="op-case-card" href="#demo">
+                            <div style="position: relative; height: 250px; padding: 22px; background-color: #2B3A1B; background-image: radial-gradient(90% 80% at 80% 110%, rgba(172,215,25,0.32) 0%, rgba(172,215,25,0) 60%), repeating-linear-gradient(100deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 13px);">
+                                <p class="op-serif" style="font-size: 60px; line-height: 1; color: #F4F5EF; margin: 0 0 8px 0;">~90%</p>
+                                <p style="color: #D5D9CC; font-size: 13px; margin: 0;">of inbound requests triaged automatically</p>
+                            </div>
+                            <div style="padding: 18px 20px 22px 20px; min-height: 150px;">
+                                <p style="color: #ACD719; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px 0;">Logistics &#183; Europe</p>
+                                <p style="color: #F0F2EA; font-size: 16px; line-height: 1.4; font-weight: 500; margin: 0 0 14px 0;">Northgale Freight: One Inbox for Fourteen Regional Teams</p>
+                                <p style="color: #9EA396; font-size: 13px; margin: 0;">Read the story &#8594;</p>
+                            </div>
+                        </a>
+                        <a class="op-case-card" href="#demo">
+                            <div style="position: relative; height: 250px; padding: 22px; background-color: #1B2A3A; background-image: radial-gradient(90% 80% at 80% 110%, rgba(172,215,25,0.32) 0%, rgba(172,215,25,0) 60%), repeating-linear-gradient(100deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 13px);">
+                                <p class="op-serif" style="font-size: 60px; line-height: 1; color: #F4F5EF; margin: 0 0 8px 0;">150 hrs</p>
+                                <p style="color: #D5D9CC; font-size: 13px; margin: 0;">saved on reporting every month</p>
+                            </div>
+                            <div style="padding: 18px 20px 22px 20px; min-height: 150px;">
+                                <p style="color: #ACD719; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px 0;">Fintech &#183; India</p>
+                                <p style="color: #F0F2EA; font-size: 16px; line-height: 1.4; font-weight: 500; margin: 0 0 14px 0;">Veloqi Pay: Month-End Close in Three Days, Not Ten</p>
+                                <p style="color: #9EA396; font-size: 13px; margin: 0;">Read the story &#8594;</p>
+                            </div>
+                        </a>
+                        <a class="op-case-card" href="#demo">
+                            <div style="position: relative; height: 250px; padding: 22px; background-color: #3A2A1B; background-image: radial-gradient(90% 80% at 80% 110%, rgba(172,215,25,0.32) 0%, rgba(172,215,25,0) 60%), repeating-linear-gradient(100deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 13px);">
+                                <p class="op-serif" style="font-size: 60px; line-height: 1; color: #F4F5EF; margin: 0 0 8px 0;">~70%</p>
+                                <p style="color: #D5D9CC; font-size: 13px; margin: 0;">faster first response</p>
+                            </div>
+                            <div style="padding: 18px 20px 22px 20px; min-height: 150px;">
+                                <p style="color: #ACD719; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px 0;">Healthcare</p>
+                                <p style="color: #F0F2EA; font-size: 16px; line-height: 1.4; font-weight: 500; margin: 0 0 14px 0;">Marisol Health: Patient Admin Without the Backlog</p>
+                                <p style="color: #9EA396; font-size: 13px; margin: 0;">Read the story &#8594;</p>
+                            </div>
+                        </a>
+                        <a class="op-case-card" href="#demo">
+                            <div style="position: relative; height: 250px; padding: 22px; background-color: #1B3A30; background-image: radial-gradient(90% 80% at 80% 110%, rgba(172,215,25,0.32) 0%, rgba(172,215,25,0) 60%), repeating-linear-gradient(100deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 13px);">
+                                <p class="op-serif" style="font-size: 60px; line-height: 1; color: #F4F5EF; margin: 0 0 8px 0;">85%</p>
+                                <p style="color: #D5D9CC; font-size: 13px; margin: 0;">of CRM updates automated</p>
+                            </div>
+                            <div style="padding: 18px 20px 22px 20px; min-height: 150px;">
+                                <p style="color: #ACD719; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px 0;">Software</p>
+                                <p style="color: #F0F2EA; font-size: 16px; line-height: 1.4; font-weight: 500; margin: 0 0 14px 0;">Brambleton Labs: A CRM That Keeps Itself Current</p>
+                                <p style="color: #9EA396; font-size: 13px; margin: 0;">Read the story &#8594;</p>
+                            </div>
+                        </a>
+                        <a class="op-case-card" href="#demo">
+                            <div style="position: relative; height: 250px; padding: 22px; background-color: #2E2B3A; background-image: radial-gradient(90% 80% at 80% 110%, rgba(172,215,25,0.32) 0%, rgba(172,215,25,0) 60%), repeating-linear-gradient(100deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 13px);">
+                                <p class="op-serif" style="font-size: 60px; line-height: 1; color: #F4F5EF; margin: 0 0 8px 0;">2,000+</p>
+                                <p style="color: #D5D9CC; font-size: 13px; margin: 0;">contracts reviewed</p>
+                            </div>
+                            <div style="padding: 18px 20px 22px 20px; min-height: 150px;">
+                                <p style="color: #ACD719; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px 0;">Legal &#183; North America</p>
+                                <p style="color: #F0F2EA; font-size: 16px; line-height: 1.4; font-weight: 500; margin: 0 0 14px 0;">Oakhollow Legal: Contract Review Without the Weekend Work</p>
+                                <p style="color: #9EA396; font-size: 13px; margin: 0;">Read the story &#8594;</p>
+                            </div>
+                        </a>
+                        <a class="op-case-card" href="#demo">
+                            <div style="position: relative; height: 250px; padding: 22px; background-color: #23331C; background-image: radial-gradient(90% 80% at 80% 110%, rgba(172,215,25,0.32) 0%, rgba(172,215,25,0) 60%), repeating-linear-gradient(100deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 13px);">
+                                <p class="op-serif" style="font-size: 60px; line-height: 1; color: #F4F5EF; margin: 0 0 8px 0;">~60%</p>
+                                <p style="color: #D5D9CC; font-size: 13px; margin: 0;">of HR requests resolved end to end</p>
+                            </div>
+                            <div style="padding: 18px 20px 22px 20px; min-height: 150px;">
+                                <p style="color: #ACD719; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px 0;">Retail &#183; North America</p>
+                                <p style="color: #F0F2EA; font-size: 16px; line-height: 1.4; font-weight: 500; margin: 0 0 14px 0;">Quarry Lane Retail: HR Questions Answered in Minutes</p>
+                                <p style="color: #9EA396; font-size: 13px; margin: 0;">Read the story &#8594;</p>
+                            </div>
+                        </a>
+                        <a class="op-case-card" href="#demo">
+                            <div style="position: relative; height: 250px; padding: 22px; background-color: #3A1F24; background-image: radial-gradient(90% 80% at 80% 110%, rgba(172,215,25,0.32) 0%, rgba(172,215,25,0) 60%), repeating-linear-gradient(100deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 13px);">
+                                <p class="op-serif" style="font-size: 60px; line-height: 1; color: #F4F5EF; margin: 0 0 8px 0;">9</p>
+                                <p style="color: #D5D9CC; font-size: 13px; margin: 0;">languages supported around the clock</p>
+                            </div>
+                            <div style="padding: 18px 20px 22px 20px; min-height: 150px;">
+                                <p style="color: #ACD719; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px 0;">Consumer Goods &#183; Europe</p>
+                                <p style="color: #F0F2EA; font-size: 16px; line-height: 1.4; font-weight: 500; margin: 0 0 14px 0;">Tidewell Goods: Support Across Nine Languages</p>
+                                <p style="color: #9EA396; font-size: 13px; margin: 0;">Read the story &#8594;</p>
+                            </div>
+                        </a>
+                        <a class="op-case-card" href="#demo">
+                            <div style="position: relative; height: 250px; padding: 22px; background-color: #1D2F36; background-image: radial-gradient(90% 80% at 80% 110%, rgba(172,215,25,0.32) 0%, rgba(172,215,25,0) 60%), repeating-linear-gradient(100deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 13px);">
+                                <p class="op-serif" style="font-size: 60px; line-height: 1; color: #F4F5EF; margin: 0 0 8px 0;">100s</p>
+                                <p style="color: #D5D9CC; font-size: 13px; margin: 0;">of reports generated daily</p>
+                            </div>
+                            <div style="padding: 18px 20px 22px 20px; min-height: 150px;">
+                                <p style="color: #ACD719; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px 0;">Insurance</p>
+                                <p style="color: #F0F2EA; font-size: 16px; line-height: 1.4; font-weight: 500; margin: 0 0 14px 0;">Solvane Insurance: Daily Reporting on Autopilot</p>
+                                <p style="color: #9EA396; font-size: 13px; margin: 0;">Read the story &#8594;</p>
+                            </div>
+                        </a>
+                </div>
+                <div style="position: relative; height: 2px; background-color: rgba(255,255,255,0.1); margin-top: 22px; border-radius: 2px; overflow: hidden;">
+                    <div id="op-case-bar" style="position: absolute; left: 0; top: 0; bottom: 0; width: 30%; background-color: #ACD719; border-radius: 2px; transition: left .2s linear;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-light-text is-section-50 op-sec" style="background-color: #070806;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div id="security" style="text-align: center; margin: 0 auto 40px auto; max-width: 820px;">
+                    <h2 class="op-h2 op-reveal op-serif" style="font-size: 50px; line-height: 1.05; color: #F4F5EF; margin: 0 0 14px 0;">Security first, certified to prove it</h2>
+                    <p class="op-reveal op-d1" style="color: #A3A79B; font-size: 16px; line-height: 1.55; margin: 0;">It works with the single sign-on, storage and access rules you already trust.</p>
+                </div>
+                <div class="op-sec-grid op-reveal op-d2" style="border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; background-color: #0E100C;">
+                    <div style="padding: 44px 24px 38px 24px; text-align: center; ">
+                        <div style="width: 104px; height: 104px; margin: 0 auto 18px auto;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="104" height="104" role="img" aria-label="Globe" style="display:block;width:104px;height:104px;"><defs>
+<linearGradient id="ac0c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".28" stop-color="#9DA19A"/><stop offset=".5" stop-color="#23251F"/><stop offset=".72" stop-color="#8E928A"/><stop offset="1" stop-color="#F2F4EE"/></linearGradient>
+<linearGradient id="ac0d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9ECE4"/><stop offset=".45" stop-color="#3A3D36"/><stop offset=".6" stop-color="#0E0F0C"/><stop offset="1" stop-color="#B9BEB2"/></linearGradient>
+<radialGradient id="ac0g" cx=".32" cy=".25" r=".9"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".35" stop-color="#6E7269"/><stop offset=".7" stop-color="#15160F"/><stop offset="1" stop-color="#A8AD9F"/></radialGradient>
+</defs><circle cx="60" cy="60" r="44" fill="none" stroke="url(#ac0c)" stroke-width="7"/><ellipse cx="60" cy="60" rx="20" ry="44" fill="none" stroke="url(#ac0c)" stroke-width="5"/><line x1="60" y1="16" x2="60" y2="104" stroke="url(#ac0c)" stroke-width="5"/><path d="M20 44 H100 M16 60 H104 M20 76 H100" stroke="url(#ac0d)" stroke-width="5" fill="none"/><path d="M30 30 Q60 18 90 30" stroke="#ACD719" stroke-width="1.6" fill="none" opacity=".9"/></svg></div>
+                        <p style="color: #E6E8E0; font-size: 14.5px; line-height: 1.45; margin: 0 auto; max-width: 240px;">ISO 27001</p>
+                    </div>
+                    <div style="padding: 44px 24px 38px 24px; text-align: center; border-left: 1px solid rgba(255,255,255,0.07);">
+                        <div style="width: 104px; height: 104px; margin: 0 auto 18px auto;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="104" height="104" role="img" aria-label="Shield" style="display:block;width:104px;height:104px;"><defs>
+<linearGradient id="ac1c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".28" stop-color="#9DA19A"/><stop offset=".5" stop-color="#23251F"/><stop offset=".72" stop-color="#8E928A"/><stop offset="1" stop-color="#F2F4EE"/></linearGradient>
+<linearGradient id="ac1d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9ECE4"/><stop offset=".45" stop-color="#3A3D36"/><stop offset=".6" stop-color="#0E0F0C"/><stop offset="1" stop-color="#B9BEB2"/></linearGradient>
+<radialGradient id="ac1g" cx=".32" cy=".25" r=".9"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".35" stop-color="#6E7269"/><stop offset=".7" stop-color="#15160F"/><stop offset="1" stop-color="#A8AD9F"/></radialGradient>
+</defs><path d="M60 12 L98 26 V58 C98 82 82 99 60 108 C38 99 22 82 22 58 V26 Z" fill="url(#ac1d)" stroke="url(#ac1c)" stroke-width="4"/><path d="M60 22 L88 32 V58 C88 76 77 89 60 97 Z" fill="#FFFFFF" opacity=".16"/><path d="M44 60 L55 71 L78 48" stroke="#ACD719" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <p style="color: #E6E8E0; font-size: 14.5px; line-height: 1.45; margin: 0 auto; max-width: 240px;">SOC 2</p>
+                    </div>
+                    <div style="padding: 44px 24px 38px 24px; text-align: center; border-left: 1px solid rgba(255,255,255,0.07);">
+                        <div style="width: 104px; height: 104px; margin: 0 auto 18px auto;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="104" height="104" role="img" aria-label="Stars" style="display:block;width:104px;height:104px;"><defs>
+<linearGradient id="ac2c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".28" stop-color="#9DA19A"/><stop offset=".5" stop-color="#23251F"/><stop offset=".72" stop-color="#8E928A"/><stop offset="1" stop-color="#F2F4EE"/></linearGradient>
+<linearGradient id="ac2d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9ECE4"/><stop offset=".45" stop-color="#3A3D36"/><stop offset=".6" stop-color="#0E0F0C"/><stop offset="1" stop-color="#B9BEB2"/></linearGradient>
+<radialGradient id="ac2g" cx=".32" cy=".25" r=".9"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".35" stop-color="#6E7269"/><stop offset=".7" stop-color="#15160F"/><stop offset="1" stop-color="#A8AD9F"/></radialGradient>
+</defs><polygon points="60.00,14.60 61.88,19.41 67.04,19.71 63.04,22.99 64.35,27.99 60.00,25.20 55.65,27.99 56.96,22.99 52.96,19.71 58.12,19.41" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><polygon points="79.00,19.69 80.88,24.50 86.04,24.80 82.04,28.08 83.35,33.08 79.00,30.29 74.65,33.08 75.96,28.08 71.96,24.80 77.12,24.50" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><polygon points="92.91,33.60 94.79,38.41 99.95,38.71 95.95,41.99 97.26,46.99 92.91,44.20 88.56,46.99 89.87,41.99 85.87,38.71 91.03,38.41" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><polygon points="98.00,52.60 99.88,57.41 105.04,57.71 101.04,60.99 102.35,65.99 98.00,63.20 93.65,65.99 94.96,60.99 90.96,57.71 96.12,57.41" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><polygon points="92.91,71.60 94.79,76.41 99.95,76.71 95.95,79.99 97.26,84.99 92.91,82.20 88.56,84.99 89.87,79.99 85.87,76.71 91.03,76.41" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><polygon points="79.00,85.51 80.88,90.32 86.04,90.62 82.04,93.90 83.35,98.90 79.00,96.11 74.65,98.90 75.96,93.90 71.96,90.62 77.12,90.32" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><polygon points="60.00,90.60 61.88,95.41 67.04,95.71 63.04,98.99 64.35,103.99 60.00,101.20 55.65,103.99 56.96,98.99 52.96,95.71 58.12,95.41" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><polygon points="41.00,85.51 42.88,90.32 48.04,90.62 44.04,93.90 45.35,98.90 41.00,96.11 36.65,98.90 37.96,93.90 33.96,90.62 39.12,90.32" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><polygon points="27.09,71.60 28.97,76.41 34.13,76.71 30.13,79.99 31.44,84.99 27.09,82.20 22.74,84.99 24.05,79.99 20.05,76.71 25.21,76.41" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><polygon points="22.00,52.60 23.88,57.41 29.04,57.71 25.04,60.99 26.35,65.99 22.00,63.20 17.65,65.99 18.96,60.99 14.96,57.71 20.12,57.41" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><polygon points="27.09,33.60 28.97,38.41 34.13,38.71 30.13,41.99 31.44,46.99 27.09,44.20 22.74,46.99 24.05,41.99 20.05,38.71 25.21,38.41" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><polygon points="41.00,19.69 42.88,24.50 48.04,24.80 44.04,28.08 45.35,33.08 41.00,30.29 36.65,33.08 37.96,28.08 33.96,24.80 39.12,24.50" fill="url(#ac2g)" stroke="#D8DCD2" stroke-width=".6"/><circle cx="60" cy="60" r="16" fill="none" stroke="#ACD719" stroke-width="1.4" opacity=".8"/></svg></div>
+                        <p style="color: #E6E8E0; font-size: 14.5px; line-height: 1.45; margin: 0 auto; max-width: 240px;">GDPR ready</p>
+                    </div>
+                    <div style="padding: 44px 24px 38px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.07);">
+                        <div style="width: 104px; height: 104px; margin: 0 auto 18px auto;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="104" height="104" role="img" aria-label="Lock" style="display:block;width:104px;height:104px;"><defs>
+<linearGradient id="ac3c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".28" stop-color="#9DA19A"/><stop offset=".5" stop-color="#23251F"/><stop offset=".72" stop-color="#8E928A"/><stop offset="1" stop-color="#F2F4EE"/></linearGradient>
+<linearGradient id="ac3d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9ECE4"/><stop offset=".45" stop-color="#3A3D36"/><stop offset=".6" stop-color="#0E0F0C"/><stop offset="1" stop-color="#B9BEB2"/></linearGradient>
+<radialGradient id="ac3g" cx=".32" cy=".25" r=".9"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".35" stop-color="#6E7269"/><stop offset=".7" stop-color="#15160F"/><stop offset="1" stop-color="#A8AD9F"/></radialGradient>
+</defs><path d="M38 52 V38 C38 24 48 16 60 16 C72 16 82 24 82 38 V52" fill="none" stroke="url(#ac3c)" stroke-width="9" stroke-linecap="round"/><rect x="26" y="50" width="68" height="56" rx="8" fill="url(#ac3d)" stroke="url(#ac3c)" stroke-width="3"/><rect x="30" y="54" width="60" height="10" rx="4" fill="#FFFFFF" opacity=".18"/><circle cx="60" cy="76" r="7" fill="#0B0C09" stroke="#ACD719" stroke-width="2"/><rect x="57.5" y="80" width="5" height="13" rx="2" fill="#ACD719"/></svg></div>
+                        <p style="color: #E6E8E0; font-size: 14.5px; line-height: 1.45; margin: 0 auto; max-width: 240px;">Role-based access with single sign-on</p>
+                    </div>
+                    <div style="padding: 44px 24px 38px 24px; text-align: center; border-left: 1px solid rgba(255,255,255,0.07);border-top: 1px solid rgba(255,255,255,0.07);">
+                        <div style="width: 104px; height: 104px; margin: 0 auto 18px auto;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="104" height="104" role="img" aria-label="Vault" style="display:block;width:104px;height:104px;"><defs>
+<linearGradient id="ac4c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".28" stop-color="#9DA19A"/><stop offset=".5" stop-color="#23251F"/><stop offset=".72" stop-color="#8E928A"/><stop offset="1" stop-color="#F2F4EE"/></linearGradient>
+<linearGradient id="ac4d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9ECE4"/><stop offset=".45" stop-color="#3A3D36"/><stop offset=".6" stop-color="#0E0F0C"/><stop offset="1" stop-color="#B9BEB2"/></linearGradient>
+<radialGradient id="ac4g" cx=".32" cy=".25" r=".9"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".35" stop-color="#6E7269"/><stop offset=".7" stop-color="#15160F"/><stop offset="1" stop-color="#A8AD9F"/></radialGradient>
+</defs><rect x="18" y="20" width="84" height="80" rx="10" fill="url(#ac4d)" stroke="url(#ac4c)" stroke-width="4"/><rect x="26" y="28" width="68" height="64" rx="6" fill="none" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="1.5"/><circle cx="60" cy="60" r="20" fill="url(#ac4g)" stroke="url(#ac4c)" stroke-width="3"/><circle cx="60" cy="60" r="6" fill="#0B0C09" stroke="#ACD719" stroke-width="2"/><path d="M60 40 V46 M60 74 V80 M40 60 H46 M74 60 H80" stroke="#ACD719" stroke-width="2.4" stroke-linecap="round"/><rect x="100" y="36" width="6" height="14" rx="2" fill="url(#ac4c)"/><rect x="100" y="70" width="6" height="14" rx="2" fill="url(#ac4c)"/></svg></div>
+                        <p style="color: #E6E8E0; font-size: 14.5px; line-height: 1.45; margin: 0 auto; max-width: 240px;">Encryption at rest and in transit</p>
+                    </div>
+                    <div style="padding: 44px 24px 38px 24px; text-align: center; border-left: 1px solid rgba(255,255,255,0.07);border-top: 1px solid rgba(255,255,255,0.07);">
+                        <div style="width: 104px; height: 104px; margin: 0 auto 18px auto;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="104" height="104" role="img" aria-label="Server" style="display:block;width:104px;height:104px;"><defs>
+<linearGradient id="ac5c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".28" stop-color="#9DA19A"/><stop offset=".5" stop-color="#23251F"/><stop offset=".72" stop-color="#8E928A"/><stop offset="1" stop-color="#F2F4EE"/></linearGradient>
+<linearGradient id="ac5d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9ECE4"/><stop offset=".45" stop-color="#3A3D36"/><stop offset=".6" stop-color="#0E0F0C"/><stop offset="1" stop-color="#B9BEB2"/></linearGradient>
+<radialGradient id="ac5g" cx=".32" cy=".25" r=".9"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".35" stop-color="#6E7269"/><stop offset=".7" stop-color="#15160F"/><stop offset="1" stop-color="#A8AD9F"/></radialGradient>
+</defs><rect x="20" y="18" width="80" height="24" rx="6" fill="url(#ac5d)" stroke="url(#ac5c)" stroke-width="3"/><rect x="20" y="48" width="80" height="24" rx="6" fill="url(#ac5d)" stroke="url(#ac5c)" stroke-width="3"/><rect x="20" y="78" width="80" height="24" rx="6" fill="url(#ac5d)" stroke="url(#ac5c)" stroke-width="3"/><circle cx="34" cy="30" r="3.5" fill="#ACD719"/><circle cx="34" cy="60" r="3.5" fill="#ACD719"/><circle cx="34" cy="90" r="3.5" fill="#ACD719" opacity=".5"/><path d="M50 30 H88 M50 60 H88 M50 90 H88" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/></svg></div>
+                        <p style="color: #E6E8E0; font-size: 14.5px; line-height: 1.45; margin: 0 auto; max-width: 240px;">Cloud, private cloud or on-prem</p>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #A3A79B; font-size: 14px; line-height: 1.6; margin: 34px auto 0 auto; max-width: 700px;">Company data is never used to train models, and the Vault Layer masks sensitive fields before any model sees them.<br><a class="op-lime-link" href="#faq">Read the security overview &#8594;</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-light-text is-section-50 op-sec" style="background-color: #0B0C0A;">
+    <div class="is-overlay"></div>
+    <div class="is-container v2">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div id="faq" class="op-faq-grid">
+                    <div class="op-faq-left">
+                        <h2 class="op-h2 op-reveal op-serif" style="font-size: 46px; line-height: 1.05; color: #F4F5EF; margin: 0 0 18px 0;">Asked in every first call. Answered here.</h2>
+                        <p class="op-reveal op-d1" style="color: #A3A79B; font-size: 15.5px; line-height: 1.65; margin: 0 0 22px 0;">Nine questions that come up in nearly every first conversation, answered plainly. Pricing, pilots and connector details live on the full FAQ page.</p>
+                        <a class="op-lime-link" href="#demo" style="font-size: 15px;">Browse all questions &#8594;</a>
+                    </div>
+                    <div id="op-faq" class="op-faq-right" style="border-top: 1px solid rgba(255,255,255,0.09);">
+                        <div style="border-bottom: 1px solid rgba(255,255,255,0.09);">
+                            <button type="button" class="op-faq-q" onclick="opFaq(this)" aria-expanded="false">What is Acme AI?<span class="op-faq-icon" aria-hidden="true">+</span></button>
+                            <div class="op-faq-panel"><p>Acme AI is an AI work platform for busy teams. At its centre is Acme Relay, an engine that picks up requests, gathers context from your tools, drafts the work and delivers it once the right person signs off. It is built for operations, finance, sales, support and people teams.</p></div>
+                        </div>
+                        <div style="border-bottom: 1px solid rgba(255,255,255,0.09);">
+                            <button type="button" class="op-faq-q" onclick="opFaq(this)" aria-expanded="false">Is Acme AI just another chatbot?<span class="op-faq-icon" aria-hidden="true">+</span></button>
+                            <div class="op-faq-panel"><p>No. A chatbot answers questions; Acme AI finishes tasks. It reads from and writes to the tools you already use, follows your approval rules, and hands back completed work with every source attached.</p></div>
+                        </div>
+                        <div style="border-bottom: 1px solid rgba(255,255,255,0.09);">
+                            <button type="button" class="op-faq-q" onclick="opFaq(this)" aria-expanded="false">Do we need to replace our existing tools?<span class="op-faq-icon" aria-hidden="true">+</span></button>
+                            <div class="op-faq-panel"><p>No. Acme AI sits on top of your mail, docs, CRM, helpdesk and finance tools and makes them work together. Those tools keep doing what they do well.</p></div>
+                        </div>
+                        <div style="border-bottom: 1px solid rgba(255,255,255,0.09);">
+                            <button type="button" class="op-faq-q" onclick="opFaq(this)" aria-expanded="false">What does &#8220;work as a service&#8221; mean?<span class="op-faq-icon" aria-hidden="true">+</span></button>
+                            <div class="op-faq-panel"><p>Instead of another tool your team has to operate, Acme AI delivers the outcome: the report written, the queue cleared, the follow-up sent. Every action is scoped, approval-gated where your policy says so, reversible and logged.</p></div>
+                        </div>
+                        <div style="border-bottom: 1px solid rgba(255,255,255,0.09);">
+                            <button type="button" class="op-faq-q" onclick="opFaq(this)" aria-expanded="false">Can Acme AI run in our own cloud?<span class="op-faq-icon" aria-hidden="true">+</span></button>
+                            <div class="op-faq-panel"><p>Yes. Acme AI runs in our cloud, in your private cloud or on your own hardware, including the AI models. Your data is never used to train models.</p></div>
+                        </div>
+                        <div style="border-bottom: 1px solid rgba(255,255,255,0.09);">
+                            <button type="button" class="op-faq-q" onclick="opFaq(this)" aria-expanded="false">Why can&#8217;t our team just automate this themselves?<span class="op-faq-icon" aria-hidden="true">+</span></button>
+                            <div class="op-faq-panel"><p>Many teams already have a few scripts and Zaps, and Acme AI keeps them. But rule-based automations break the moment a request is slightly different. Acme AI handles the judgement in between, with approvals and a full history.</p></div>
+                        </div>
+                        <div style="border-bottom: 1px solid rgba(255,255,255,0.09);">
+                            <button type="button" class="op-faq-q" onclick="opFaq(this)" aria-expanded="false">What happens if Acme AI is down, or if we leave?<span class="op-faq-icon" aria-hidden="true">+</span></button>
+                            <div class="op-faq-panel"><p>Your work keeps moving. Acme AI is a layer over your tools, not a replacement, so your team can always work directly. If you leave, every Playbook and workflow you built exports with you.</p></div>
+                        </div>
+                        <div style="border-bottom: 1px solid rgba(255,255,255,0.09);">
+                            <button type="button" class="op-faq-q" onclick="opFaq(this)" aria-expanded="false">What can Acme AI do that our team can&#8217;t today?<span class="op-faq-icon" aria-hidden="true">+</span></button>
+                            <div class="op-faq-panel"><p>Nothing your people lack the skill for. It simply works across every tool at once, never loses context between tasks, and runs your best Playbooks at any hour.</p></div>
+                        </div>
+                        <div style="border-bottom: 1px solid rgba(255,255,255,0.09);">
+                            <button type="button" class="op-faq-q" onclick="opFaq(this)" aria-expanded="false">Why should we trust AI with real work?<span class="op-faq-icon" aria-hidden="true">+</span></button>
+                            <div class="op-faq-panel"><p>Trust comes from control. Every output shows its sources and reasoning, anything that changes records or leaves the building goes through your approvals, and every action can be reviewed and undone.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-light-text is-section-75 op-sec" style="background-color: #060705; overflow: hidden;">
+    <div class="is-overlay"><div class="is-overlay-bg" style="background-image: radial-gradient(60% 90% at 50% 120%, rgba(172,215,25,0.28) 0%, rgba(172,215,25,0.06) 45%, rgba(0,0,0,0) 70%), repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 22px);"></div></div>
+    <div class="is-container v2">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div id="demo" style="position: relative; text-align: center; padding: 30px 0 10px 0;">
+                    <p class="op-reveal" style="color: #ACD719; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 18px 0;">Book a demo</p>
+                    <h2 class="op-h2 op-reveal op-d1 op-serif" style="font-size: 60px; line-height: 1.02; color: #F4F5EF; margin: 0 auto 20px auto; max-width: 900px;">The AI work platform for busy teams</h2>
+                    <p class="op-reveal op-d2" style="color: #B9BDB0; font-size: 17px; line-height: 1.55; margin: 0 auto 32px auto; max-width: 620px;">Capture, draft, review and deliver in one governed flow.</p>
+                    <div class="op-hero-actions op-reveal op-d3" style="justify-content: center;">
+                        <a href="#top" role="button" class="op-btn op-btn-lime" style="padding: 13px 20px; font-size: 15px;">Book a demo &#8594;</a>
+                        <a href="#stories" role="button" class="op-btn op-btn-ghost" style="padding: 13px 20px; font-size: 15px;">See customer stories &#8594;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="is-section is-box box-autofit is-light-text is-section-50 is-section-footer op-sec" style="background-color: #080907; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.06);">
+    <div class="is-overlay"></div>
+    <div class="is-container v2">
+        <div class="row">
+            <div class="column" style="width: 100%;">
+                <div class="op-foot-top">
+                    <div class="op-foot-brand">
+                        <div style="margin-bottom: 20px;"><span class="acme-logo" style="display:inline-flex;align-items:center;gap:9px;"><svg class="acme-mark" width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" style="display:block;flex:0 0 auto;"><path d="M6.5 26.5 L16 6 L25.5 26.5" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 19 H21.4" fill="none" stroke="#ACD719" stroke-width="3.1" stroke-linecap="round"/><circle cx="16" cy="6" r="3.1" fill="#ACD719"/><circle cx="6.5" cy="26.5" r="2.2" fill="#ACD719"/><circle cx="25.5" cy="26.5" r="2.2" fill="#ACD719"/></svg><span class="acme-logo-t" style="font-family:'Inter',system-ui,sans-serif !important;font-weight:700;font-size:17px;letter-spacing:0.14em;color:#F4F5EF;line-height:1;white-space:nowrap;">ACME&nbsp;AI</span></span></div>
+                        <p style="color: #A3A79B; font-size: 14px; line-height: 1.6; margin: 0 0 22px 0;">The AI work platform for busy teams: capture, draft, review and deliver under one governed layer.</p>
+                        <p style="color: #C9CCC2; font-size: 13.5px; line-height: 1.7; margin: 0;">hello@acme-ai.example<br>Remote-first, worldwide<br>Support around the clock</p>
+                    </div>
+                    <div class="op-foot-cols"><div><p style="color: #7E8378; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 16px 0;">Product</p><a class="op-foot-link" href="#top">Acme Relay</a><a class="op-foot-link" href="#top">Playbooks</a><a class="op-foot-link" href="#top">Connectors</a><a class="op-foot-link" href="#top">Workshop</a><a class="op-foot-link" href="#top">Vault Layer</a></div><div><p style="color: #7E8378; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 16px 0;">Solutions</p><a class="op-foot-link" href="#top">Status reporting</a><a class="op-foot-link" href="#top">Ticket triage</a><a class="op-foot-link" href="#top">Meeting follow-ups</a><a class="op-foot-link" href="#top">Finance operations</a><a class="op-foot-link" href="#top">HR requests</a><a class="op-foot-link" href="#top">Sales operations</a><a class="op-foot-link" href="#top">Customer support</a></div><div><p style="color: #7E8378; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 16px 0;">Resources</p><a class="op-foot-link" href="#top">Blog</a><a class="op-foot-link" href="#top">Customer stories</a><a class="op-foot-link" href="#top">Videos</a><a class="op-foot-link" href="#top">FAQs</a><a class="op-foot-link" href="#top">Glossary</a></div><div><p style="color: #7E8378; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 16px 0;">Company</p><a class="op-foot-link" href="#top">Why Acme AI</a><a class="op-foot-link" href="#top">Our story</a><a class="op-foot-link" href="#top">About</a><a class="op-foot-link" href="#top">Careers</a><a class="op-foot-link" href="#top">Pricing</a></div><div><p style="color: #7E8378; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 16px 0;">Legal</p><a class="op-foot-link" href="#top">Privacy Policy</a><a class="op-foot-link" href="#top">Terms &amp; Conditions</a><a class="op-foot-link" href="#top">Security</a></div></div>
+                </div>
+                <div style="margin-top: 40px;"><a class="op-foot-link" href="#top" style="display: inline-block; font-size: 13px; margin-right: 16px;">LinkedIn</a> <a class="op-foot-link" href="#top" style="display: inline-block; font-size: 13px; margin-right: 16px;">X</a> <a class="op-foot-link" href="#top" style="display: inline-block; font-size: 13px; margin-right: 16px;">YouTube</a> <a class="op-foot-link" href="#top" style="display: inline-block; font-size: 13px; margin-right: 16px;">Instagram</a></div>
+                <div style="margin-top: 50px; overflow: hidden;" aria-hidden="true">
+                    <p class="op-foot-word op-serif" style="font-size: 20vw; color: #151712; margin: 0; text-align: center; letter-spacing: 0.02em; background-image: linear-gradient(180deg, #2A2E24 0%, #0C0D0A 92%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">ACME AI</p>
+                </div>
+                <p style="text-align: center; color: #6F7469; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin: 18px 0 0 0;">ACME AI &#169; 2026 &#183; A fictional company, designed for a portfolio showcase</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<a class="sc-back" href="../../" aria-label="Back to the showcase"><span aria-hidden="true">&#8592;</span> Showcase</a>
+
+<script>
+/* =====================================================================
+   ACME AI · Editorial Dark homepage · page script
+   ===================================================================== */
+var docReady = function (fn) {
+    if (document.readyState === 'complete') { try { fn(); } catch (e) { if (window.console) console.warn('[acme]', e); } return; }
+    window.addEventListener('load', function () { try { fn(); } catch (e) { if (window.console) console.warn('[acme]', e); } });
+};
+
+/* ---------- global handlers used by onclick attributes ---------- */
+function opToggleMenu(btn) {
+    var m = document.getElementById('op-mobile-menu');
+    if (!m) return;
+    var open = m.getAttribute('data-open') === '1';
+    m.style.display = open ? 'none' : 'block';
+    m.setAttribute('data-open', open ? '0' : '1');
+    if (btn) btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+}
+function opFaq(btn) {
+    var list = document.getElementById('op-faq');
+    var panel = btn.nextElementSibling;
+    var icon = btn.querySelector('.op-faq-icon');
+    var isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+    if (list) {
+        var ps = list.querySelectorAll('.op-faq-panel'), ic = list.querySelectorAll('.op-faq-icon'), bs = list.querySelectorAll('.op-faq-q');
+        for (var i = 0; i < ps.length; i++) ps[i].style.maxHeight = '0px';
+        for (var j = 0; j < ic.length; j++) ic[j].style.transform = 'rotate(0deg)';
+        for (var b = 0; b < bs.length; b++) bs[b].setAttribute('aria-expanded', 'false');
+    }
+    if (!isOpen) { panel.style.maxHeight = panel.scrollHeight + 'px'; if (icon) icon.style.transform = 'rotate(45deg)'; btn.setAttribute('aria-expanded', 'true'); }
+}
+function opTabClick(k) { if (window.opTab) window.opTab(k, true); }
+function opCarousel(dir) {
+    var t = document.getElementById('op-case-track');
+    if (!t) return;
+    var c = t.querySelector('.op-case-card');
+    var step = c ? c.offsetWidth + 16 : 336;
+    t.scrollBy({ left: dir * step, behavior: 'smooth' });
+}
+
+docReady(function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.documentElement.classList.add('op-js');
+
+    /* ---------- scroll reveal + count-up ---------- */
+    function countUp(el) {
+        var raw = el.textContent;
+        var m = raw.match(/^([^0-9]*)([0-9][0-9,]*\.?[0-9]*)(.*)$/);
+        if (!m || reduce) return;
+        var pre = m[1], num = parseFloat(m[2].replace(/,/g, '')), post = m[3], comma = m[2].indexOf(',') > -1;
+        var t0 = null, dur = 1600;
+        function fmt(v) { v = Math.round(v); return comma ? v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : String(v); }
+        function step(ts) {
+            if (!t0) t0 = ts;
+            var p = Math.min(1, (ts - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+            el.textContent = pre + fmt(num * k) + post;
+            if (p < 1) requestAnimationFrame(step); else el.textContent = raw;
+        }
+        requestAnimationFrame(step);
+    }
+    var revealEls = document.querySelectorAll('.op-reveal');
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+                if (!en.isIntersecting) return;
+                en.target.classList.add('op-in');
+                var cs = en.target.querySelectorAll('.op-count');
+                for (var i = 0; i < cs.length; i++) countUp(cs[i]);
+                io.unobserve(en.target);
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        for (var r = 0; r < revealEls.length; r++) io.observe(revealEls[r]);
+    } else {
+        for (var r2 = 0; r2 < revealEls.length; r2++) revealEls[r2].classList.add('op-in');
+    }
+
+    /* ---------- stat media: team dots ---------- */
+    var dots = document.getElementById('op-dots');
+    if (dots && !dots.children.length) {
+        var seed = 7; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+        var html = '';
+        for (var d = 0; d < 650; d++) {
+            var v = rnd(), on = v < 0.62, hot = v < 0.035;
+            var col = hot ? '#FF6B4A' : (on ? '#ACD719' : 'rgba(255,255,255,0.12)');
+            html += '<i class="op-dot' + (on ? ' op-dot-on' : '') + '" style="display:block;background-color:' + col + ';animation-delay:' + (rnd() * 3.2).toFixed(2) + 's"></i>';
+        }
+        dots.innerHTML = html;
+    }
+    /* ---------- stat media: hours equaliser ---------- */
+    var eq = document.getElementById('op-eq');
+    if (eq && !eq.children.length) {
+        var bars = '';
+        for (var b = 0; b < 46; b++) {
+            bars += '<i style="background-image:linear-gradient(180deg,#ACD719 0%,rgba(172,215,25,0.15) 100%);border-radius:2px 2px 0 0;animation-delay:' + (-(b * 0.41) % 5.5).toFixed(2) + 's;animation-duration:' + (4.6 + (b % 5) * 0.45).toFixed(2) + 's"></i>';
+        }
+        eq.innerHTML = bars;
+        eq.style.backgroundImage = 'none';
+    }
+
+    /* ---------- chapter tabs: auto-advance with progress bar ---------- */
+    var tabWrap = document.getElementById('op-tabs');
+    if (tabWrap) {
+        var TAB_MS = 9000, tabTimer = null, tabHover = false, tabVisible = false;
+        window.opTab = function (k, user) {
+            var tabs = tabWrap.querySelectorAll('.op-tab'), panels = tabWrap.querySelectorAll('.op-tab-panel');
+            if (!tabs.length) return;
+            k = (k + tabs.length) % tabs.length;
+            for (var i = 0; i < tabs.length; i++) {
+                var on = i === k, bar = tabs[i].querySelector('.op-tab-bar');
+                tabs[i].style.backgroundColor = on ? 'rgba(255,255,255,0.035)' : 'transparent';
+                tabs[i].style.color = on ? '#F4F5EF' : '';
+                tabs[i].setAttribute('aria-selected', on ? 'true' : 'false');
+                if (panels[i]) { if (on) panels[i].classList.add('op-active'); else panels[i].classList.remove('op-active'); }
+                if (bar) { bar.style.transition = 'none'; bar.style.width = on && reduce ? '100%' : '0'; }
+            }
+            var cur = tabs[k].querySelector('.op-tab-bar');
+            if (cur && !reduce) { void cur.offsetWidth; cur.style.transition = 'width ' + TAB_MS + 'ms linear'; cur.style.width = '100%'; }
+            if (user && window.innerWidth < 769) tabs[k].parentNode.scrollTo({ left: tabs[k].offsetLeft - 16, behavior: 'smooth' });
+            tabWrap.setAttribute('data-k', k);
+            clearTimeout(tabTimer);
+            if (!reduce) tabTimer = setTimeout(function tick() { if (tabVisible && !tabHover) window.opTab(k + 1); else tabTimer = setTimeout(tick, 1000); }, TAB_MS);
+        };
+        tabWrap.addEventListener('mouseenter', function () { tabHover = true; });
+        tabWrap.addEventListener('mouseleave', function () { tabHover = false; });
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (en) {
+                var was = tabVisible; tabVisible = en[0].isIntersecting;
+                if (tabVisible && !was) window.opTab(parseInt(tabWrap.getAttribute('data-k') || '0', 10));
+            }, { threshold: 0.3 }).observe(tabWrap);
+        } else { tabVisible = true; window.opTab(0); }
+    }
+
+    /* ---------- case carousel progress ---------- */
+    var track = document.getElementById('op-case-track'), bar = document.getElementById('op-case-bar');
+    function caseProgress() {
+        if (!track || !bar) return;
+        var max = track.scrollWidth - track.clientWidth;
+        var vis = track.clientWidth / track.scrollWidth;
+        bar.style.width = (Math.max(0.12, vis) * 100) + '%';
+        bar.style.left = (max > 0 ? (track.scrollLeft / max) * (1 - Math.max(0.12, vis)) * 100 : 0) + '%';
+    }
+    if (track) { track.addEventListener('scroll', caseProgress, { passive: true }); window.addEventListener('resize', caseProgress); caseProgress(); }
+
+    /* ---------- work log table: "working on it" row sweep ---------- */
+    var rows = document.querySelectorAll('#op-log-table .op-log-row');
+    if (rows.length && !reduce) {
+        var ri = 0;
+        setInterval(function () {
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].children;
+                for (var c = 0; c < cells.length; c++) cells[c].style.backgroundColor = (i === ri) ? 'rgba(172,215,25,0.14)' : '';
+            }
+            ri = (ri + 1) % rows.length;
+        }, 1700);
+    }
+
+    /* ---------- stage chips (synced to the loop pulse) ---------- */
+    var chips = document.querySelectorAll('#op-stage-chips .op-stage');
+    window.opSetStage = function (k) {
+        for (var i = 0; i < chips.length; i++) {
+            var on = i === k;
+            chips[i].style.backgroundColor = on ? '#ACD719' : 'rgba(0,0,0,0.35)';
+            chips[i].style.color = on ? '#0A0B08' : '#D9DCD2';
+            chips[i].style.borderColor = on ? 'rgba(172,215,25,0.9)' : 'rgba(255,255,255,0.18)';
+        }
+    };
+
+    /* =====================================================================
+       THE WORK LOOP (Three.js)
+       A closed, gently twisting loop of metallic slats. Ten slat groups stand
+       for the ten work modules; the gaps between groups carry glowing nodes,
+       slat length breathes like live activity, and a lime pulse travels the
+       loop as a request moves through capture > draft > review > deliver.
+       ===================================================================== */
+    function opLoadThree(cb) {
+        if (window.THREE && window.THREE.InstancedMesh) return cb();
+        var srcs = ['../../assets/vendor/three.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js'];
+        (function next(i) {
+            if (i >= srcs.length) return;
+            var s = document.createElement('script');
+            s.src = srcs[i]; s.async = true;
+            s.onload = function () { if (window.THREE) cb(); else next(i + 1); };
+            s.onerror = function () { next(i + 1); };
+            document.head.appendChild(s);
+        })(0);
+    }
+
+    function opRing(el) {
+        var T = window.THREE;
+        var theme = el.getAttribute('data-theme') || 'hero';
+        var hero = theme === 'hero';
+        var W = el.clientWidth, H = el.clientHeight;
+        if (!W || !H) return;
+        var renderer;
+        try { renderer = new T.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' }); } catch (err) { return; }
+        var mobile = window.innerWidth < 769;
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 1.75));
+        renderer.setSize(W, H, false);
+        renderer.setClearColor(0x000000, 0);
+        renderer.outputEncoding = T.sRGBEncoding;
+        renderer.toneMapping = T.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = hero ? 1.3 : 1.2;
+        var cv = renderer.domElement;
+        cv.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;display:block;';
+        el.insertBefore(cv, el.firstChild);
+
+        var scene = new T.Scene();
+        var cam = new T.PerspectiveCamera(30, W / H, 0.1, 100);
+        cam.position.set(0, 0, hero ? (mobile ? 11.2 : 13.2) : 9.4);
+
+        /* studio environment for the metal reflections */
+        var pm = new T.PMREMGenerator(renderer);
+        var env = new T.Scene();
+        env.add(new T.Mesh(new T.SphereGeometry(20, 24, 12), new T.MeshBasicMaterial({ color: hero ? 0x020302 : 0x0b1510, side: T.BackSide })));
+        function panel(color, k, x, y, z, w, h) {
+            var m = new T.MeshBasicMaterial({ color: color, side: T.DoubleSide });
+            m.color.multiplyScalar(k);
+            var p = new T.Mesh(new T.PlaneGeometry(w, h), m);
+            p.position.set(x, y, z); p.lookAt(0, 0, 0); env.add(p);
+        }
+        if (hero) {
+            panel(0xACD719, 5.5, -7, 3, 3, 4, 9);
+            panel(0xffffff, 2.2, 7, 6, 2, 5, 3);
+            panel(0xACD719, 2.4, 3, -7, 3, 12, 2);
+            panel(0xfff1c9, 1.2, 0, 9, -5, 8, 2);
+        } else {
+            panel(0xffffff, 3.2, 0, 8, 3, 14, 3);
+            panel(0xACD719, 4.2, 0, -8, 2, 14, 4);
+            panel(0xe6f0ff, 1.6, -8, 0, 2, 2, 10);
+            panel(0xffffff, 1.3, 8, 0, 4, 2, 10);
+        }
+        scene.environment = pm.fromScene(env, 0.035).texture;
+        scene.add(new T.AmbientLight(0xffffff, hero ? 0.04 : 0.22));
+        var dl = new T.DirectionalLight(hero ? 0xd9f27a : 0xffffff, hero ? 1.1 : 0.9);
+        dl.position.set(-3, 4, 5); scene.add(dl);
+
+        var tilt = new T.Group(), spin = new T.Group();
+        tilt.add(spin); scene.add(tilt);
+        tilt.rotation.set(hero ? 1.02 : 0.92, 0, hero ? -0.42 : 0.3);
+        if (!hero) tilt.position.set(-0.55, -1.15, 0);
+
+        var SEG = 10, PER = mobile ? 16 : (hero ? 26 : 18), N = SEG * PER;
+        var R = hero ? 2.3 : 2.25, L0 = hero ? 0.95 : 0.86, WID = hero ? 0.34 : 0.2, TH = hero ? 0.022 : 0.026;
+        var mat = new T.MeshStandardMaterial({ color: 0xffffff, metalness: hero ? 1.0 : 0.82, roughness: hero ? 0.24 : 0.3, envMapIntensity: hero ? 1.3 : 1.15 });
+        var mesh = new T.InstancedMesh(new T.BoxGeometry(1, 1, 1), mat, N);
+        mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);
+        spin.add(mesh);
+        var nodeMat = new T.MeshBasicMaterial({ color: 0xACD719 });
+        nodeMat.color.multiplyScalar(1.4);
+        var nodes = [];
+        for (var s = 0; s < SEG; s++) { var nm = new T.Mesh(new T.SphereGeometry(hero ? 0.06 : 0.055, 16, 12), nodeMat); spin.add(nm); nodes.push(nm); }
+
+        var labels = el.querySelectorAll('.op-ring-label');
+        var copyEl = hero ? document.querySelector('.op-hero-copy') : null, minX = 0;
+        function measure() { if (copyEl) { var a = copyEl.getBoundingClientRect(), b = el.getBoundingClientRect(); minX = Math.max(0, a.right - b.left + 24); } }
+        measure(); window.addEventListener('resize', measure);
+        var baseA = new T.Color(hero ? 0x2a2d26 : 0xd4d7d2), baseB = new T.Color(hero ? 0x3d4136 : 0x2e312c), lime = new T.Color(0xACD719), col = new T.Color();
+        var m4 = new T.Matrix4(), P = new T.Vector3(), Tg = new T.Vector3(), Nn = new T.Vector3(), Bn = new T.Vector3(), U = new T.Vector3(), V = new T.Vector3(), tmp = new T.Vector3(), a1 = new T.Vector3(), a2 = new T.Vector3(), a3 = new T.Vector3();
+        var TAU = Math.PI * 2, SAG = hero ? 0.34 : 0.3;
+
+        var visible = true, mx = 0, my = 0, tmx = 0, tmy = 0, scrollY0 = 0;
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: 0 }).observe(el);
+        }
+        window.addEventListener('mousemove', function (ev) { tmx = (ev.clientX / window.innerWidth) * 2 - 1; tmy = (ev.clientY / window.innerHeight) * 2 - 1; }, { passive: true });
+        window.addEventListener('scroll', function () { scrollY0 = window.pageYOffset || document.documentElement.scrollTop || 0; }, { passive: true });
+        window.addEventListener('resize', function () {
+            var w = el.clientWidth, h = el.clientHeight; if (!w || !h) return;
+            renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix();
+        });
+
+        var speed = reduce ? 0.15 : 1, t = 0, last = performance.now(), lastStage = -1;
+        function frame(now) {
+            requestAnimationFrame(frame);
+            var dt = Math.min(0.05, (now - last) / 1000); last = now;
+            if (!visible) return;
+            t += dt * speed;
+            mx += (tmx - mx) * 0.04; my += (tmy - my) * 0.04;
+            spin.rotation.y = t * 0.07 + scrollY0 * 0.0009;
+            tilt.rotation.x = (hero ? 1.02 : 0.92) + my * 0.08;
+            tilt.rotation.z = (hero ? -0.42 : 0.3) + mx * 0.06;
+
+            var pulse = (t * 0.32) % TAU;
+            for (var i = 0; i < N; i++) {
+                var th = (i / N) * TAU, local = i % PER, seg = (i / PER) | 0;
+                var c = Math.cos(th), sn = Math.sin(th), c2 = Math.cos(2 * th), s2 = Math.sin(2 * th);
+                P.set(R * c, SAG * s2, R * sn);
+                Tg.set(-R * sn, 2 * SAG * c2, R * c).normalize();
+                Nn.set(c, 0, sn); tmp.copy(Tg).multiplyScalar(Nn.dot(Tg)); Nn.sub(tmp).normalize();
+                Bn.crossVectors(Tg, Nn);
+                var phi = th * 1.5 + t * 0.28;
+                var cp = Math.cos(phi), sp = Math.sin(phi);
+                U.copy(Nn).multiplyScalar(cp).addScaledVector(Bn, sp);
+                V.copy(Bn).multiplyScalar(cp).addScaledVector(Nn, -sp);
+                var sig = 0.55 * Math.sin(th * 9 - t * 1.6) + 0.3 * Math.sin(th * 23 + t * 2.7) + 0.15 * Math.sin(th * 41 - t * 3.9);
+                sig = (sig + 1) * 0.5;
+                var dd = th - pulse; dd = Math.atan2(Math.sin(dd), Math.cos(dd));
+                var bump = Math.exp(-(dd * dd) / 0.07);
+                var len = L0 * (0.74 + 0.32 * sig + 0.5 * bump);
+                if (local === 0) {
+                    /* module gap: hide the slat, place a node */
+                    m4.makeScale(0.0001, 0.0001, 0.0001); m4.setPosition(P);
+                    var nd = nodes[seg]; nd.position.copy(P);
+                    var ns = 1 + 0.6 * bump; nd.scale.set(ns, ns, ns);
+                } else {
+                    a1.copy(Tg).multiplyScalar(TH); a2.copy(U).multiplyScalar(len); a3.copy(V).multiplyScalar(WID);
+                    m4.makeBasis(a1, a2, a3); m4.setPosition(P);
+                }
+                mesh.setMatrixAt(i, m4);
+                col.copy((i & 1) ? baseA : baseB).lerp(lime, Math.min(1, bump * 0.95 + (hero && sig > 0.93 ? 0.35 : 0)));
+                mesh.setColorAt(i, col);
+            }
+            mesh.instanceMatrix.needsUpdate = true;
+            if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+
+            /* pin the module labels to their nodes */
+            if (labels.length) {
+                scene.updateMatrixWorld();
+                for (var k = 0; k < labels.length && k < SEG; k++) {
+                    nodes[k].getWorldPosition(tmp);
+                    var depth = tmp.z;
+                    tmp.project(cam);
+                    var x = (tmp.x * 0.5 + 0.5) * el.clientWidth, y = (-tmp.y * 0.5 + 0.5) * el.clientHeight;
+                    var op = Math.max(0, Math.min(1, (depth + 0.6) / 1.8));
+                    var inside = x > minX && x > 10 && x < el.clientWidth - 90 && y > 10 && y < el.clientHeight - 10;
+                    labels[k].style.transform = 'translate(' + (x + 12).toFixed(1) + 'px,' + (y - 8).toFixed(1) + 'px)';
+                    labels[k].style.opacity = inside ? op.toFixed(2) : '0';
+                }
+            }
+            /* stage chips follow the pulse */
+            if (!hero && window.opSetStage) {
+                var st = Math.floor((pulse / TAU) * 4) % 4;
+                if (st !== lastStage) { lastStage = st; window.opSetStage(st); }
+            }
+            renderer.render(scene, cam);
+        }
+        requestAnimationFrame(frame);
+    }
+
+    var ringEls = document.querySelectorAll('.op-ring-hero, .op-ring-card');
+    if (ringEls.length) {
+        /* start the 3D loop just after the first paint so the headline reveal is never held up */
+        setTimeout(function () { opLoadThree(function () { for (var i = 0; i < ringEls.length; i++) { try { opRing(ringEls[i]); } catch (e) { if (window.console) console.warn('[acme ring]', e); } } }); }, 700);
+    }
+});
+</script>
+</body>
+</html>

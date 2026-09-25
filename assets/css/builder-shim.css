@@ -1,0 +1,41 @@
+/* ------------------------------------------------------------------
+   Builder shim
+   Both pages were originally built inside a ContentBox / InnovaStudio
+   style page builder, which supplies its own section, container, row and
+   column framework. This file recreates the small part of that framework
+   the pages rely on, so they run as plain standalone HTML.
+   ------------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+img, svg { max-width: 100%; }
+button { font: inherit; }
+
+.is-wrapper { position: relative; width: 100%; overflow-x: clip; }
+.is-section { position: relative; display: flex; align-items: center; width: 100%; }
+.is-section-0 { padding: 0; }
+.is-section-50 { padding: 104px 0; }
+.is-section-75 { padding: 128px 0; }
+.is-section-footer { padding-bottom: 56px; }
+.is-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.is-overlay-bg { position: absolute; inset: 0; }
+.is-container { position: relative; z-index: 1; width: 100%; margin: 0 auto; padding: 0 24px; }
+.is-container.v2 { max-width: 1200px; }
+.is-light-text { color: #F4F5EF; }
+.is-dark-text { color: #0D1016; }
+.row { display: flex; width: 100%; }
+.column { flex: 1 1 auto; min-width: 0; }
+
+/* utility classes the builder normally provides */
+.transition-all { transition: all .2s ease; }
+.whitespace-nowrap { white-space: nowrap; }
+.cursor-pointer { cursor: pointer; }
+.no-underline { text-decoration: none; }
+.inline-block { display: inline-block; }
+.font-semibold { font-weight: 600; }
+.text-center { text-align: center; }
+
+/* small "back to showcase" chip, added for the portfolio build */
+.sc-back { position: fixed; left: 16px; bottom: 16px; z-index: 2000; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 40px; font: 500 12.5px/1 'Inter', system-ui, sans-serif; letter-spacing: .01em; text-decoration: none; color: #F4F5EF; background: rgba(12,13,11,.78); border: 1px solid rgba(255,255,255,.16); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: background-color .2s ease, transform .2s ease; }
+.sc-back:hover { background: rgba(12,13,11,.95); transform: translateY(-1px); }
+.sc-back:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid #ACD719; outline-offset: 2px; }
